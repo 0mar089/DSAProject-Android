@@ -28,6 +28,12 @@
             </intent-filter>
         </activity>
 
+        <!-- Declaración de ShopActivity -->
+        <activity
+            android:name=".ShopActivity"
+            android:exported="true"
+            tools:ignore="Instantiatable" />
+
     </application>
 
 </manifest>
