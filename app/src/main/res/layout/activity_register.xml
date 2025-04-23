@@ -48,7 +48,7 @@
 
     <!-- Email -->
     <EditText
-        android:id="@+id/emailInput"
+        android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Correo electrónico"
@@ -60,14 +60,14 @@
 
     <!-- Contraseña -->
     <EditText
-        android:id="@+id/passwordInput"
+        android:id="@+id/txtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         android:inputType="textPassword"
         android:padding="16dp"
         android:backgroundTint="#A9A9A9"
-        app:layout_constraintTop_toBottomOf="@id/emailInput"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- Confirmar Contraseña -->
@@ -79,7 +79,7 @@
         android:inputType="textPassword"
         android:padding="16dp"
         android:backgroundTint="#A9A9A9"
-        app:layout_constraintTop_toBottomOf="@id/passwordInput"
+        app:layout_constraintTop_toBottomOf="@id/txtPassword"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- Términos y Condiciones -->

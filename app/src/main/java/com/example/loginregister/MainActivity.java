@@ -3,6 +3,7 @@ package com.example.loginregister;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -15,15 +16,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.loginregister.Swagger.AuthenticateResponse;
+import com.example.loginregister.Swagger.API;
+import com.example.loginregister.Swagger.LoginResponse;
 import com.example.loginregister.Swagger.LoginRequest;
-import com.example.loginregister.Swagger.Swagger;
+import com.example.loginregister.Swagger.AuthService;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    private EditText emailEditText, passwordEditText;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -50,50 +55,50 @@ public class MainActivity extends AppCompatActivity {
         Button loginButton = findViewById(R.id.loginButton);
 
         // Configurar el evento onClick para el botón de iniciar sesión
-        loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, ShopActivity.class);
-            startActivity(intent);
-        });
+//        loginButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, ShopActivity.class);
+//            startActivity(intent);
+//        });
+
+        emailEditText = findViewById(R.id.txtEmail);
+        passwordEditText = findViewById(R.id.txtPassword);
     }
 
 
-    public void clickLogin(View view){
+    public void clickLogin(View view) {
+        String correo = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
 
-        EditText usernameInput = findViewById(R.id.emailInput);
-        EditText passwordInput = findViewById(R.id.passwordInput);
+        // Hacer la llamada a la API para realizar el login
+        loginUser(correo, password);
+    }
 
-        String username = usernameInput.getText().toString();
-        String password = passwordInput.getText().toString();
-
-        LoginRequest loginRequest = new LoginRequest(username, password);
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        Swagger swagger = retrofit.create(Swagger.class);
-
-        Call<AuthenticateResponse> call = swagger.login(loginRequest);
-        call.enqueue(new Callback<AuthenticateResponse>() {
+    private void loginUser(String correo, String password) {
+        // Llamada Retrofit para hacer el login
+        API.getAuthService().login(correo, password).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<AuthenticateResponse> call, A<AuthenticateResponse> response) {
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    AuthenticateResponse loginResponse = response.body();
-                    Toast.makeText(MainActivity.this, "Login correcto: " + loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    // aquí puedes redirigir al usuario a otra actividad
+                    LoginResponse loginResponse = response.body();
+                    if (loginResponse != null && loginResponse.isStatus()) {
+                        // Login exitoso, muestra un mensaje
+                        Toast.makeText(MainActivity.this, "Bienvenido, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
+                    } else {
+                        // Login fallido, muestra el mensaje de error
+                        Toast.makeText(MainActivity.this, "Error: " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
+                    }
                 } else {
-                    Toast.makeText(MainActivity.this, "Login fallido", Toast.LENGTH_SHORT).show();
+                    // Si la respuesta no es exitosa
+                    Toast.makeText(MainActivity.this, "Login fallido", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<AuthenticateResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                // Si hay un error en la llamada, muestra el error
+                Toast.makeText(MainActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
 }
