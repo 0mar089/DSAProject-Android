@@ -2,6 +2,7 @@ package com.example.loginregister;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -56,14 +57,18 @@ public class RegisterActivity extends Activity {
                 Toast.makeText(RegisterActivity.this, "Debes aceptar los términos y condiciones.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            clickRegister(v);
 
-            // Llamar al método para registrar al usuario
-            registerUser(username, email, password);
         });
     }
 
-    private void registerUser(String username, String email, String password) {
-        API.getAuthService().register(new RegisterRequest(username, email, password)).enqueue(new Callback<RegisterResponse>() {
+    public void clickRegister(View view) {
+        Toast.makeText(this, "CLICK DETECTADO", Toast.LENGTH_SHORT).show();
+        API.getAuthService().register(
+                usernameInput.getText().toString(),
+                txtEmail.getText().toString(),
+                txtPassword.getText().toString()
+        ).enqueue(new Callback<RegisterResponse>() {
             @Override
             public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

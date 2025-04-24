@@ -2,6 +2,7 @@ package com.example.loginregister.Swagger;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
@@ -14,6 +15,11 @@ public interface AuthService {
     );
 
     // Método corregido para el registro
-    @POST("/register")
-    Call<RegisterResponse> register(@Body RegisterRequest request);
+    @FormUrlEncoded
+    @POST("/TocaBolas/users/register")
+    Call<RegisterResponse> register(
+            @Field("username") String username,
+            @Field("correo") String correo,
+            @Field("password") String password
+    );
 }
