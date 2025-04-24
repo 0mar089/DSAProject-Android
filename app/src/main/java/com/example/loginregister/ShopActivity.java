@@ -7,6 +7,6 @@ public class ShopActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tienda_layout);  // Verifica que este nombre coincide con tu XML
+        setContentView(R.layout.activity_shop);  // Verifica que este nombre coincide con tu XML
     }
 }
