@@ -10,15 +10,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.loginregister.Swagger.API;
+import com.example.loginregister.Swagger.LoginResponse;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.LoginResponse;
-import com.example.loginregister.Swagger.LoginRequest;
 import com.example.loginregister.Swagger.AuthService;
 
 import retrofit2.Call;

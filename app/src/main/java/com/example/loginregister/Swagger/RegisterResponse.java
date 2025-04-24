@@ -1,4 +1,4 @@
-package com.example.loginregister;
+package com.example.loginregister.Swagger;
 
 public class RegisterResponse {
     private boolean status;
