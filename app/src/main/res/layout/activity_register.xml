@@ -31,9 +31,8 @@
         android:layout_height="wrap_content"
         android:text="Usuario"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"/>
+        tools:layout_editor_absoluteY="122dp" />
 
     <EditText
         android:id="@+id/usernameInput"
