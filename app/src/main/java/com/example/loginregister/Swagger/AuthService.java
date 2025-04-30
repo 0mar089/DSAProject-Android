@@ -1,9 +1,12 @@
 package com.example.loginregister.Swagger;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface AuthService {
@@ -14,7 +17,6 @@ public interface AuthService {
             @retrofit2.http.Field("password") String password
     );
 
-    // Método corregido para el registro
     @FormUrlEncoded
     @POST("/TocaBolas/users/register")
     Call<RegisterResponse> register(
@@ -22,4 +24,8 @@ public interface AuthService {
             @Field("correo") String correo,
             @Field("password") String password
     );
+
+    @GET("/TocaBolas/Shop/items")
+    Call<List<ShopItem>> getShopItems();
+
 }

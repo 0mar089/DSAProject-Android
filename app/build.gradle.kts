@@ -35,6 +35,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation("androidx.recyclerview:recyclerview:1.2.1")  // Ajusta la versión a la más reciente
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")  // Ajusta la versión a la más reciente
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)

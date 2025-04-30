@@ -22,7 +22,7 @@
 
         <!-- Declaración de MainActivity con intent-filter -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".LobbyActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
