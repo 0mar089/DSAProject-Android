@@ -15,6 +15,18 @@
         android:theme="@style/Theme.LoginRegister"
         tools:targetApi="31">
 
+        <!-- Declaración de SplashScreenActivity -->
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:exported="true" />
+
+        <!-- Declaración de LoginActivity -->
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true" />
+
         <!-- Declaración de RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
@@ -22,7 +34,7 @@
 
         <!-- Declaración de MainActivity con intent-filter -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
