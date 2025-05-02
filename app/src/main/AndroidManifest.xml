@@ -14,7 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginRegister"
         tools:targetApi="31">
-
+        <!-- Declaración de StartActivity como la actividad principal -->
+        <activity
+            android:name=".StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!-- Declaración de RegisterActivity -->
         <activity
             android:name=".RegisterActivity"
@@ -23,12 +31,7 @@
         <!-- Declaración de MainActivity con intent-filter -->
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
 
         <!-- Declaración de ShopActivity -->
         <activity
