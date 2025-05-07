@@ -77,7 +77,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     public void PerfilClick(View view){
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
-
+        
     }
 
 }

@@ -75,9 +75,12 @@
 
     <TextView
         android:id="@+id/UserTxtLobby"
-        android:layout_width="124dp"
-        android:layout_height="47dp"
-        android:textSize="20sp"
+        android:layout_width="299dp"
+        android:layout_height="111dp"
+        android:fontFamily="casual"
+        android:text="USER"
+        android:textAlignment="center"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/shopBtn3"
         app:layout_constraintEnd_toEndOf="parent"
