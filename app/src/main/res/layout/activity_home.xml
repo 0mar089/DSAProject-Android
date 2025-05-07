@@ -7,6 +7,21 @@
     android:layout_height="match_parent">
 
 
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="1101dp"
+        android:layout_height="2028dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.308"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/falling_balls_loop" />
+
     <Button
         android:id="@+id/buttonStartHome"
         android:layout_width="143dp"
@@ -25,17 +40,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.691" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="1101dp"
-        android:layout_height="2028dp"
-        android:layout_marginBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.308"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/falling_balls_loop" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface AuthService {
-    @POST("/TocaBolas/users/login")
+    @POST("/TocaBolas/login")
     @FormUrlEncoded
     Call<LoginResponse> login(
             @retrofit2.http.Field("correo") String correo,
@@ -18,7 +18,7 @@ public interface AuthService {
     );
 
     @FormUrlEncoded
-    @POST("/TocaBolas/users/register")
+    @POST("/TocaBolas/register")
     Call<RegisterResponse> register(
             @Field("username") String username,
             @Field("correo") String correo,

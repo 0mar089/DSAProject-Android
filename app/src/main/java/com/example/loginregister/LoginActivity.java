@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     public void clickLogin(View view) {
         String correo = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
-
         // Hacer la llamada a la API para realizar el login
         loginUser(correo, password);
     }
@@ -79,6 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                         // Login exitoso, muestra un mensaje
                         Toast.makeText(LoginActivity.this, "Bienvenido, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
+                        intent.putExtra("user", loginResponse.getUser());
+                        intent.putExtra("gmail", loginResponse.getCorreo());
                         intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
                         startActivity(intent);
                         finish(); // Evita que el usuario regrese con el botón "Atrás"

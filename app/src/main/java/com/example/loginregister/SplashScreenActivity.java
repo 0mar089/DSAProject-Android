@@ -32,7 +32,8 @@ public class SplashScreenActivity extends Activity{
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent;
-
+            String user = "";
+            String gmail = "";
             if (origen != null) {
                 switch (origen) {
                     case Constants.ORIGEN_HOME:
@@ -40,9 +41,11 @@ public class SplashScreenActivity extends Activity{
                         break;
                     case Constants.ORIGEN_LOGIN:
                         intent = new Intent(this, LobbyActivity.class);
+                        user = getIntent().getStringExtra("user");
                         break;
                     case Constants.ORIGEN_REGISTER:
                         intent = new Intent(this, LobbyActivity.class);
+                        user = getIntent().getStringExtra("user");
                         break;
                     default: // Por defecto va a StartActivity
                         intent = new Intent(this, StartActivity.class);
@@ -51,8 +54,15 @@ public class SplashScreenActivity extends Activity{
             } else {
                 intent = new Intent(this, StartActivity.class);
             }
+            if(user.isEmpty()){
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            else{
+                intent.putExtra("user", user);
+                intent.putExtra("gmail", gmail);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 

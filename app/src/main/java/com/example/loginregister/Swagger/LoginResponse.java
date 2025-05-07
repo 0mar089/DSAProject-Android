@@ -5,6 +5,7 @@ public class LoginResponse {
     private String message;
     private String user;
     private String token;
+    private String correo;
 
     public boolean isStatus() {
         return status;
@@ -21,4 +22,6 @@ public class LoginResponse {
     public String getToken() {
         return token;
     }
+
+    public String getCorreo(){return correo;}
 }

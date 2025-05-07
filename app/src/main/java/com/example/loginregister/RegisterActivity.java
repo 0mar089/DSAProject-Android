@@ -46,10 +46,7 @@ public class RegisterActivity extends Activity {
             // Validación de los datos ingresados
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
-                intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_REGISTER);
-                startActivity(intent);
-                finish(); // Evita que el usuario regrese con el botón "Atrás"
+
                 return;
             }
 
@@ -80,6 +77,11 @@ public class RegisterActivity extends Activity {
                     RegisterResponse registerResponse = response.body();
                     if (registerResponse.isStatus()) {
                         Toast.makeText(RegisterActivity.this, "Registro exitoso: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
+                        intent.putExtra("user", registerResponse.getUsername());
+                        intent.putExtra("gmail", registerResponse.getCorreo());
+                        intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_REGISTER);
+                        startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(RegisterActivity.this, "Error: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();

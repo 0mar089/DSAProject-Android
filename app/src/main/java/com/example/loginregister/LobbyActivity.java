@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,7 +15,8 @@ import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
 import com.example.loginregister.Swagger.ShopItem;
 
-import java.io.Serializable;
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,13 @@ public class LobbyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lobby); // Inflar el layout
 
         this.shopBtn = findViewById(R.id.shopBtn);
+
+        // Getear Datos del usuario.
+        String user = getIntent().getStringExtra("user");
+        String correo = getIntent().getStringExtra("gmail");
+
+        TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);
+        UsuarioTxt.setText(user);
 
     }
 
@@ -64,6 +73,11 @@ public class LobbyActivity extends AppCompatActivity {
                 Log.e("API", "Error al obtener productos: " + t.getMessage());
             }
         });
+    }
+
+    public void PerfilClick(View view){
+        Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
+
     }
 
 }
