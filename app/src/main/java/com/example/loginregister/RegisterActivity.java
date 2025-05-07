@@ -46,6 +46,10 @@ public class RegisterActivity extends Activity {
             // Validación de los datos ingresados
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
+                intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_REGISTER);
+                startActivity(intent);
+                finish(); // Evita que el usuario regrese con el botón "Atrás"
                 return;
             }
 

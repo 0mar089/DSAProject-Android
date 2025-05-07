@@ -17,6 +17,7 @@ public class HomeActivity extends Activity {
         findViewById(R.id.buttonStartHome).setOnClickListener(v -> {
             // Inicia SplashScreenActivity y cierra HomeActivity para evitar volver atrás
             Intent intent = new Intent(this, SplashScreenActivity.class);
+            intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_HOME);
             startActivity(intent);
             finish(); // Evita que el usuario regrese con el botón "Atrás"
         });

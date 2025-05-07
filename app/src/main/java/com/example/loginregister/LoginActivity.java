@@ -78,6 +78,10 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse != null && loginResponse.isStatus()) {
                         // Login exitoso, muestra un mensaje
                         Toast.makeText(LoginActivity.this, "Bienvenido, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
+                        intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
+                        startActivity(intent);
+                        finish(); // Evita que el usuario regrese con el botón "Atrás"
                     } else {
                         // Login fallido, muestra el mensaje de error
                         Toast.makeText(LoginActivity.this, "Error: " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
