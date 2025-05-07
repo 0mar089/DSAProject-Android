@@ -27,6 +27,8 @@ import retrofit2.Response;
 public class LobbyActivity extends AppCompatActivity {
 
     Button shopBtn;
+    public String user;
+    public String correo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,8 @@ public class LobbyActivity extends AppCompatActivity {
         this.shopBtn = findViewById(R.id.shopBtn);
 
         // Getear Datos del usuario.
-        String user = getIntent().getStringExtra("user");
-        String correo = getIntent().getStringExtra("gmail");
+         this.user = getIntent().getStringExtra("user");
+         this.correo = getIntent().getStringExtra("gmail");
 
         TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);
         UsuarioTxt.setText(user);
@@ -77,7 +79,10 @@ public class LobbyActivity extends AppCompatActivity {
 
     public void PerfilClick(View view){
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
-        
+        intent.putExtra("user", this.user);
+        intent.putExtra("gmail", this.correo);
+        startActivity(intent);
+        finish();
     }
 
 }
