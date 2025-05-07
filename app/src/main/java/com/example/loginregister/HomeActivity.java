@@ -2,32 +2,30 @@ package com.example.loginregister;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.view.View;
 
 public class HomeActivity extends Activity {
+
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // ⚡️ Verificar la sesión guardada
+        prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+
         findViewById(R.id.buttonStartHome).setOnClickListener(v -> {
-            // Inicia SplashScreenActivity y cierra HomeActivity para evitar volver atrás
-            Intent intent = new Intent(this, SplashScreenActivity.class);
-            intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_HOME);
-            startActivity(intent);
-            finish(); // Evita que el usuario regrese con el botón "Atrás"
+            if (prefs.getBoolean("sesionIniciada", false)) {
+                // ✅ Si la sesión está activa, ir directamente al LobbyActivity
+                startActivity(new Intent(this, LobbyActivity.class));
+            } else {
+                // 🔄 Si no hay sesión, ir a StartActivity
+                startActivity(new Intent(this, StartActivity.class));
+            }
+            finish(); // Cierra HomeActivity para evitar que el usuario vuelva atrás
         });
-
     }
-
-//    public void startClick(View view) {
-//        Intent intent = new Intent(this, SplashScreenActivity.class);
-//        startActivity(intent);
-//        finish(); // Esto evita que el usuario pueda volver atrás
-//    }
-
 }
