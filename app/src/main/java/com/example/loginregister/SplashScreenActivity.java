@@ -6,9 +6,16 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 
 public class SplashScreenActivity extends Activity{
+
+    public class Constants {
+        public static final String ORIGEN_HOME = "home";
+        public static final String ORIGEN_LOGIN = "login";
+        public static final String ORIGEN_REGISTER = "register";
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,16 +27,36 @@ public class SplashScreenActivity extends Activity{
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
 
+        // Recupera el extra (con valor por defecto si no existe)
+        String origen = getIntent().getStringExtra("origen");
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            Intent intent = new Intent(SplashScreenActivity.this, StartActivity.class);
+            Intent intent;
+
+            if (origen != null) {
+                switch (origen) {
+                    case Constants.ORIGEN_HOME:
+                        intent = new Intent(this, StartActivity.class);
+                        break;
+                    case Constants.ORIGEN_LOGIN:
+                        intent = new Intent(this, LobbyActivity.class);
+                        break;
+                    case Constants.ORIGEN_REGISTER:
+                        intent = new Intent(this, LobbyActivity.class);
+                        break;
+                    default: // Por defecto va a StartActivity
+                        intent = new Intent(this, StartActivity.class);
+                        Toast.makeText(SplashScreenActivity.this, "ERROR ESTAS EN EL DEFAULT, ", Toast.LENGTH_LONG).show();
+                }
+            } else {
+                intent = new Intent(this, StartActivity.class);
+            }
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
 
         }, 3000);
-
-
     }
 
 
