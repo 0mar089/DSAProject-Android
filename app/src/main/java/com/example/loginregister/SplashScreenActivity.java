@@ -34,6 +34,7 @@ public class SplashScreenActivity extends Activity{
             Intent intent;
             String user = "";
             String gmail = "";
+            String token = "";
             if (origen != null) {
                 switch (origen) {
                     case Constants.ORIGEN_HOME:
@@ -42,10 +43,14 @@ public class SplashScreenActivity extends Activity{
                     case Constants.ORIGEN_LOGIN:
                         intent = new Intent(this, LobbyActivity.class);
                         user = getIntent().getStringExtra("user");
+                        gmail = getIntent().getStringExtra("correo");
+                        token = getIntent().getStringExtra("token");
                         break;
                     case Constants.ORIGEN_REGISTER:
                         intent = new Intent(this, LobbyActivity.class);
                         user = getIntent().getStringExtra("user");
+                        gmail = getIntent().getStringExtra("correo");
+                        token = getIntent().getStringExtra("token");
                         break;
                     default: // Por defecto va a StartActivity
                         intent = new Intent(this, StartActivity.class);
@@ -59,7 +64,8 @@ public class SplashScreenActivity extends Activity{
             }
             else{
                 intent.putExtra("user", user);
-                intent.putExtra("gmail", gmail);
+                intent.putExtra("correo", gmail);
+                intent.putExtra("token", token);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             }
 

@@ -22,6 +22,7 @@ public class LobbyActivity extends AppCompatActivity {
     private Button shopBtn;
     private String user;
     private String correo;
+    private String token;
     private SharedPreferences prefs;
 
     @Override
@@ -31,11 +32,12 @@ public class LobbyActivity extends AppCompatActivity {
 
         this.shopBtn = findViewById(R.id.shopBtn);
 
-        // 📌 Obtener datos del usuario desde `Intent`
+        //  Obtener datos del usuario desde `Intent`
         this.user = getIntent().getStringExtra("user");
-        this.correo = getIntent().getStringExtra("gmail");
+        this.correo = getIntent().getStringExtra("correo");
+        this.token = getIntent().getStringExtra("token");
 
-        // 📝 Si los datos no vienen en el `Intent`, recuperarlos desde `SharedPreferences`
+        // Si los datos no vienen en el `Intent`, recuperarlos desde `SharedPreferences`
         prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
         if (user == null || user.isEmpty()) {
             this.user = prefs.getString("user", "Invitado");
@@ -43,8 +45,11 @@ public class LobbyActivity extends AppCompatActivity {
         if (correo == null || correo.isEmpty()) {
             this.correo = prefs.getString("correo", "Sin correo");
         }
+        if (this.token == null || this.token.isEmpty()) {
+            this.token = prefs.getString("token", null); // intenta desde SharedPreferences como respaldo
+        }
 
-        // 🔄 Mostrar el nombre del usuario en pantalla
+        //  Mostrar el nombre del usuario en pantalla
         TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);
         UsuarioTxt.setText(  this.user );
 
@@ -78,10 +83,11 @@ public class LobbyActivity extends AppCompatActivity {
         });
     }
 
-    public void PerfilClick(View view){
+    public void perfilClick(View view){
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
         intent.putExtra("user", this.user);
-        intent.putExtra("gmail", this.correo);
+        intent.putExtra("correo", this.correo);
+        intent.putExtra("token", this.token);
         startActivity(intent);
         finish();
     }
