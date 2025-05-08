@@ -37,4 +37,11 @@ public interface AuthService {
             @Field("nuevaContrasena") String nuevaContrasena
     );
 
+    @FormUrlEncoded
+    @POST("/TocaBolas/eliminarUsuario")
+    Call<GenericResponse> eliminarUsuario(
+            @Header("Authorization") String token,
+            @Field("contrasena") String contrasena
+    );
+
 }

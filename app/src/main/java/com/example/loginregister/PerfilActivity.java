@@ -1,5 +1,6 @@
 package com.example.loginregister;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.ChangePassRequest;
 import com.example.loginregister.Swagger.GenericResponse;
 
 import retrofit2.Call;
@@ -24,10 +24,9 @@ public class PerfilActivity extends AppCompatActivity {
     public String user;
     public String correo;
     public String token;
-    EditText txtNewPassword;
-    EditText txtActualPassword;
+    EditText txtNewPassword, txtActualPassword, txtPasswordDelete;
     Button enviarBtn;
-    Button mostrarInputsBtn;
+    Button enviarBtn2;
 
     TextView correoTxtView;
 
@@ -44,13 +43,15 @@ public class PerfilActivity extends AppCompatActivity {
         correoTxtView = findViewById(R.id.correoTxtView);
         userTxtView = findViewById(R.id.userTxtView);
 
-        correoTxtView.setText(this.correo);
-        userTxtView.setText(this.user);
+        correoTxtView.setText("Correo: " + this.correo);
+        userTxtView.setText("Usuario: " + this.user);
 
         txtNewPassword = findViewById(R.id.txtNewPassword);
         txtActualPassword = findViewById(R.id.txtActualPassword);
+        txtPasswordDelete = findViewById(R.id.txtPasswordDelete);
 
         enviarBtn = findViewById(R.id.enviarBtn);
+        enviarBtn2 = findViewById(R.id.enviarBtn2);
 
         // Están ocultos por XML, pero puedes reforzarlo aquí
         txtNewPassword.setVisibility(View.GONE);
@@ -62,14 +63,19 @@ public class PerfilActivity extends AppCompatActivity {
         txtNewPassword.setVisibility(View.VISIBLE);
         txtActualPassword.setVisibility(View.VISIBLE);
         enviarBtn.setVisibility(View.VISIBLE);
-
+        txtPasswordDelete.setVisibility(View.GONE);
+        enviarBtn2.setVisibility(View.GONE);
     }
 
     public void deleteAccountClick(View view){
-
+        txtNewPassword.setVisibility(View.GONE);
+        txtActualPassword.setVisibility(View.GONE);
+        enviarBtn.setVisibility(View.GONE);
+        txtPasswordDelete.setVisibility(View.VISIBLE);
+        enviarBtn2.setVisibility(View.VISIBLE);
     }
 
-    public void enviarClick(View view){
+    public void enviarChangeClick(View view){
         String nuevaPassword = txtNewPassword.getText().toString().trim();
         String actualPassword = txtActualPassword.getText().toString().trim();
 
@@ -111,6 +117,43 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
                 Toast.makeText(PerfilActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void enviarDeleteClick(View view){
+        String actualPassword = txtPasswordDelete.getText().toString();
+
+        if (this.token == null || this.token.isEmpty() || actualPassword.isEmpty()) {
+            Toast.makeText(this, "Introduce tu contraseña actual", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AuthService authService = API.getAuthService();
+        Call<GenericResponse> call = authService.eliminarUsuario("Bearer " + this.token, actualPassword);
+
+        call.enqueue(new Callback<GenericResponse>() {
+            @Override
+            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
+                if (response.isSuccessful() && response.body() != null && response.body().isStatus()) {
+                    Toast.makeText(PerfilActivity.this, "Cuenta eliminada correctamente", Toast.LENGTH_LONG).show();
+                    // Limpiar sesión
+                    SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
+                    editor.clear();
+                    editor.apply();
+                    // Volver al inicio
+                    Intent intent = new Intent(PerfilActivity.this, StartActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    String mensaje = response.body() != null ? response.body().getMessage() : "Error al eliminar cuenta";
+                    Toast.makeText(PerfilActivity.this, mensaje, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GenericResponse> call, Throwable t) {
+                Toast.makeText(PerfilActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
