@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <com.airbnb.lottie.LottieAnimationView
         android:layout_width="419dp"
         android:layout_height="800dp"
@@ -17,5 +19,105 @@
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/bouncing_balls_perfil" />
+
+    <EditText
+        android:id="@+id/txtNewPassword"
+        android:layout_width="302dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:backgroundTint="#000000"
+        android:fontFamily="casual"
+        android:hint="Nueva contraseña"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:padding="16dp"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/enviarBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteAccountBtn"
+        app:layout_constraintVertical_bias="0.614" />
+
+    <Button
+        android:id="@+id/enviarBtn"
+        android:layout_width="177dp"
+        android:layout_height="67dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:backgroundTint="#000000"
+        android:onClick="deleteAccountClick"
+        android:text="Enviar"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.809" />
+
+    <Button
+        android:id="@+id/deleteAccountBtn"
+        android:layout_width="240dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:backgroundTint="#000000"
+        android:onClick="deleteAccountClick"
+        android:text="Eliminar cuenta"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
+
+    <TextView
+        android:id="@+id/correoTxtView"
+        android:layout_width="241dp"
+        android:layout_height="75dp"
+        android:text="Correo"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.605"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.175" />
+
+    <TextView
+        android:id="@+id/userTxtView"
+        android:layout_width="230dp"
+        android:layout_height="66dp"
+        android:text="User"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/correoTxtView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.491" />
+
+    <Button
+        android:id="@+id/changePassBtn"
+        android:layout_width="238dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:backgroundTint="#000000"
+        android:onClick="changePassClick"
+        android:text="Cambiar contraseña"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.373" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
