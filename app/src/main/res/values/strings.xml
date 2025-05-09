@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Login&amp;Register</string>
+    <string name="search_anything">Search anything ...</string>
+    <string name="items">Items</string>
+    <string name="skins">Skins</string>
+    <string name="see_all">See all</string>
 </resources>
