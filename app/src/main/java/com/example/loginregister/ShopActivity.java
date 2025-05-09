@@ -23,7 +23,7 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);  // Verifica que este nombre coincide con tu XML
 
-        recyclerView = findViewById(R.id.my_recycler_view);
+        recyclerView = findViewById(R.id.recyclerViewItems);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Recuperamos los datos que nos pasaron
