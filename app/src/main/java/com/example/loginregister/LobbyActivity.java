@@ -28,11 +28,11 @@ public class LobbyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lobby); // Inflar el layout
+        setContentView(R.layout.activity_lobby);
 
         this.shopBtn = findViewById(R.id.shopBtn);
 
-        //  Obtener datos del usuario desde `Intent`
+        // Obtener datos del usuario desde `Intent`
         this.user = getIntent().getStringExtra("user");
         this.correo = getIntent().getStringExtra("correo");
         this.token = getIntent().getStringExtra("token");
@@ -46,34 +46,44 @@ public class LobbyActivity extends AppCompatActivity {
             this.correo = prefs.getString("correo", "Sin correo");
         }
         if (this.token == null || this.token.isEmpty()) {
-            this.token = prefs.getString("token", null); // intenta desde SharedPreferences como respaldo
+            this.token = prefs.getString("token", null);
         }
 
-        //  Mostrar el nombre del usuario en pantalla
+        // Mostrar el nombre del usuario en pantalla
         TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);
-        UsuarioTxt.setText(  this.user );
-
+        UsuarioTxt.setText(this.user);
     }
 
-    public void shopClick(View view){
-        AuthService authService = API.getAuthService();  // Obtenemos el servicio AuthService
-        Call<List<ShopItem>> call = authService.getShopItems();  // Llamamos al endpoint de la tienda
+    public void shopClick(View view) {
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        boolean primeraVez = prefs.getBoolean("primeraVezShop", true);
 
-        call.enqueue(new Callback<List<ShopItem>>() {
+        if (primeraVez) {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putBoolean("primeraVezShop", false);
+            editor.apply();
+
+            // Ir a la SplashScreen antes de ShopActivity la primera vez
+            Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
+            intent.putExtra("origen", "shop");
+            startActivity(intent);
+        } else {
+            startShopActivity();
+        }
+    }
+
+    private void startShopActivity() {
+        AuthService authService = API.getAuthService();
+        authService.getShopItems().enqueue(new Callback<List<ShopItem>>() {
             @Override
             public void onResponse(Call<List<ShopItem>> call, Response<List<ShopItem>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<ShopItem> items = response.body();
-
-                    for (ShopItem item : items) {
-                        Log.d("ShopItem", "Producto: " + item.getName() + ", Descripción: " + item.getDescription());
-                    }
-                    Intent intent = new Intent(LobbyActivity.this, ShopActivity.class);
-                    intent.putExtra("shop_items", new ArrayList<>(items));
-                    startActivity(intent);
-                } else {
+                if (!response.isSuccessful() || response.body() == null) {
                     Log.d("API", "No se pudieron obtener los productos");
+                    return;
                 }
+
+                List<ShopItem> items = response.body();
+                startActivity(new Intent(LobbyActivity.this, ShopActivity.class).putExtra("shop_items", new ArrayList<>(items)));
             }
 
             @Override
@@ -83,7 +93,7 @@ public class LobbyActivity extends AppCompatActivity {
         });
     }
 
-    public void perfilClick(View view){
+    public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
         intent.putExtra("user", this.user);
         intent.putExtra("correo", this.correo);
