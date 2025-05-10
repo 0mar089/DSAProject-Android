@@ -1,23 +1,28 @@
 package com.example.loginregister.Swagger;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.loginregister.R;
+import com.example.loginregister.ShopActivity;
 
-
-public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder>{
+public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder> {
     private List<ShopItem> values;
 
-    // Constructor para recibir la lista de ShopItems
     public ShopAdapter(List<ShopItem> myDataset) {
         values = myDataset;
     }
@@ -27,19 +32,16 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         notifyDataSetChanged();
     }
 
-    // Método para agregar un ítem en una posición específica
     public void add(int position, ShopItem item) {
         values.add(position, item);
         notifyItemInserted(position);
     }
 
-    // Método para eliminar un ítem en una posición específica
     public void remove(int position) {
         values.remove(position);
         notifyItemRemoved(position);
     }
 
-    // ViewHolder que mantiene las vistas de cada ítem
     public class ShopViewHolder extends RecyclerView.ViewHolder {
         public TextView txtName, txtDescription;
         public ImageView icon;
@@ -54,34 +56,46 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         }
     }
 
-    // Crear nuevas vistas (invocado por el LayoutManager)
     @Override
     public ShopViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.activity_row_shop, parent, false); // Asegúrate de que 'item_shop' es el layout correcto
+        View v = inflater.inflate(R.layout.activity_row_shop, parent, false);
         return new ShopViewHolder(v);
     }
 
-    // Reemplazar el contenido de una vista (invocado por el LayoutManager)
     @Override
-    public void onBindViewHolder(final ShopViewHolder holder, final int position) {
-        // Obtener el elemento de la lista en esta posición
+    public void onBindViewHolder(final ShopViewHolder holder, int position) {
         ShopItem item = values.get(position);
 
-        // Establecer los valores en los TextViews y cargar la imagen
         holder.txtName.setText(item.getName());
         holder.txtDescription.setText(item.getDescription());
 
-        // Usar Glide para cargar la imagen desde la URL (puedes usar otras librerías si lo prefieres)
         Glide.with(holder.icon.getContext())
                 .load(item.getUrl_icon())
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        if (holder.getBindingAdapterPosition() == values.size() - 1) {
+                            ((ShopActivity) holder.itemView.getContext()).hideProgressBars();  // Oculta ambos
+                        }
+                        return false;
+                    }
+                })
                 .into(holder.icon);
     }
 
-    // Retornar el tamaño de la lista (invocado por el LayoutManager)
+
+
+
+
+
     @Override
     public int getItemCount() {
         return values.size();
     }
-
 }
