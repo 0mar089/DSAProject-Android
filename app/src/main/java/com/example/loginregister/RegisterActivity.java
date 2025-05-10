@@ -79,7 +79,7 @@ public class RegisterActivity extends Activity {
                         Toast.makeText(RegisterActivity.this, "Registro exitoso: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
                         intent.putExtra("user", registerResponse.getUsername());
-                        intent.putExtra("gmail", registerResponse.getCorreo());
+                        intent.putExtra("correo", registerResponse.getCorreo());
                         intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_REGISTER);
                         startActivity(intent);
                         finish();

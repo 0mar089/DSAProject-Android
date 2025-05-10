@@ -39,18 +39,21 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+
         prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
 
-        // ⚡️ Verifica si hay sesión activa
+        // si no hay sesion activa entra al if
         if (prefs.getBoolean("sesionIniciada", false)) {
             Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
             intent.putExtra("user", prefs.getString("user", ""));
-            intent.putExtra("gmail", prefs.getString("correo", ""));
+            intent.putExtra("correo", prefs.getString("correo", ""));
             intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
             startActivity(intent);
             finish();
             return;
+
         }
+
 
         // Referencia al TextView de Sign up
         TextView signUpText = findViewById(R.id.signUp);
@@ -76,18 +79,20 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     LoginResponse loginResponse = response.body();
                     if (loginResponse != null && loginResponse.isStatus()) {
-                        // ✅ Guardar sesión en SharedPreferences
+                        // Guardar sesión en SharedPreferences
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putBoolean("sesionIniciada", true);
                         editor.putString("user", loginResponse.getUser());
                         editor.putString("correo", loginResponse.getCorreo());
+                        editor.putString("token", loginResponse.getToken());
                         editor.apply();
 
-                        // 🔄 Redirigir a la pantalla principal
+                        // Redirigir a la pantalla principal
                         Toast.makeText(LoginActivity.this, "Bienvenido, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
                         intent.putExtra("user", loginResponse.getUser());
-                        intent.putExtra("gmail", loginResponse.getCorreo());
+                        intent.putExtra("correo", loginResponse.getCorreo());
+                        intent.putExtra("token", loginResponse.getToken());
                         intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
                         startActivity(intent);
                         finish(); // Evita que el usuario regrese con el botón "Atrás"

@@ -7,6 +7,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface AuthService {
@@ -27,5 +28,20 @@ public interface AuthService {
 
     @GET("/TocaBolas/Shop/items")
     Call<List<ShopItem>> getShopItems();
+
+    @FormUrlEncoded
+    @POST("/TocaBolas/actualizarContrasena")
+    Call<GenericResponse> actualizarContrasena(
+            @Header("Authorization") String token,
+            @Field("contrasenaActual") String contrasenaActual,
+            @Field("nuevaContrasena") String nuevaContrasena
+    );
+
+    @FormUrlEncoded
+    @POST("/TocaBolas/eliminarUsuario")
+    Call<GenericResponse> eliminarUsuario(
+            @Header("Authorization") String token,
+            @Field("contrasena") String contrasena
+    );
 
 }
