@@ -15,7 +15,7 @@ public class SplashScreenActivity extends Activity {
         public static final String ORIGEN_HOME = "home";
         public static final String ORIGEN_LOGIN = "login";
         public static final String ORIGEN_REGISTER = "register";
-        public static final String ORIGEN_SHOP = "shop"; // Nuevo origen para la tienda
+        public static final String ORIGEN_LOBBY = "lobby"; // Nuevo origen para la tienda
     }
 
     @Override
@@ -29,10 +29,6 @@ public class SplashScreenActivity extends Activity {
         );
 
         String origen = getIntent().getStringExtra("origen");
-
-        // Verificamos si es la primera vez que se abre la tienda
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        boolean primeraVezShop = prefs.getBoolean("primeraVezShop", true);
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent;
@@ -52,7 +48,7 @@ public class SplashScreenActivity extends Activity {
                         gmail = getIntent().getStringExtra("correo");
                         token = getIntent().getStringExtra("token");
                         break;
-                    case Constants.ORIGEN_SHOP:
+                    case Constants.ORIGEN_LOBBY:
                         // Ir a `ShopActivity` directamente, sin pasar por Lobby
                         intent = new Intent(this, ShopActivity.class);
                         break;

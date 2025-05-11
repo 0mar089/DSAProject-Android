@@ -55,43 +55,32 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     public void shopClick(View view) {
-        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        boolean primeraVez = prefs.getBoolean("primeraVezShop", true);
-
-        if (primeraVez) {
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("primeraVezShop", false);
-            editor.apply();
-
-            // Ir a la SplashScreen antes de ShopActivity la primera vez
-            Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
-            intent.putExtra("origen", "shop");
-            startActivity(intent);
-        } else {
-            startShopActivity();
-        }
+        // Siempre ir a la SplashScreen antes de la tienda
+        Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
+        intent.putExtra("origen", "lobby");
+        startActivity(intent);
     }
 
-    private void startShopActivity() {
-        AuthService authService = API.getAuthService();
-        authService.getShopItems().enqueue(new Callback<List<ShopItem>>() {
-            @Override
-            public void onResponse(Call<List<ShopItem>> call, Response<List<ShopItem>> response) {
-                if (!response.isSuccessful() || response.body() == null) {
-                    Log.d("API", "No se pudieron obtener los productos");
-                    return;
-                }
-
-                List<ShopItem> items = response.body();
-                startActivity(new Intent(LobbyActivity.this, ShopActivity.class).putExtra("shop_items", new ArrayList<>(items)));
-            }
-
-            @Override
-            public void onFailure(Call<List<ShopItem>> call, Throwable t) {
-                Log.e("API", "Error al obtener productos: " + t.getMessage());
-            }
-        });
-    }
+//    private void startShopActivity() {
+//        AuthService authService = API.getAuthService();
+//        authService.getShopItems().enqueue(new Callback<List<ShopItem>>() {
+//            @Override
+//            public void onResponse(Call<List<ShopItem>> call, Response<List<ShopItem>> response) {
+//                if (!response.isSuccessful() || response.body() == null) {
+//                    Log.d("API", "No se pudieron obtener los productos");
+//                    return;
+//                }
+//
+//                List<ShopItem> items = response.body();
+//                startActivity(new Intent(LobbyActivity.this, ShopActivity.class).putExtra("shop_items", new ArrayList<>(items)));
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<ShopItem>> call, Throwable t) {
+//                Log.e("API", "Error al obtener productos: " + t.getMessage());
+//            }
+//        });
+//    }
 
     public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
