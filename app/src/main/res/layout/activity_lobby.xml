@@ -29,7 +29,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
         android:backgroundTint="#000000"
-        android:onClick="shopClick"
+        android:onClick="jugarClick"
         android:text="Jugar"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"

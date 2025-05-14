@@ -1,5 +1,6 @@
 package com.example.loginregister;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
@@ -89,5 +92,25 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("token", this.token);
         startActivity(intent);
         finish();
+    }
+
+    public void jugarClick(View view){
+        String unityPackage = "com.DefaultCompany.DSAProjectUnity";
+        String unityActivity = "com.unity3d.player.UnityPlayerGameActivity";
+
+        try {
+            Intent intent = new Intent();
+            intent.setComponent(new ComponentName(unityPackage, unityActivity));
+
+            // Verificamos si existe el intent para evitar que crashee si no está instalado
+            if (getPackageManager().resolveActivity(intent, 0) != null) {
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "El juego de Unity no está instalado.", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error al intentar lanzar el juego.", Toast.LENGTH_LONG).show();
+        }
     }
 }
