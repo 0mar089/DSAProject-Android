@@ -31,6 +31,7 @@ public class ShopActivity extends AppCompatActivity {
 
     private ProgressBar progressBarBanner;
 
+
     public void hideProgressBars() {
         progressBarItems.setVisibility(View.GONE);
         progressBarBanner.setVisibility(View.GONE);
