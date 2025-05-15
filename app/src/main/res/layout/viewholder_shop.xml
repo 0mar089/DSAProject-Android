@@ -41,10 +41,11 @@
         android:id="@+id/priceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:text="$-"
         android:textColor="@color/darkBrown"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/nameItem"
-        tools:layout_editor_absoluteY="210dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nameItem" />
 </androidx.constraintlayout.widget.ConstraintLayout>

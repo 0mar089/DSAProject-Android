@@ -21,13 +21,14 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView5"
-        app:shapeAppearanceOverlay="@style/CircleImageView"
         android:layout_width="145dp"
         android:layout_height="95dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="@+id/frameLayout"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/CircleImageView"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
 
     <TextView
         android:id="@+id/titleTxt"
@@ -50,5 +51,18 @@
         android:textColor="@color/darkBrown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/titleTxt"
+        app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
+
+    <TextView
+        android:id="@+id/quantityTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="quantiy"
+        android:textColor="@color/darkBrown"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pricetxt"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

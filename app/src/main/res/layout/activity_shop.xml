@@ -229,9 +229,11 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/cartBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
+            android:onClick="cartClcik"
             android:orientation="vertical">
 
             <ImageView
@@ -240,6 +242,7 @@
                 android:layout_height="22dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/btn_2" />
+
             <TextView
 
                 android:layout_width="match_parent"

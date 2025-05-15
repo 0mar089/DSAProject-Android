@@ -118,5 +118,12 @@ public class ShopActivity extends AppCompatActivity {
         }
 
     }
+    public void cartClcik (View view){
+
+        Intent intent = new Intent(ShopActivity.this, CartActivity.class);
+        intent.putExtra("origen", "lobby");
+        startActivity(intent);
+
+    }
 }
 
