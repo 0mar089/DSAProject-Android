@@ -1,5 +1,6 @@
 package com.example.loginregister;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -88,7 +89,34 @@ public class ShopActivity extends AppCompatActivity {
                 Log.e("API", "Error al obtener productos: " + t.getMessage());
                 progressBarItems.setVisibility(View.GONE);
             }
+
+
         });
+
+    }
+    public void itemDetailClick (View view){
+
+        try {
+            // Obtener el ViewHolder (puede necesitar ajustes según tu layout)
+            View parent = (View) view.getParent().getParent(); // Ajusta según tu jerarquía
+
+            RecyclerView recyclerView = findViewById(R.id.recyclerViewItems);
+            if (recyclerView != null) {
+                int position = recyclerView.getChildLayoutPosition(parent);
+
+                if (position != RecyclerView.NO_POSITION && position < shopItems.size()) {
+                    ShopItem clickedItem = shopItems.get(position);
+
+                    Intent intent = new Intent(this, DetailActivity.class);
+                    intent.putExtra("shopItem", clickedItem);
+                    intent.putExtra("itemPosition", position);
+                    startActivity(intent);
+                }
+            }
+        } catch (Exception e) {
+            Log.e("ShopActivity", "Error al obtener posición del item", e);
+        }
+
     }
 }
 

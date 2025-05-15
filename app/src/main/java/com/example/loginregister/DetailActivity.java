@@ -1,24 +1,43 @@
 package com.example.loginregister;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.bumptech.glide.Glide;
+import com.example.loginregister.R;
+import com.example.loginregister.Swagger.ShopItem;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private TextView titleTxt, priceTxt, descriptionTxt;
+    private ImageView picMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detail);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        // Referencias a los elementos del layout
+        titleTxt = findViewById(R.id.TitleTxt);
+        priceTxt = findViewById(R.id.priceDetailTxt);
+        descriptionTxt = findViewById(R.id.textView9);
+        picMain = findViewById(R.id.picMain);
+
+        // Obtener el objeto ShopItem enviado desde el intent
+        ShopItem item = (ShopItem) getIntent().getSerializableExtra("item");
+
+        if (item != null) {
+            titleTxt.setText(item.getName());
+            priceTxt.setText(item.getPrice() + "$");
+            descriptionTxt.setText(item.getDescription());
+
+            // Cargar la imagen con Glide
+            Glide.with(this)
+                    .load(item.getUrl_icon())
+                    .into(picMain);
+        }
     }
 }

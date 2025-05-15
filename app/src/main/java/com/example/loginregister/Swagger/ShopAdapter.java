@@ -1,5 +1,6 @@
 package com.example.loginregister.Swagger;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.loginregister.DetailActivity;
 import com.example.loginregister.R;
 import com.example.loginregister.ShopActivity;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -39,7 +41,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             layout = v;
             txtName = v.findViewById(R.id.nameItem);
             txtPrice = v.findViewById(R.id.priceTxt);
-            plusIcon = v.findViewById(R.id.imageView4);
             picItem = v.findViewById(R.id.picItem);
         }
     }
@@ -75,7 +76,15 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                     }
                 })
                 .into(holder.picItem);
+
+        // Evento de clic en el layout del ítem para abrir DetailActivity
+        holder.layout.setOnClickListener(v -> {
+            Intent intent = new Intent(holder.itemView.getContext(), DetailActivity.class);
+            intent.putExtra("item", item); // Enviamos el objeto completo
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
+
 
     @Override
     public int getItemCount() {
