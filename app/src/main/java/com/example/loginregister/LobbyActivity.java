@@ -33,7 +33,7 @@ public class LobbyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
-        this.shopBtn = findViewById(R.id.shopBtn);
+        this.shopBtn = findViewById(R.id.shopBtn3);
 
         // Obtener datos del usuario desde `Intent`
         this.user = getIntent().getStringExtra("user");
