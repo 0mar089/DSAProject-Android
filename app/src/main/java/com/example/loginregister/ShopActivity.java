@@ -125,5 +125,12 @@ public class ShopActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+    public void lobbyClcik (View view){
+        finish();
+        overridePendingTransition(R.anim.slide_in_left); // Asegúrate de tener estos archivos en res/anim
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
+    }
 }
 

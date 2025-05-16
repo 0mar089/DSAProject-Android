@@ -1,6 +1,7 @@
 package com.example.loginregister;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,5 +30,14 @@ public class CartActivity extends AppCompatActivity {
         CartAdapter adapter = new CartAdapter(new ArrayList<>(cartItems.entrySet())); // Convierte HashMap a lista de pares
         recyclerView.setAdapter(adapter);
     }
+
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left); // Asegúrate de tener estos archivos en res/anim
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
+    }
+
 
 }

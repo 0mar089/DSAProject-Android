@@ -63,14 +63,18 @@ public class DetailActivity extends AppCompatActivity {
             Toast.makeText(this, "¡Item añadido al carrito!", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
     public void minusQuantityClick(View view){
         if (cantidad > 1) { // Evita que la cantidad llegue a 0
             this.cantidad--;
             cantidadTxt.setText(String.valueOf(cantidad));
         }
+    }
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left); // Asegúrate de tener estos archivos en res/anim
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 
 
