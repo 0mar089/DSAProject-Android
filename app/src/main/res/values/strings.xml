@@ -1,12 +1,10 @@
 <resources>
-    <string name="todo">Aquí va el texto TODO</string>
+    <string name="play_button_description">Play game</string>
     <string name="app_name">Login&amp;Register</string>
     <string name="search_anything">Search anything ...</string>
     <string name="items">Items</string>
     <string name="skins">Skins</string>
     <string name="see_all">See all</string>
     <string name="qty">Qty.</string>
-    <string name="content_description_shop_button">Botón para ir a la tienda</string>
-    <string name="content_description_profile_button">Botón para ir al perfil de usuario</string>
-    <string name="content_description_play_button">Botón para iniciar el juego</string>
+    <string name="todo">TODO</string>
 </resources>

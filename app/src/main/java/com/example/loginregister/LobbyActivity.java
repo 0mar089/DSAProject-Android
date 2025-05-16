@@ -1,10 +1,10 @@
 package com.example.loginregister;
 
+import android.annotation.SuppressLint;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,13 +27,15 @@ public class LobbyActivity extends AppCompatActivity {
     private String correo;
     private String token;
     private SharedPreferences prefs;
+    private View playBtn;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
 
-        this.shopBtn = findViewById(R.id.shopBtn3);
+        this.playBtn = findViewById(R.id.playBtn);
 
         // Obtener datos del usuario desde `Intent`
         this.user = getIntent().getStringExtra("user");

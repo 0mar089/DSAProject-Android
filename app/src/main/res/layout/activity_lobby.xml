@@ -7,11 +7,11 @@
     android:layout_height="match_parent">
 
 
-
-
     <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
         android:layout_width="1101dp"
         android:layout_height="2028dp"
+        android:layout_marginStart="32dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,71 +22,64 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/floating_balls" />
 
-    <Button
-        android:id="@+id/shopBtn3"
-        android:layout_width="291dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="#000000"
-        android:onClick="jugarClick"
-        android:text="Jugar"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383" />
-
-    <Button
-        android:id="@+id/shopBtn2"
-        android:layout_width="291dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="#000000"
-        android:onClick="perfilClick"
-        android:text="Perfil"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
-
-    <Button
-        android:id="@+id/shopBtn"
-        android:layout_width="291dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:backgroundTint="#000000"
-        android:onClick="shopClick"
-        android:text="Shop"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616" />
 
     <TextView
         android:id="@+id/UserTxtLobby"
-        android:layout_width="299dp"
-        android:layout_height="111dp"
-        android:fontFamily="casual"
+        android:layout_width="417dp"
+        android:layout_height="81dp"
+        android:fontFamily="@font/autour_one"
         android:text="USER"
         android:textAlignment="center"
-        android:textSize="34sp"
+        android:textColor="@color/white"
+        android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/shopBtn3"
+        app:layout_constraintBottom_toTopOf="@+id/playBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
+        app:layout_constraintVertical_bias="0.58" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="56dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:contentDescription="@string/todo"
+        android:onClick="shopClick"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_2" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="59dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:contentDescription="TODO"
+        android:onClick="perfilClick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_5" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/playBtn"
+        android:layout_width="147dp"
+        android:layout_height="138dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="100dp"
+        android:onClick="jugarClick"
+        android:contentDescription="@string/play_button_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/play" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
