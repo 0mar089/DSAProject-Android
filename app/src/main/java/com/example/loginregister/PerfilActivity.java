@@ -157,6 +157,15 @@ public class PerfilActivity extends AppCompatActivity {
             }
         });
     }
+    public void onClickBack(View view) {
+        Intent intent = new Intent(PerfilActivity.this, LobbyActivity.class);
+        intent.putExtra("origen", "lobby");
+        startActivity(intent);
+
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
+    }
 
 
 }
