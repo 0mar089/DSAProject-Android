@@ -34,6 +34,8 @@ public class ShopActivity extends AppCompatActivity {
     private ProgressBar progressBarItems;
     private ProgressBar progressBarBanner;
 
+    int money;
+
     public void hideProgressBars() {
         if (progressBarItems != null) {
             progressBarItems.setVisibility(View.GONE);
@@ -82,6 +84,8 @@ public class ShopActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         getShopItems();
+
+        this.money = Integer.parseInt(getIntent().getStringExtra("money"));
     }
 
     private void filterItems(String query) {
