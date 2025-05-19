@@ -1,5 +1,7 @@
 package com.example.loginregister;
 
+import android.util.Log;
+
 import com.example.loginregister.Swagger.ShopItem;
 
 import java.util.HashMap;
@@ -21,6 +23,16 @@ public class CartManager {
     public static Map<ShopItem, Integer> getCartItems() {
         return cartItems;
     }
+    // Eliminar un producto del carrito
+    public static void deleteItem(ShopItem item) {
+        if (cartItems.containsKey(item)) {
+            cartItems.remove(item);
+            Log.d("CartManager", "Producto eliminado: " + item.getName());
+        } else {
+            Log.w("CartManager", "Intento de eliminar producto inexistente: " + item.getName());
+        }
+    }
+
 
     // Limpiar el carrito (por si el usuario quiere vaciarlo)
     public static void clearCart() {

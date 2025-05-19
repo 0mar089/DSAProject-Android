@@ -56,13 +56,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             }
         });
 
-        // Botón para eliminar el producto del carrito
+        // Botón para eliminar el producto del carrito (no funciona)
         holder.removeBtn.setOnClickListener(v -> {
-            cartItems.remove(position);
-            notifyItemRemoved(position);
-            notifyItemRangeChanged(position, cartItems.size());
+            int positionToRemove = holder.getAdapterPosition();
+            if (positionToRemove != RecyclerView.NO_POSITION) {
+                cartItems.remove(positionToRemove);
+                notifyItemRemoved(positionToRemove);
+                notifyItemRangeChanged(positionToRemove, cartItems.size());
+            }
         });
+
     }
+
 
     @Override
     public int getItemCount() {
