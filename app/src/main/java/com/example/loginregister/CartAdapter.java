@@ -24,7 +24,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_item_pic_right, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_cart, parent, false);
         return new CartViewHolder(view);
     }
 
@@ -36,11 +36,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
         holder.titleTxt.setText(item.getName());
         holder.priceTxt.setText(item.getPrice() * cantidad + "$");
-        holder.quantityTxt.setText("Cantidad: " + cantidad);
+        holder.quantityTxt.setText(String.valueOf(cantidad));
 
         Glide.with(holder.picMain.getContext())
                 .load(item.getUrl_icon())
                 .into(holder.picMain);
+
+        // Botón para aumentar cantidad
+        holder.plusEachItem.setOnClickListener(v -> {
+            cartItems.get(position).setValue(cantidad + 1);
+            notifyItemChanged(position);
+        });
+
+        // Botón para disminuir cantidad
+        holder.minusEachItem.setOnClickListener(v -> {
+            if (cantidad > 1) {
+                cartItems.get(position).setValue(cantidad - 1);
+                notifyItemChanged(position);
+            }
+        });
+
+        // Botón para eliminar el producto del carrito
+        holder.removeBtn.setOnClickListener(v -> {
+            cartItems.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, cartItems.size());
+        });
     }
 
     @Override
@@ -49,15 +70,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTxt, priceTxt, quantityTxt;
-        ImageView picMain;
+        TextView titleTxt, priceTxt, quantityTxt, plusEachItem, minusEachItem;
+        ImageView picMain, removeBtn;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTxt = itemView.findViewById(R.id.titleTxt);
-            priceTxt = itemView.findViewById(R.id.pricetxt);
-            quantityTxt = itemView.findViewById(R.id.quantityTxt);
-            picMain = itemView.findViewById(R.id.imageView5); // Asegúrate que el ID sea el correcto
+            titleTxt = itemView.findViewById(R.id.nameItemCart);
+            priceTxt = itemView.findViewById(R.id.totalCartTxt);
+            quantityTxt = itemView.findViewById(R.id.numberItems);
+            plusEachItem = itemView.findViewById(R.id.plusEachItem);
+            minusEachItem = itemView.findViewById(R.id.minusEachItem);
+            picMain = itemView.findViewById(R.id.picCart);
+            removeBtn = itemView.findViewById(R.id.removeBtn);
         }
     }
 }

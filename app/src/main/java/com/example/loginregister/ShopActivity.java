@@ -34,6 +34,8 @@ public class ShopActivity extends AppCompatActivity {
     private ProgressBar progressBarItems;
     private ProgressBar progressBarBanner;
 
+    int money;
+
     public void hideProgressBars() {
         if (progressBarItems != null) {
             progressBarItems.setVisibility(View.GONE);
@@ -75,14 +77,28 @@ public class ShopActivity extends AppCompatActivity {
         if (progressBarItems != null) progressBarItems.setVisibility(View.VISIBLE);
         if (progressBarBanner != null) progressBarBanner.setVisibility(View.VISIBLE);
 
-
         allShopItemsMaster = new ArrayList<>();
         displayedShopItems = new ArrayList<>(); // Esta es la lista que el adaptador usará
         adapter = new ShopAdapter(displayedShopItems); // El adaptador usa la lista 'displayedShopItems'
         recyclerView.setAdapter(adapter);
 
         getShopItems();
+
+        // Manejo seguro de la conversión a entero
+        String moneyString = getIntent().getStringExtra("money");
+        if (moneyString != null && !moneyString.isEmpty()) {
+            try {
+                this.money = Integer.parseInt(moneyString);
+            } catch (NumberFormatException e) {
+                Log.e("ShopActivity", "Error al convertir 'money' a entero: " + moneyString, e);
+                this.money = 0; // Asigna un valor por defecto si hay error
+            }
+        } else {
+            Log.e("ShopActivity", "El valor de 'money' es nulo o vacío.");
+            this.money = 0; // Valor por defecto si el dato es nulo o vacío
+        }
     }
+
 
     private void filterItems(String query) {
         List<ShopItem> filteredList = new ArrayList<>();
