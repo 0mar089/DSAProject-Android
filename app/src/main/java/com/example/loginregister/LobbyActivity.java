@@ -130,22 +130,19 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     public void jugarClick(View view){
-        String unityPackage = "com.DefaultCompany.DSAProjectUnity";
-        String unityActivity = "com.unity3d.player.UnityPlayerGameActivity";
+//        String unityPackage = "com.DefaultCompany.DSAProject-Unity";
+//        String unityActivity = "com.unity3d.player.UnityPlayerGameActivity";
+
+        String packageName = "com.DefaultCompany.DSAProject-Unity";
 
         try {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(unityPackage, unityActivity));
-
-            // Verificamos si existe el intent para evitar que crashee si no está instalado
-            if (getPackageManager().resolveActivity(intent, 0) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "El juego de Unity no está instalado.", Toast.LENGTH_SHORT).show();
-            }
+            // Intenta abrir la app de Unity
+            Intent intent = getPackageManager().getLaunchIntentForPackage(packageName);
+            startActivity(intent);
         } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error al intentar lanzar el juego.", Toast.LENGTH_LONG).show();
+            // Si la app no está instalada, muestra un mensaje
+            Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
         }
+
     }
 }

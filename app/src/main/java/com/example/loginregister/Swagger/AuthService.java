@@ -49,6 +49,8 @@ public interface AuthService {
     Call<UserStatsResponse> getUserStats(
             @Body UserStatsRequest request,
             @Header("Authorization") String token
+
+
     );
 
     @POST("/TocaBolas/Shop/comprar")
