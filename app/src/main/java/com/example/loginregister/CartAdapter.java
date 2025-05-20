@@ -16,9 +16,12 @@ import java.util.Map;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private List<Map.Entry<ShopItem, Integer>> cartItems;
+    private TextView totalTxt;
 
-    public CartAdapter(List<Map.Entry<ShopItem, Integer>> cartItems) {
+    public CartAdapter(List<Map.Entry<ShopItem, Integer>> cartItems, TextView totalTxt) {
+
         this.cartItems = cartItems;
+        this.totalTxt = totalTxt;
     }
 
     @NonNull
@@ -46,6 +49,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.plusEachItem.setOnClickListener(v -> {
             cartItems.get(position).setValue(cantidad + 1);
             notifyItemChanged(position);
+            updateTotal(); // Actualiza total
         });
 
         // Botón para disminuir cantidad
@@ -53,6 +57,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             if (cantidad > 1) {
                 cartItems.get(position).setValue(cantidad - 1);
                 notifyItemChanged(position);
+                updateTotal(); // Actualiza total
             }
         });
 
@@ -60,14 +65,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.removeBtn.setOnClickListener(v -> {
             int positionToRemove = holder.getAdapterPosition();
             if (positionToRemove != RecyclerView.NO_POSITION) {
+                ShopItem itemToRemove = cartItems.get(positionToRemove).getKey();
+                com.example.loginregister.CartManager.deleteItem(itemToRemove);
                 cartItems.remove(positionToRemove);
                 notifyItemRemoved(positionToRemove);
                 notifyItemRangeChanged(positionToRemove, cartItems.size());
+                updateTotal(); // Actualizar total al eliminar
             }
         });
 
     }
-
+    private void updateTotal() {
+        double total = 0;
+        for (Map.Entry<ShopItem, Integer> entry : cartItems) {
+            ShopItem item = entry.getKey();
+            int cantidad = entry.getValue();
+            total += item.getPrice() * cantidad;
+        }
+        totalTxt.setText(String.format("%.2f $", total));
+    }
 
     @Override
     public int getItemCount() {

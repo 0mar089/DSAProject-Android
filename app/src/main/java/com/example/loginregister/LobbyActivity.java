@@ -94,7 +94,8 @@ public class LobbyActivity extends AppCompatActivity {
         Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
         intent.putExtra("origen", "lobby");
         TextView dineroText = findViewById(R.id.moneyTxt);
-        intent.putExtra("money", dineroText.toString());
+        intent.putExtra("money", dineroText.getText().toString());
+        intent.putExtra("token", this.token);
         startActivity(intent);
     }
 

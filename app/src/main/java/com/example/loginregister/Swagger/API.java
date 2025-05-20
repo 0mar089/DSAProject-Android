@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class API {
 
-    private static final String BASE_URL = "http://10.0.2.2:8080"; // Ajusta la URL según tu entorno
+    private static final String BASE_URL = "http://dsa2.upc.edu"; // Ajusta la URL según tu entorno
 
     private static Retrofit retrofit;
 

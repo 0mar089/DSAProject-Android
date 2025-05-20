@@ -35,6 +35,7 @@ public class SplashScreenActivity extends Activity {
             String user = "";
             String gmail = "";
             String token = "";
+            String money = "";
 
             if (origen != null) {
                 switch (origen) {
@@ -51,6 +52,8 @@ public class SplashScreenActivity extends Activity {
                     case Constants.ORIGEN_LOBBY:
                         // Ir a `ShopActivity` directamente, sin pasar por Lobby
                         intent = new Intent(this, ShopActivity.class);
+                        money = getIntent().getStringExtra("money");
+                        token = getIntent().getStringExtra("token");
                         break;
                     default:
                         intent = new Intent(this, StartActivity.class);
@@ -60,11 +63,12 @@ public class SplashScreenActivity extends Activity {
                 intent = new Intent(this, StartActivity.class);
             }
 
-            if (!user.isEmpty()) {
-                intent.putExtra("user", user);
-                intent.putExtra("correo", gmail);
-                intent.putExtra("token", token);
-            }
+
+            intent.putExtra("user", user);
+            intent.putExtra("correo", gmail);
+            intent.putExtra("token", token);
+            intent.putExtra("money", money);
+
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

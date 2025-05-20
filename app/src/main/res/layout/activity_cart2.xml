@@ -123,6 +123,7 @@
             android:layout_marginEnd="4dp"
             android:layout_weight="1"
             android:background="@drawable/blue_full_corner"
+            android:onClick="clickBuyBtn"
             android:text="Buy"
             android:textColor="@color/white"
             android:textSize="16sp" />

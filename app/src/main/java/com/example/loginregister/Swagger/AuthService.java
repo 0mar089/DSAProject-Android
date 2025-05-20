@@ -8,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface AuthService {
@@ -48,6 +49,13 @@ public interface AuthService {
     Call<UserStatsResponse> getUserStats(
             @Body UserStatsRequest request,
             @Header("Authorization") String token
+    );
+
+    @POST("/TocaBolas/Shop/comprar")
+    @Headers("Content-Type: text/plain")
+    Call<GenericResponse> comprarItems(
+            @Header("Authorization") String token,
+            @Body String itemsString
     );
 
 }

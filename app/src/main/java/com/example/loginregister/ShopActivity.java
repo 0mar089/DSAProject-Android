@@ -190,6 +190,8 @@ public class ShopActivity extends AppCompatActivity {
     public void cartClcik (View view){
         Intent intent = new Intent(ShopActivity.this, CartActivity.class);
         intent.putExtra("origen", "lobby"); // Asumo que esto es correcto para tu lógica
+        String token = getIntent().getStringExtra("token");
+        intent.putExtra("token", token);
         startActivity(intent);
     }
 
@@ -198,7 +200,4 @@ public class ShopActivity extends AppCompatActivity {
         // overridePendingTransition(R.anim.slide_in_left); // Descomenta si tienes estas animaciones
     }
 
-    // Quita este método si no lo usas o defínelo correctamente
-    // private void overridePendingTransition(int slideInLeft) {
-    // }
 }
