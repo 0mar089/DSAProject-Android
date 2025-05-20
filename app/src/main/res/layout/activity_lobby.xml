@@ -24,6 +24,39 @@
 
 
     <TextView
+        android:id="@+id/recordTxt"
+        android:layout_width="417dp"
+        android:layout_height="81dp"
+        android:fontFamily="@font/autour_one"
+        android:text="USER"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/playBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67" />
+
+    <TextView
+        android:id="@+id/moneyTxt"
+        android:layout_width="417dp"
+        android:layout_height="81dp"
+        android:fontFamily="@font/autour_one"
+        android:text="USER"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/playBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
+    <TextView
         android:id="@+id/UserTxtLobby"
         android:layout_width="417dp"
         android:layout_height="81dp"
@@ -35,10 +68,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/playBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintVertical_bias="0.117" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -70,14 +103,14 @@
         android:layout_height="138dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="100dp"
-        android:onClick="jugarClick"
         android:contentDescription="@string/play_button_description"
+        android:onClick="jugarClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68"
+        app:layout_constraintVertical_bias="0.805"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/play" />

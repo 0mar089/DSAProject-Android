@@ -77,6 +77,7 @@ public class ShopActivity extends AppCompatActivity {
         if (progressBarItems != null) progressBarItems.setVisibility(View.VISIBLE);
         if (progressBarBanner != null) progressBarBanner.setVisibility(View.VISIBLE);
 
+
         allShopItemsMaster = new ArrayList<>();
         displayedShopItems = new ArrayList<>(); // Esta es la lista que el adaptador usará
         adapter = new ShopAdapter(displayedShopItems); // El adaptador usa la lista 'displayedShopItems'
@@ -98,7 +99,6 @@ public class ShopActivity extends AppCompatActivity {
             this.money = 0; // Valor por defecto si el dato es nulo o vacío
         }
     }
-
 
     private void filterItems(String query) {
         List<ShopItem> filteredList = new ArrayList<>();
