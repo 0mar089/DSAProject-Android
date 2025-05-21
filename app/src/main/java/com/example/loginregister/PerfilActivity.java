@@ -24,6 +24,8 @@ public class PerfilActivity extends AppCompatActivity {
     public String user;
     public String correo;
     public String token;
+    public String money;
+    public String record;
     EditText txtNewPassword, txtActualPassword, txtPasswordDelete;
     Button enviarBtn;
     Button enviarBtn2;
@@ -40,6 +42,8 @@ public class PerfilActivity extends AppCompatActivity {
         this.user = getIntent().getStringExtra("user");
         this.correo = getIntent().getStringExtra("correo");
         this.token = getIntent().getStringExtra("token");
+        this.money = getIntent().getStringExtra("money");
+        this.record = getIntent().getStringExtra("record");
         correoTxtView = findViewById(R.id.correoTxtView);
         userTxtView = findViewById(R.id.userTxtView);
 
@@ -162,6 +166,10 @@ public class PerfilActivity extends AppCompatActivity {
         intent.putExtra("origen", "lobby");
         startActivity(intent);
 
+    }
+
+    public void onClickInventario(View view){
+        Intent intent;
     }
 
     private void overridePendingTransition(int slideInLeft) {
