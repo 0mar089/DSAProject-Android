@@ -1,7 +1,6 @@
 package com.example.loginregister;
 
 import android.annotation.SuppressLint;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -13,13 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.GenericResponse;
-import com.example.loginregister.Swagger.ShopItem;
-import com.example.loginregister.Swagger.UserStatsRequest;
 import com.example.loginregister.Swagger.UserStatsResponse;
 
-import java.util.ArrayList;
-import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,13 +58,12 @@ public class LobbyActivity extends AppCompatActivity {
         UsuarioTxt.setText(this.user);
 
         AuthService authService = API.getAuthService();
-        UserStatsRequest request = new UserStatsRequest(user);
-        authService.getUserStats(request, "Bearer " + token).enqueue(new Callback<UserStatsResponse>()  {
+        authService.getUserStats("Bearer " + token).enqueue(new Callback<UserStatsResponse>() {
             @Override
             public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    int dinero = response.body().getDinero();
-                    int record = response.body().getRecord();
+                    int dinero = response.body().getMoney();
+                    int record = response.body().getScore();
 
                     TextView dineroText = findViewById(R.id.moneyTxt);
                     TextView recordText = findViewById(R.id.recordTxt);
@@ -86,6 +79,7 @@ public class LobbyActivity extends AppCompatActivity {
                 Toast.makeText(LobbyActivity.this, "Fallo al conectar con servidor", Toast.LENGTH_SHORT).show();
             }
         });
+
 
     }
 
@@ -143,6 +137,5 @@ public class LobbyActivity extends AppCompatActivity {
             // Si la app no está instalada, muestra un mensaje
             Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
         }
-
     }
 }
