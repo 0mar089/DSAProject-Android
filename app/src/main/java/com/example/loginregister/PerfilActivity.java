@@ -169,7 +169,13 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void onClickInventario(View view){
-        Intent intent;
+        Intent intent = new Intent(PerfilActivity.this, InventarioActivity.class);
+        intent.putExtra("user", this.user);
+        intent.putExtra("correo", this.correo);
+        intent.putExtra("token", this.token);
+        intent.putExtra("money",this.money);
+        intent.putExtra("record", this.record);
+        startActivity(intent);
     }
 
     private void overridePendingTransition(int slideInLeft) {

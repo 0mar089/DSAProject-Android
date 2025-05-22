@@ -63,6 +63,7 @@ public class LobbyActivity extends AppCompatActivity {
 
         AuthService authService = API.getAuthService();
         authService.getUserStats("Bearer " + token).enqueue(new Callback<UserStatsResponse>() {
+
             @Override
             public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

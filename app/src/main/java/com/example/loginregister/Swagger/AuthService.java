@@ -58,4 +58,9 @@ public interface AuthService {
             @Body String itemsString
     );
 
+    @GET("/TocaBolas/inventario")
+    Call<List<InventoryResponse>> getInventario(
+            @Header("Authorization") String username
+    );
+
 }
