@@ -56,8 +56,8 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             icon = itemView.findViewById(R.id.icon);
-            firstLine = itemView.findViewById(R.id.firstLine);
-            secondLine = itemView.findViewById(R.id.secondLine);
+            firstLine = itemView.findViewById(R.id.usernameTxtRanking);
+            secondLine = itemView.findViewById(R.id.RecordTxt);
             CantidadText = itemView.findViewById(R.id.CantidadTxt);
         }
     }

@@ -63,4 +63,9 @@ public interface AuthService {
             @Header("Authorization") String username
     );
 
+    @GET("/TocaBolas/ranking")
+    Call<List<UsersScoreResponse>> getRanking();
+
+
+
 }

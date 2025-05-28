@@ -36,7 +36,7 @@
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewInventario"
+        android:id="@+id/recyclerViewRanking"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="100dp"
@@ -51,14 +51,15 @@
         android:id="@+id/textView2"
         android:layout_width="207dp"
         android:layout_height="51dp"
+        android:layout_marginBottom="620dp"
         android:fontFamily="casual"
-        android:text="INVENTARIO"
+        android:text="RANKING"
         android:textAlignment="center"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recyclerViewInventario"
         app:layout_constraintVertical_bias="0.038" />

@@ -1,21 +1,24 @@
 package com.example.loginregister.Swagger;
 
-public class RankingResponse {
-    String username;
-    int record;
+public class UsersScoreResponse {
+    private String usuario;
+    private int score;
 
+    public UsersScoreResponse() {}
 
-    public String getUsername(){
-        return this.username;
-    }
-    public int getRecord(){
-        return this.record;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setUsername(String username){
-        this.username = username;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
-    public void setRecord(int record){
-        this.record = record;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

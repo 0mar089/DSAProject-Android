@@ -5,49 +5,51 @@
     android:padding="6dp"
     android:layout_marginTop="12dp">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="TODO"
-        android:src="@mipmap/ic_launcher" />
-
     <TextView
-        android:id="@+id/firstLine"
-        android:layout_width="wrap_content"
+        android:id="@+id/usernameTxtRanking"
+        android:layout_width="121dp"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/icon"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="12dp"
-        android:text="Example application"
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="189dp"
+        android:layout_toEndOf="@id/icon"
+        android:fontFamily="@font/alfa_slab_one"
+        android:text="Username"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/alfa_slab_one" />
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/secondLine"
+        android:id="@+id/RecordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/firstLine"
-        android:layout_toEndOf="@id/icon"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="Description"
-        android:textSize="16sp"
+        android:layout_below="@+id/usernameTxtRanking"
+        android:layout_alignStart="@+id/usernameTxtRanking"
+        android:layout_alignEnd="@+id/usernameTxtRanking"
+        android:layout_alignBottom="@+id/usernameTxtRanking"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginBottom="-35dp"
         android:fontFamily="serif"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:text="Record"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/CantidadTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/secondLine"
-        android:layout_toEndOf="@id/icon"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="Cantidad"
-        android:textSize="16sp" />
+        android:id="@+id/textView3"
+        android:layout_width="73dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="38dp"
+        android:layout_toStartOf="@+id/usernameTxtRanking"
+        android:fontFamily="sans-serif-black"
+        android:text="POS"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>
 

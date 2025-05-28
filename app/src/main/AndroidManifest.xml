@@ -44,6 +44,9 @@
         <activity
             android:name=".PerfilActivity"
             android:exported="true" />
+        <activity
+            android:name=".RankingActivity"
+            android:exported="true" />
         <!-- Declaración de MainActivity con intent-filter -->
         <activity
             android:name=".HomeActivity"
