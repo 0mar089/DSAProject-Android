@@ -26,7 +26,7 @@ public class API {
         }
         return retrofit;
     }
-
+//prueba para subir commit 
     public static AuthService getAuthService() {
         return getRetrofit().create(AuthService.class);
     }

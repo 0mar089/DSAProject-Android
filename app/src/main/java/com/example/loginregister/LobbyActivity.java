@@ -146,5 +146,11 @@ public class LobbyActivity extends AppCompatActivity {
             Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
         }
     }
+    public void chatClick(View view){
+
+    }
+    public void rankingClick(View view){
+
+    }
 
 }
