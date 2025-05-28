@@ -148,4 +148,10 @@ public class LobbyActivity extends AppCompatActivity {
             Toast.makeText(this, "Error al intentar lanzar el juego.", Toast.LENGTH_LONG).show();
         }
     }
+    public void chatClick(View view){
+
+    }
+    public void rankingClick(View view){
+
+    }
 }
