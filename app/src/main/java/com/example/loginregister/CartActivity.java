@@ -70,6 +70,7 @@ public class CartActivity extends AppCompatActivity {
 
 
         Map<ShopItem, Integer> cartItems = com.example.loginregister.CartManager.getCartItems();
+        System.out.println(cartItems);
         String itemsString = generateItemsString(cartItems);
 
         AuthService authService = API.getAuthService();
@@ -103,9 +104,9 @@ public class CartActivity extends AppCompatActivity {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<ShopItem, Integer> entry : cartItems.entrySet()) {
             sb.append(entry.getKey().getId())
-                    .append(":")
+                    .append(':')
                     .append(entry.getValue())
-                    .append(",");
+                    .append(',');
         }
         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
         return sb.toString();

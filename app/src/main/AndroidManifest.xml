@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".InventarioActivity"
+            android:exported="true" />
+        <activity
             android:name=".DetailActivity"
             android:exported="false" />
         <activity
@@ -40,7 +43,8 @@
             android:exported="true" />
         <activity
             android:name=".PerfilActivity"
-            android:exported="true" /> <!-- Declaración de MainActivity con intent-filter -->
+            android:exported="true" />
+        <!-- Declaración de MainActivity con intent-filter -->
         <activity
             android:name=".HomeActivity"
             android:exported="true">

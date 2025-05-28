@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,13 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.GenericResponse;
-import com.example.loginregister.Swagger.ShopItem;
-import com.example.loginregister.Swagger.UserStatsRequest;
 import com.example.loginregister.Swagger.UserStatsResponse;
 
-import java.util.ArrayList;
-import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +26,8 @@ public class LobbyActivity extends AppCompatActivity {
     private String user;
     private String correo;
     private String token;
+    private String record;
+    private String money;
     private SharedPreferences prefs;
     private View playBtn;
 
@@ -64,13 +62,13 @@ public class LobbyActivity extends AppCompatActivity {
         UsuarioTxt.setText(this.user);
 
         AuthService authService = API.getAuthService();
-        UserStatsRequest request = new UserStatsRequest(user);
-        authService.getUserStats(request, "Bearer " + token).enqueue(new Callback<UserStatsResponse>()  {
+        authService.getUserStats("Bearer " + token).enqueue(new Callback<UserStatsResponse>() {
+
             @Override
             public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    int dinero = response.body().getDinero();
-                    int record = response.body().getRecord();
+                    int dinero = response.body().getMoney();
+                    int record = response.body().getScore();
 
                     TextView dineroText = findViewById(R.id.moneyTxt);
                     TextView recordText = findViewById(R.id.recordTxt);
@@ -86,6 +84,10 @@ public class LobbyActivity extends AppCompatActivity {
                 Toast.makeText(LobbyActivity.this, "Fallo al conectar con servidor", Toast.LENGTH_SHORT).show();
             }
         });
+        TextView dineroTxt = findViewById(R.id.moneyTxt);
+        TextView recordTxt = findViewById(R.id.recordTxt);
+        this.money = dineroTxt.getText().toString();
+        this.record = recordTxt.getText().toString();
 
     }
 
@@ -125,27 +127,23 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("user", this.user);
         intent.putExtra("correo", this.correo);
         intent.putExtra("token", this.token);
+        intent.putExtra("money", this.money);
+        intent.putExtra("record", this.record);
         startActivity(intent);
         finish();
     }
 
-    public void jugarClick(View view){
-        String unityPackage = "com.DefaultCompany.DSAProjectUnity";
-        String unityActivity = "com.unity3d.player.UnityPlayerGameActivity";
-
+    public void jugarClick(View view) {
         try {
-            Intent intent = new Intent();
-            intent.setComponent(new ComponentName(unityPackage, unityActivity));
-
-            // Verificamos si existe el intent para evitar que crashee si no está instalado
-            if (getPackageManager().resolveActivity(intent, 0) != null) {
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "El juego de Unity no está instalado.", Toast.LENGTH_SHORT).show();
-            }
+            Intent i = new Intent();
+            i.setComponent(new ComponentName(
+                    "com.DefaultCompany.DSAProjectUnity",  // este es tu package real
+                    "com.unity3d.player.UnityPlayerGameActivity"  // esta es la activity real según tu APK
+            ));
+            startActivityForResult(i, 0);
         } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Error al intentar lanzar el juego.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
+            Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
         }
     }
     public void chatClick(View view){
@@ -154,4 +152,5 @@ public class LobbyActivity extends AppCompatActivity {
     public void rankingClick(View view){
 
     }
+
 }

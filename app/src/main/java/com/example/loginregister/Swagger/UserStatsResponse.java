@@ -1,22 +1,22 @@
 package com.example.loginregister.Swagger;
 
 public class UserStatsResponse {
-    private int dinero;
-    private int record;
+    private int money;
+    private int score;
 
-    public int getDinero() {
-        return dinero;
+    public int getMoney() {
+        return money;
     }
 
-    public void setDinero(int dinero) {
-        this.dinero = dinero;
+    public void setMoney(int money) {
+        this.money = money;
     }
 
-    public int getRecord() {
-        return record;
+    public int getScore() {
+        return score;
     }
 
-    public void setRecord(int record) {
-        this.record = record;
+    public void setScore(int score) {
+        this.score = score;
     }
 }

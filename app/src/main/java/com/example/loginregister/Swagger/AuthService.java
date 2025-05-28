@@ -45,17 +45,22 @@ public interface AuthService {
             @Field("contrasena") String contrasena
     );
 
-    @POST("/TocaBolas/userStats")
+    @GET("/TocaBolas/userStats")
     Call<UserStatsResponse> getUserStats(
-            @Body UserStatsRequest request,
             @Header("Authorization") String token
     );
+
 
     @POST("/TocaBolas/Shop/comprar")
     @Headers("Content-Type: text/plain")
     Call<GenericResponse> comprarItems(
             @Header("Authorization") String token,
             @Body String itemsString
+    );
+
+    @GET("/TocaBolas/inventario")
+    Call<List<InventoryResponse>> getInventario(
+            @Header("Authorization") String username
     );
 
 }
