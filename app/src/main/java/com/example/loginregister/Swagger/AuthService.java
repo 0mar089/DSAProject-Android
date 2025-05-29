@@ -62,5 +62,7 @@ public interface AuthService {
     Call<List<InventoryResponse>> getInventario(
             @Header("Authorization") String username
     );
+    @POST("/question")
+    Call<Void> sendQuestion(@Body QuestionRequest question);
 
 }
