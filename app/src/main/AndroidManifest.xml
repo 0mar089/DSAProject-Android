@@ -49,7 +49,7 @@
             android:exported="true" />
         <!-- Declaración de MainActivity con intent-filter -->
         <activity
-            android:name=".HomeActivity"
+            android:name=".QuestionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
