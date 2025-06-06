@@ -40,12 +40,12 @@ public class LobbyActivity extends AppCompatActivity {
 
         this.playBtn = findViewById(R.id.playBtn);
 
-        // Obtener datos del usuario desde `Intent`
+        // Obtener datos del usuario desde Intent
         this.user = getIntent().getStringExtra("user");
         this.correo = getIntent().getStringExtra("correo");
         this.token = getIntent().getStringExtra("token");
 
-        // Si los datos no vienen en el `Intent`, recuperarlos desde `SharedPreferences`
+        // Si los datos no vienen en el Intent, recuperarlos desde SharedPreferences
         prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
         if (user == null || user.isEmpty()) {
             this.user = prefs.getString("user", "Invitado");
@@ -61,9 +61,9 @@ public class LobbyActivity extends AppCompatActivity {
         TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);
         UsuarioTxt.setText(this.user);
 
+        // Llamada a la API para obtener dinero y récord
         AuthService authService = API.getAuthService();
         authService.getUserStats("Bearer " + token).enqueue(new Callback<UserStatsResponse>() {
-
             @Override
             public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -74,6 +74,22 @@ public class LobbyActivity extends AppCompatActivity {
                     TextView recordText = findViewById(R.id.recordTxt);
                     dineroText.setText("Dinero: " + dinero);
                     recordText.setText("Récord: " + record);
+
+                    // Asignar los valores a los atributos
+                    LobbyActivity.this.money = String.valueOf(dinero);
+                    LobbyActivity.this.record = String.valueOf(record);
+                } else if (response.code() == 404 || response.code() == 401) {
+                    // Token inválido o expirado, eliminar sesión
+                    SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.clear();
+                    editor.apply();
+
+                    Toast.makeText(LobbyActivity.this, "Sesión expirada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(LobbyActivity.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(LobbyActivity.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
                 }
@@ -84,12 +100,8 @@ public class LobbyActivity extends AppCompatActivity {
                 Toast.makeText(LobbyActivity.this, "Fallo al conectar con servidor", Toast.LENGTH_SHORT).show();
             }
         });
-        TextView dineroTxt = findViewById(R.id.moneyTxt);
-        TextView recordTxt = findViewById(R.id.recordTxt);
-        this.money = dineroTxt.getText().toString();
-        this.record = recordTxt.getText().toString();
-
     }
+
 
     public void shopClick(View view) {
         // Siempre ir a la SplashScreen antes de la tienda
@@ -140,6 +152,9 @@ public class LobbyActivity extends AppCompatActivity {
                     "com.DefaultCompany.DSAProjectUnity",  // este es tu package real
                     "com.unity3d.player.UnityPlayerGameActivity"  // esta es la activity real según tu APK
             ));
+            i.putExtra("user", this.user);
+            i.putExtra("money", this.money);
+            i.putExtra("record", this.record);
             startActivityForResult(i, 0);
         } catch (Exception e) {
             Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
@@ -150,7 +165,8 @@ public class LobbyActivity extends AppCompatActivity {
 
     }
     public void rankingClick(View view){
-
+        Intent intent = new Intent(LobbyActivity.this, RankingActivity.class);
+        startActivity(intent);
     }
 
 }

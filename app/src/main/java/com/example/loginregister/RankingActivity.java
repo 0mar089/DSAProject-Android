@@ -29,7 +29,7 @@ public class RankingActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerViewRanking);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        AuthService authService = API.getAuthService();g
+        AuthService authService = API.getAuthService();
 
         authService.getRanking().enqueue(new Callback<List<UsersScoreResponse>>() {
             @Override

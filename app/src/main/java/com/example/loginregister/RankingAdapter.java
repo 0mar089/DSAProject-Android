@@ -44,7 +44,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
         UsersScoreResponse user = rankingList.get(position);
         holder.txtUsuario.setText(user.getUsuario());
         holder.txtScore.setText("Score: " + user.getScore());
-        holder.txtPosicion.setText(String.valueOf(position + 1)); // Posición desde 1
+
     }
 
     @Override
