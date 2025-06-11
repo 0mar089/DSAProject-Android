@@ -1,17 +1,17 @@
 package com.example.loginregister.Swagger;
 
 public class UsersScoreResponse {
-    private String usuario;
+    private String username;
     private int score;
 
     public UsersScoreResponse() {}
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getScore() {

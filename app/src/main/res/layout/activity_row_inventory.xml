@@ -18,26 +18,24 @@
         android:id="@+id/usernameTxtRanking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/icon"
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"
+        android:layout_toEndOf="@id/icon"
         android:text="Example application"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/alfa_slab_one" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/RecordTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/usernameTxtRanking"
-        android:layout_toEndOf="@id/icon"
         android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/icon"
+        android:singleLine="true"
         android:text="Description"
-        android:textSize="16sp"
-        android:fontFamily="serif"
-        android:singleLine="true" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/CantidadTxt"

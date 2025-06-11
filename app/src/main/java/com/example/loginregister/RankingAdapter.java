@@ -29,6 +29,7 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
             super(itemView);
             txtUsuario = itemView.findViewById(R.id.usernameTxtRanking);
             txtScore = itemView.findViewById(R.id.RecordTxt);
+            txtPosicion = itemView.findViewById(R.id.positionTxt);
         }
     }
 
@@ -42,10 +43,28 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RankingAdapter.ViewHolder holder, int position) {
         UsersScoreResponse user = rankingList.get(position);
-        holder.txtUsuario.setText(user.getUsuario());
+        holder.txtUsuario.setText(user.getUsername());
         holder.txtScore.setText("Score: " + user.getScore());
 
+        int displayPosition = position + 1;
+        holder.txtPosicion.setText(String.valueOf(displayPosition));
+
+        switch (displayPosition) {
+            case 1:
+                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#FFD700")); // Oro
+                break;
+            case 2:
+                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#C0C0C0")); // Plata
+                break;
+            case 3:
+                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#CD7F32")); // Bronce
+                break;
+            default:
+                holder.txtPosicion.setTextColor(android.graphics.Color.BLACK);
+                break;
+        }
     }
+
 
     @Override
     public int getItemCount() {

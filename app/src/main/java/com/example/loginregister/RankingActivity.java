@@ -37,7 +37,7 @@ public class RankingActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<UsersScoreResponse> ranking = response.body();
                     for (UsersScoreResponse userScore : ranking) {
-                        Log.d("Ranking", "Usuario: " + userScore.getUsuario() + ", Score: " + userScore.getScore());
+                        Log.d("Ranking", "Usuario: " + userScore.getUsername() + ", Score: " + userScore.getScore());
                     }
                     RankingAdapter adapter = new RankingAdapter(RankingActivity.this, ranking);
                     recyclerView.setAdapter(adapter);
