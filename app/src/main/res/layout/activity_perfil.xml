@@ -12,7 +12,7 @@
         android:layout_width="56dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:onClick="onClickBack"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,29 +188,27 @@
 
     <TextView
         android:id="@+id/correoTxtView"
-        android:layout_width="241dp"
-        android:layout_height="75dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Correo"
+        android:textColor="@color/darkBrown"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.175" />
+        app:layout_constraintEnd_toEndOf="@+id/userTxtView"
+        app:layout_constraintStart_toStartOf="@+id/userTxtView"
+        app:layout_constraintTop_toBottomOf="@+id/userTxtView" />
 
     <TextView
         android:id="@+id/userTxtView"
-        android:layout_width="230dp"
-        android:layout_height="66dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
         android:text="User"
+        android:textColor="@color/darkBrown"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/correoTxtView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/changePassBtn"

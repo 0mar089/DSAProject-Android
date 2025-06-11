@@ -1,6 +1,7 @@
 package com.example.loginregister;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,5 +71,6 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     public int getItemCount() {
         return rankingList.size();
     }
+
 
 }

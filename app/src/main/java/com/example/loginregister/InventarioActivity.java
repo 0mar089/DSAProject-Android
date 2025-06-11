@@ -57,9 +57,12 @@ public class InventarioActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack(View view){
-        Intent intent = new Intent(InventarioActivity.this, PerfilActivity.class);
-        intent.putExtra("origen", "Inventario");
-        startActivity(intent);
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
+
     }
 }

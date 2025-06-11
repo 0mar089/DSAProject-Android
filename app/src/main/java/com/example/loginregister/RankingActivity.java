@@ -1,7 +1,9 @@
 package com.example.loginregister;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +54,13 @@ public class RankingActivity extends AppCompatActivity {
                 Log.e("RankingError", "Error: ", t);
             }
         });
+    }
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 
 }
