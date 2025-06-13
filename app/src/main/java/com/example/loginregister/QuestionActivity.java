@@ -1,5 +1,6 @@
 package com.example.loginregister;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     private EditText etTitle, etMessage, etSender;
     private Button btnSubmit;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,9 @@ public class QuestionActivity extends AppCompatActivity {
         etSender = findViewById(R.id.etSender);
         btnSubmit = findViewById(R.id.btnSubmit);
 
+        prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+        String token = prefs.getString("token", "");
+
         btnSubmit.setOnClickListener(v -> {
             String title = etTitle.getText().toString().trim();
             String message = etMessage.getText().toString().trim();
@@ -44,15 +49,15 @@ public class QuestionActivity extends AppCompatActivity {
                 return;
             }
 
-            String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
-            QuestionRequest question = new QuestionRequest(title, message, sender, date);
-            sendQuestion(question);
+
+            QuestionRequest question = new QuestionRequest(title, message, sender);
+            sendQuestion(token, question);
         });
     }
 
-    private void sendQuestion(QuestionRequest question) {
+    private void sendQuestion(String token, QuestionRequest question) {
         AuthService service = API.getAuthService();
-        Call<Void> call = service.sendQuestion(question);
+        Call<Void> call = service.sendQuestion("Bearer " + token, etSender.getText().toString().trim(),etTitle.getText().toString().trim(),etMessage.getText().toString().trim());  // importante: incluir "Bearer "
 
         call.enqueue(new Callback<Void>() {
             @Override

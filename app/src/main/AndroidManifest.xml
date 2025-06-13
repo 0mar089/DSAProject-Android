@@ -23,6 +23,10 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".QuestionActivity"
+            android:exported="true" />
         <activity
             android:name=".CartActivity"
             android:exported="false" /> <!-- Declaración de SplashScreenActivity -->

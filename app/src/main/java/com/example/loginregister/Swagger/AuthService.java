@@ -62,8 +62,15 @@ public interface AuthService {
     Call<List<InventoryResponse>> getInventario(
             @Header("Authorization") String username
     );
-    @POST("/question")
-    Call<Void> sendQuestion(@Body QuestionRequest question);
+    @FormUrlEncoded
+    @POST("/TocaBolas/question")
+    Call<Void> sendQuestion(
+            @Header("Authorization") String token,
+            @Field("sender") String sender,
+            @Field("titulo") String titulo,
+            @Field("mensaje") String mensaje
+
+    );
 
     @GET("/TocaBolas/ranking")
     Call<List<UsersScoreResponse>> getRanking();

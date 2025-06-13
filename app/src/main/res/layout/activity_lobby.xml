@@ -138,8 +138,11 @@
         android:layout_height="51dp"
         android:layout_marginStart="170dp"
         android:layout_marginTop="650dp"
+        android:contentDescription="Botón de ayuda"
+        android:onClick="helpClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_help" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
