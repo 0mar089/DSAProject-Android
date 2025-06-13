@@ -132,4 +132,14 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/play" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="68dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="650dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_help" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
