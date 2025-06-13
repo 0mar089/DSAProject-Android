@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
 import com.example.loginregister.Swagger.UserStatsResponse;
@@ -30,7 +31,6 @@ public class LobbyActivity extends AppCompatActivity {
     private String money;
     private SharedPreferences prefs;
     private View playBtn;
-
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -75,11 +75,9 @@ public class LobbyActivity extends AppCompatActivity {
                     dineroText.setText("Dinero: " + dinero);
                     recordText.setText("Récord: " + record);
 
-                    // Asignar los valores a los atributos
                     LobbyActivity.this.money = String.valueOf(dinero);
                     LobbyActivity.this.record = String.valueOf(record);
                 } else if (response.code() == 404 || response.code() == 401) {
-                    // Token inválido o expirado, eliminar sesión
                     SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.clear();
@@ -102,9 +100,7 @@ public class LobbyActivity extends AppCompatActivity {
         });
     }
 
-
     public void shopClick(View view) {
-        // Siempre ir a la SplashScreen antes de la tienda
         Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
         intent.putExtra("origen", "lobby");
         TextView dineroText = findViewById(R.id.moneyTxt);
@@ -112,27 +108,6 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("token", this.token);
         startActivity(intent);
     }
-
-//    private void startShopActivity() {
-//        AuthService authService = API.getAuthService();
-//        authService.getShopItems().enqueue(new Callback<List<ShopItem>>() {
-//            @Override
-//            public void onResponse(Call<List<ShopItem>> call, Response<List<ShopItem>> response) {
-//                if (!response.isSuccessful() || response.body() == null) {
-//                    Log.d("API", "No se pudieron obtener los productos");
-//                    return;
-//                }
-//
-//                List<ShopItem> items = response.body();
-//                startActivity(new Intent(LobbyActivity.this, ShopActivity.class).putExtra("shop_items", new ArrayList<>(items)));
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ShopItem>> call, Throwable t) {
-//                Log.e("API", "Error al obtener productos: " + t.getMessage());
-//            }
-//        });
-//    }
 
     public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
@@ -149,8 +124,8 @@ public class LobbyActivity extends AppCompatActivity {
         try {
             Intent i = new Intent();
             i.setComponent(new ComponentName(
-                    "com.DefaultCompany.DSAProjectUnity",  // este es tu package real
-                    "com.unity3d.player.UnityPlayerGameActivity"  // esta es la activity real según tu APK
+                    "com.DefaultCompany.DSAProjectUnity",
+                    "com.unity3d.player.UnityPlayerGameActivity"
             ));
             i.putExtra("user", this.user);
             i.putExtra("money", this.money);
@@ -161,12 +136,20 @@ public class LobbyActivity extends AppCompatActivity {
             Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
         }
     }
-    public void chatClick(View view){
 
+    public void chatClick(View view) {
+        // Aquí podrías abrir un ChatActivity o implementar más adelante
     }
-    public void rankingClick(View view){
+
+    public void rankingClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, RankingActivity.class);
         startActivity(intent);
     }
 
+    // Para enlazar boton "?"
+    public void helpClick(View view) {
+        Intent intent = new Intent(LobbyActivity.this, QuestionActivity.class);
+        intent.putExtra("correo", this.correo);  // para autocompletar remitente
+        startActivity(intent);
+    }
 }
