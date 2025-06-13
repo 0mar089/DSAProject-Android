@@ -71,6 +71,8 @@ public interface AuthService {
             @Field("mensaje") String mensaje
 
     );
+    @GET("/TocaBolas/faqs")
+    Call<List<FAQs>> getFAQs();
 
     @GET("/TocaBolas/ranking")
     Call<List<UsersScoreResponse>> getRanking();

@@ -152,4 +152,9 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("correo", this.correo);  // para autocompletar remitente
         startActivity(intent);
     }
+    public void faqClick(View view){
+        Intent intent = new Intent(LobbyActivity.this, FAQsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
