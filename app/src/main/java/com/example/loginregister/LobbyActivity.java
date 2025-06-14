@@ -121,20 +121,30 @@ public class LobbyActivity extends AppCompatActivity {
     }
 
     public void jugarClick(View view) {
-        try {
-            Intent i = new Intent();
-            i.setComponent(new ComponentName(
-                    "com.DefaultCompany.DSAProjectUnity",
-                    "com.unity3d.player.UnityPlayerGameActivity"
-            ));
-            i.putExtra("user", this.user);
-            i.putExtra("money", this.money);
-            i.putExtra("record", this.record);
-            startActivityForResult(i, 0);
-        } catch (Exception e) {
-            Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
-            Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
-        }
+        obtenerInventarioJson(this.user, new OnInventarioJsonReadyListener() {
+            @Override
+            public void onInventarioJsonReady(String inventarioJson) {
+                if (inventarioJson == null) {
+                    Toast.makeText(getApplicationContext(), "No se pudo obtener el inventario", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                try {
+                    Intent i = new Intent();
+                    i.setComponent(new ComponentName(
+                            "com.DefaultCompany.DSAProjectUnity",
+                            "com.unity3d.player.UnityPlayerGameActivity"
+                    ));
+                    i.putExtra("user", user);
+                    i.putExtra("money", money);
+                    i.putExtra("record", record);
+                    i.putExtra("inventario", inventarioJson);
+                    startActivityForResult(i, 0);
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
+                    Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
+                }
+            }
+        });
     }
 
     public void chatClick(View view) {
@@ -156,5 +166,31 @@ public class LobbyActivity extends AppCompatActivity {
         Intent intent = new Intent(LobbyActivity.this, FAQsActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void obtenerInventarioJson(String username, final OnInventarioJsonReadyListener listener) {
+        AuthService authService = API.getAuthService();
+
+        authService.getInventario(username).enqueue(new Callback<List<InventoryResponse>>() {
+            @Override
+            public void onResponse(Call<List<InventoryResponse>> call, Response<List<InventoryResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<InventoryResponse> inventario = response.body();
+                    String inventarioJson = new Gson().toJson(inventario);
+                    listener.onInventarioJsonReady(inventarioJson);
+                } else {
+                    listener.onInventarioJsonReady(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<InventoryResponse>> call, Throwable t) {
+                listener.onInventarioJsonReady(null);
+            }
+        });
+    }
+
+    public interface OnInventarioJsonReadyListener {
+        void onInventarioJsonReady(String inventarioJson);
     }
 }
