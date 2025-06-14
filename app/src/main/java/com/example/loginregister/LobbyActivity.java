@@ -174,6 +174,7 @@ public class LobbyActivity extends AppCompatActivity {
 
     public void onClickInsignias(View view){
         Intent intent = new Intent(LobbyActivity.this, InsigniasActivity.class);
+        intent.putExtra("user", this.user);
         startActivity(intent);
         finish();
     }
