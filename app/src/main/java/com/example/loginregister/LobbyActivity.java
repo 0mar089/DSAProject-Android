@@ -15,7 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.loginregister.Swagger.API;
 import com.example.loginregister.Swagger.AuthService;
+import com.example.loginregister.Swagger.InventoryResponse;
 import com.example.loginregister.Swagger.UserStatsResponse;
+import com.google.gson.Gson;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -164,6 +168,12 @@ public class LobbyActivity extends AppCompatActivity {
     }
     public void faqClick(View view){
         Intent intent = new Intent(LobbyActivity.this, FAQsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void mediaClick(View view){
+        Intent intent = new Intent(LobbyActivity.this, MediaActivity.class);
         startActivity(intent);
         finish();
     }

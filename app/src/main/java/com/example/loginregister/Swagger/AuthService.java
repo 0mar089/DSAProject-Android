@@ -77,6 +77,8 @@ public interface AuthService {
     @GET("/TocaBolas/ranking")
     Call<List<UsersScoreResponse>> getRanking();
 
+    @GET("/TocaBolas/media")
+    Call<List<MediaResponse>> getAllVideos();
 
 
 }

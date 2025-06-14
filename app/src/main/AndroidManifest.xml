@@ -53,6 +53,9 @@
             android:name=".PerfilActivity"
             android:exported="true" />
         <activity
+            android:name=".MediaActivity"
+            android:exported="true" />
+        <activity
             android:name=".RankingActivity"
             android:exported="true" />
         <!-- Declaración de MainActivity con intent-filter -->
