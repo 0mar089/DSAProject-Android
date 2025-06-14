@@ -10,6 +10,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface AuthService {
     @POST("/TocaBolas/login")
@@ -80,5 +81,9 @@ public interface AuthService {
     @GET("/TocaBolas/media")
     Call<List<MediaResponse>> getAllVideos();
 
+    @GET("/TocaBolas/user/{username}/badges")
+    Call<List<InsigniaResponse>> getInsignias(
+            @Path("username") String username
+    );
 
 }

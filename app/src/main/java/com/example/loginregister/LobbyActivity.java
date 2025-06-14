@@ -172,6 +172,12 @@ public class LobbyActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onClickInsignias(View view){
+        Intent intent = new Intent(LobbyActivity.this, InsigniasActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
     public void mediaClick(View view){
         Intent intent = new Intent(LobbyActivity.this, MediaActivity.class);
         startActivity(intent);
