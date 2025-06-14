@@ -3,10 +3,10 @@ package com.example.loginregister.Swagger;
 import com.google.gson.annotations.SerializedName;
 
 public class FAQs {
-    @SerializedName("pregunta")
+    @SerializedName("question")
     private String question;
 
-    @SerializedName("respuesta")
+    @SerializedName("answer")
     private String answer;
 
     public FAQs(String question, String answer) {

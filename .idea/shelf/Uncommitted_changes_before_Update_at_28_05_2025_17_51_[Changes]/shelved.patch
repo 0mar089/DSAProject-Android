@@ -1,0 +1,763 @@
+Index: app/src/main/java/com/example/loginregister/Swagger/AuthService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister.Swagger;\r\n\r\nimport java.util.List;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.http.Body;\r\nimport retrofit2.http.Field;\r\nimport retrofit2.http.FormUrlEncoded;\r\nimport retrofit2.http.GET;\r\nimport retrofit2.http.Header;\r\nimport retrofit2.http.Headers;\r\nimport retrofit2.http.POST;\r\n\r\npublic interface AuthService {\r\n    @POST(\"/TocaBolas/login\")\r\n    @FormUrlEncoded\r\n    Call<LoginResponse> login(\r\n            @retrofit2.http.Field(\"correo\") String correo,\r\n            @retrofit2.http.Field(\"password\") String password\r\n    );\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"/TocaBolas/register\")\r\n    Call<RegisterResponse> register(\r\n            @Field(\"username\") String username,\r\n            @Field(\"correo\") String correo,\r\n            @Field(\"password\") String password\r\n    );\r\n\r\n    @GET(\"/TocaBolas/Shop/items\")\r\n    Call<List<ShopItem>> getShopItems();\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"/TocaBolas/actualizarContrasena\")\r\n    Call<GenericResponse> actualizarContrasena(\r\n            @Header(\"Authorization\") String token,\r\n            @Field(\"contrasenaActual\") String contrasenaActual,\r\n            @Field(\"nuevaContrasena\") String nuevaContrasena\r\n    );\r\n\r\n    @FormUrlEncoded\r\n    @POST(\"/TocaBolas/eliminarUsuario\")\r\n    Call<GenericResponse> eliminarUsuario(\r\n            @Header(\"Authorization\") String token,\r\n            @Field(\"contrasena\") String contrasena\r\n    );\r\n\r\n    @POST(\"/TocaBolas/userStats\")\r\n    Call<UserStatsResponse> getUserStats(\r\n            @Body UserStatsRequest request,\r\n            @Header(\"Authorization\") String token\r\n    );\r\n\r\n    @POST(\"/TocaBolas/Shop/comprar\")\r\n    @Headers(\"Content-Type: text/plain\")\r\n    Call<GenericResponse> comprarItems(\r\n            @Header(\"Authorization\") String token,\r\n            @Body String itemsString\r\n    );\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/Swagger/AuthService.java b/app/src/main/java/com/example/loginregister/Swagger/AuthService.java
+--- a/app/src/main/java/com/example/loginregister/Swagger/AuthService.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/Swagger/AuthService.java	(date 1748447325400)
+@@ -45,12 +45,12 @@
+             @Field("contrasena") String contrasena
+     );
+ 
+-    @POST("/TocaBolas/userStats")
++    @GET("/TocaBolas/userStats")
+     Call<UserStatsResponse> getUserStats(
+-            @Body UserStatsRequest request,
+             @Header("Authorization") String token
+     );
+ 
++
+     @POST("/TocaBolas/Shop/comprar")
+     @Headers("Content-Type: text/plain")
+     Call<GenericResponse> comprarItems(
+@@ -58,4 +58,9 @@
+             @Body String itemsString
+     );
+ 
++    @GET("/TocaBolas/inventario")
++    Call<List<InventoryResponse>> getInventario(
++            @Header("Authorization") String username
++    );
++
+ }
+Index: app/src/main/java/com/example/loginregister/Swagger/API.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister.Swagger;\r\n\r\n\r\nimport okhttp3.OkHttpClient;\r\nimport okhttp3.logging.HttpLoggingInterceptor;\r\nimport retrofit2.Retrofit;\r\nimport retrofit2.converter.gson.GsonConverterFactory;\r\n\r\npublic class API {\r\n\r\n    private static final String BASE_URL = \"http://dsa2.upc.edu\"; // Ajusta la URL según tu entorno\r\n\r\n    private static Retrofit retrofit;\r\n\r\n    public static Retrofit getRetrofit() {\r\n        if (retrofit == null) {\r\n                HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();\r\n                interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);\r\n            OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();\r\n\r\n            retrofit = new Retrofit.Builder()\r\n                    .baseUrl(BASE_URL)\r\n                    .addConverterFactory(GsonConverterFactory.create())\r\n                    .client(client)\r\n                    .build();\r\n        }\r\n        return retrofit;\r\n    }\r\n\r\n    public static AuthService getAuthService() {\r\n        return getRetrofit().create(AuthService.class);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/Swagger/API.java b/app/src/main/java/com/example/loginregister/Swagger/API.java
+--- a/app/src/main/java/com/example/loginregister/Swagger/API.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/Swagger/API.java	(date 1748447325399)
+@@ -8,7 +8,7 @@
+ 
+ public class API {
+ 
+-    private static final String BASE_URL = "http://dsa2.upc.edu"; // Ajusta la URL según tu entorno
++    private static final String BASE_URL = "https://dsa2.upc.edu"; // Ajusta la URL según tu entorno
+ 
+     private static Retrofit retrofit;
+ 
+@@ -26,7 +26,7 @@
+         }
+         return retrofit;
+     }
+-
++//prueba para subir commit 
+     public static AuthService getAuthService() {
+         return getRetrofit().create(AuthService.class);
+     }
+Index: app/src/main/java/com/example/loginregister/LobbyActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister;\r\n\r\nimport android.annotation.SuppressLint;\r\nimport android.content.ComponentName;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport com.example.loginregister.Swagger.API;\r\nimport com.example.loginregister.Swagger.AuthService;\r\nimport com.example.loginregister.Swagger.GenericResponse;\r\nimport com.example.loginregister.Swagger.ShopItem;\r\nimport com.example.loginregister.Swagger.UserStatsRequest;\r\nimport com.example.loginregister.Swagger.UserStatsResponse;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\n\r\npublic class LobbyActivity extends AppCompatActivity {\r\n\r\n    private Button shopBtn;\r\n    private String user;\r\n    private String correo;\r\n    private String token;\r\n    private SharedPreferences prefs;\r\n    private View playBtn;\r\n\r\n\r\n    @SuppressLint(\"MissingInflatedId\")\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_lobby);\r\n\r\n        this.playBtn = findViewById(R.id.playBtn);\r\n\r\n        // Obtener datos del usuario desde `Intent`\r\n        this.user = getIntent().getStringExtra(\"user\");\r\n        this.correo = getIntent().getStringExtra(\"correo\");\r\n        this.token = getIntent().getStringExtra(\"token\");\r\n\r\n        // Si los datos no vienen en el `Intent`, recuperarlos desde `SharedPreferences`\r\n        prefs = getSharedPreferences(\"Sesion\", MODE_PRIVATE);\r\n        if (user == null || user.isEmpty()) {\r\n            this.user = prefs.getString(\"user\", \"Invitado\");\r\n        }\r\n        if (correo == null || correo.isEmpty()) {\r\n            this.correo = prefs.getString(\"correo\", \"Sin correo\");\r\n        }\r\n        if (this.token == null || this.token.isEmpty()) {\r\n            this.token = prefs.getString(\"token\", null);\r\n        }\r\n\r\n        // Mostrar el nombre del usuario en pantalla\r\n        TextView UsuarioTxt = findViewById(R.id.UserTxtLobby);\r\n        UsuarioTxt.setText(this.user);\r\n\r\n        AuthService authService = API.getAuthService();\r\n        UserStatsRequest request = new UserStatsRequest(user);\r\n        authService.getUserStats(request, \"Bearer \" + token).enqueue(new Callback<UserStatsResponse>()  {\r\n            @Override\r\n            public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {\r\n                if (response.isSuccessful() && response.body() != null) {\r\n                    int dinero = response.body().getDinero();\r\n                    int record = response.body().getRecord();\r\n\r\n                    TextView dineroText = findViewById(R.id.moneyTxt);\r\n                    TextView recordText = findViewById(R.id.recordTxt);\r\n                    dineroText.setText(\"Dinero: \" + dinero);\r\n                    recordText.setText(\"Récord: \" + record);\r\n                } else {\r\n                    Toast.makeText(LobbyActivity.this, \"Error al obtener datos del usuario\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<UserStatsResponse> call, Throwable t) {\r\n                Toast.makeText(LobbyActivity.this, \"Fallo al conectar con servidor\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    public void shopClick(View view) {\r\n        // Siempre ir a la SplashScreen antes de la tienda\r\n        Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);\r\n        intent.putExtra(\"origen\", \"lobby\");\r\n        TextView dineroText = findViewById(R.id.moneyTxt);\r\n        intent.putExtra(\"money\", dineroText.getText().toString());\r\n        intent.putExtra(\"token\", this.token);\r\n        startActivity(intent);\r\n    }\r\n\r\n//    private void startShopActivity() {\r\n//        AuthService authService = API.getAuthService();\r\n//        authService.getShopItems().enqueue(new Callback<List<ShopItem>>() {\r\n//            @Override\r\n//            public void onResponse(Call<List<ShopItem>> call, Response<List<ShopItem>> response) {\r\n//                if (!response.isSuccessful() || response.body() == null) {\r\n//                    Log.d(\"API\", \"No se pudieron obtener los productos\");\r\n//                    return;\r\n//                }\r\n//\r\n//                List<ShopItem> items = response.body();\r\n//                startActivity(new Intent(LobbyActivity.this, ShopActivity.class).putExtra(\"shop_items\", new ArrayList<>(items)));\r\n//            }\r\n//\r\n//            @Override\r\n//            public void onFailure(Call<List<ShopItem>> call, Throwable t) {\r\n//                Log.e(\"API\", \"Error al obtener productos: \" + t.getMessage());\r\n//            }\r\n//        });\r\n//    }\r\n\r\n    public void perfilClick(View view) {\r\n        Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);\r\n        intent.putExtra(\"user\", this.user);\r\n        intent.putExtra(\"correo\", this.correo);\r\n        intent.putExtra(\"token\", this.token);\r\n        startActivity(intent);\r\n        finish();\r\n    }\r\n\r\n    public void jugarClick(View view){\r\n        String unityPackage = \"com.DefaultCompany.DSAProjectUnity\";\r\n        String unityActivity = \"com.unity3d.player.UnityPlayerGameActivity\";\r\n\r\n        try {\r\n            Intent intent = new Intent();\r\n            intent.setComponent(new ComponentName(unityPackage, unityActivity));\r\n\r\n            // Verificamos si existe el intent para evitar que crashee si no está instalado\r\n            if (getPackageManager().resolveActivity(intent, 0) != null) {\r\n                startActivity(intent);\r\n            } else {\r\n                Toast.makeText(this, \"El juego de Unity no está instalado.\", Toast.LENGTH_SHORT).show();\r\n            }\r\n        } catch (Exception e) {\r\n            e.printStackTrace();\r\n            Toast.makeText(this, \"Error al intentar lanzar el juego.\", Toast.LENGTH_LONG).show();\r\n        }\r\n    }\r\n    public void chatClick(View view){\r\n\r\n    }\r\n    public void rankingClick(View view){\r\n\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/LobbyActivity.java b/app/src/main/java/com/example/loginregister/LobbyActivity.java
+--- a/app/src/main/java/com/example/loginregister/LobbyActivity.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/LobbyActivity.java	(date 1748447382152)
+@@ -5,6 +5,7 @@
+ import android.content.Intent;
+ import android.content.SharedPreferences;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.TextView;
+@@ -13,13 +14,8 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ import com.example.loginregister.Swagger.API;
+ import com.example.loginregister.Swagger.AuthService;
+-import com.example.loginregister.Swagger.GenericResponse;
+-import com.example.loginregister.Swagger.ShopItem;
+-import com.example.loginregister.Swagger.UserStatsRequest;
+ import com.example.loginregister.Swagger.UserStatsResponse;
+ 
+-import java.util.ArrayList;
+-import java.util.List;
+ import retrofit2.Call;
+ import retrofit2.Callback;
+ import retrofit2.Response;
+@@ -30,6 +26,8 @@
+     private String user;
+     private String correo;
+     private String token;
++    private String record;
++    private String money;
+     private SharedPreferences prefs;
+     private View playBtn;
+ 
+@@ -64,13 +62,13 @@
+         UsuarioTxt.setText(this.user);
+ 
+         AuthService authService = API.getAuthService();
+-        UserStatsRequest request = new UserStatsRequest(user);
+-        authService.getUserStats(request, "Bearer " + token).enqueue(new Callback<UserStatsResponse>()  {
++        authService.getUserStats("Bearer " + token).enqueue(new Callback<UserStatsResponse>() {
++
+             @Override
+             public void onResponse(Call<UserStatsResponse> call, Response<UserStatsResponse> response) {
+                 if (response.isSuccessful() && response.body() != null) {
+-                    int dinero = response.body().getDinero();
+-                    int record = response.body().getRecord();
++                    int dinero = response.body().getMoney();
++                    int record = response.body().getScore();
+ 
+                     TextView dineroText = findViewById(R.id.moneyTxt);
+                     TextView recordText = findViewById(R.id.recordTxt);
+@@ -86,6 +84,10 @@
+                 Toast.makeText(LobbyActivity.this, "Fallo al conectar con servidor", Toast.LENGTH_SHORT).show();
+             }
+         });
++        TextView dineroTxt = findViewById(R.id.moneyTxt);
++        TextView recordTxt = findViewById(R.id.recordTxt);
++        this.money = dineroTxt.getText().toString();
++        this.record = recordTxt.getText().toString();
+ 
+     }
+ 
+@@ -125,27 +127,23 @@
+         intent.putExtra("user", this.user);
+         intent.putExtra("correo", this.correo);
+         intent.putExtra("token", this.token);
++        intent.putExtra("money", this.money);
++        intent.putExtra("record", this.record);
+         startActivity(intent);
+         finish();
+     }
+ 
+-    public void jugarClick(View view){
+-        String unityPackage = "com.DefaultCompany.DSAProjectUnity";
+-        String unityActivity = "com.unity3d.player.UnityPlayerGameActivity";
+-
++    public void jugarClick(View view) {
+         try {
+-            Intent intent = new Intent();
+-            intent.setComponent(new ComponentName(unityPackage, unityActivity));
+-
+-            // Verificamos si existe el intent para evitar que crashee si no está instalado
+-            if (getPackageManager().resolveActivity(intent, 0) != null) {
+-                startActivity(intent);
+-            } else {
+-                Toast.makeText(this, "El juego de Unity no está instalado.", Toast.LENGTH_SHORT).show();
+-            }
++            Intent i = new Intent();
++            i.setComponent(new ComponentName(
++                    "com.DefaultCompany.DSAProjectUnity",  // este es tu package real
++                    "com.unity3d.player.UnityPlayerGameActivity"  // esta es la activity real según tu APK
++            ));
++            startActivityForResult(i, 0);
+         } catch (Exception e) {
+-            e.printStackTrace();
+-            Toast.makeText(this, "Error al intentar lanzar el juego.", Toast.LENGTH_LONG).show();
++            Toast.makeText(this, "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
++            Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
+         }
+     }
+     public void chatClick(View view){
+@@ -154,4 +152,5 @@
+     public void rankingClick(View view){
+ 
+     }
++
+ }
+Index: app/src/main/res/layout/activity_row_shop.xml
+===================================================================
+diff --git a/app/src/main/res/layout/activity_row_shop.xml b/app/src/main/res/layout/activity_row_shop.xml
+deleted file mode 100644
+--- a/app/src/main/res/layout/activity_row_shop.xml	(revision eabdc90fface008053408defd52de5af4615173f)
++++ /dev/null	(revision eabdc90fface008053408defd52de5af4615173f)
+@@ -1,46 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="fill_parent"
+-    android:layout_height="100dp"
+-    android:padding="6dip"
+-    android:layout_marginTop="24dp">
+-
+-    <ImageView
+-        android:id="@+id/icon"
+-        android:layout_width="100dp"
+-        android:layout_height="100dp"
+-        android:layout_alignParentTop="true"
+-        android:layout_alignParentBottom="true"
+-        android:layout_marginRight="6dip"
+-        android:layout_marginBottom="0dp"
+-        android:contentDescription="TODO"
+-        android:src="@mipmap/ic_launcher" />
+-
+-    <TextView
+-        android:id="@+id/secondLine"
+-        android:layout_width="fill_parent"
+-        android:layout_height="26dip"
+-        android:layout_alignParentRight="true"
+-        android:layout_alignParentBottom="true"
+-        android:layout_toRightOf="@id/icon"
+-        android:fontFamily="serif"
+-        android:singleLine="true"
+-        android:text="Description"
+-        android:textSize="16sp" />
+-
+-    <TextView
+-        android:id="@+id/firstLine"
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_alignWithParentIfMissing="true"
+-        android:layout_above="@id/secondLine"
+-        android:layout_alignParentTop="true"
+-        android:layout_alignParentRight="true"
+-        android:layout_toRightOf="@id/icon"
+-        android:fontFamily="@font/alfa_slab_one"
+-        android:gravity="center_vertical"
+-        android:text="Example application"
+-        android:textSize="20sp"
+-        android:textStyle="bold" />
+-
+-</RelativeLayout>
+Index: app/src/main/java/com/example/loginregister/Swagger/InventoryResponse.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/Swagger/InventoryResponse.java b/app/src/main/java/com/example/loginregister/Swagger/InventoryResponse.java
+new file mode 100644
+--- /dev/null	(date 1748447325401)
++++ b/app/src/main/java/com/example/loginregister/Swagger/InventoryResponse.java	(date 1748447325401)
+@@ -0,0 +1,47 @@
++package com.example.loginregister.Swagger;
++
++public class InventoryResponse {
++    public int id;
++    public String nombre;
++    public String descripcion;
++    public String url_icon;
++    public int cantidad;
++
++    public InventoryResponse() {
++    }
++
++
++    public InventoryResponse(int id, String nombre, String descripcion, String url_icon, int cantidad) {
++        this.id = id;
++        this.nombre = nombre;
++        this.descripcion = descripcion;
++        this.url_icon = url_icon;
++        this.cantidad = cantidad;
++    }
++
++    public int getId() { return id; }
++    public String getNombre() { return nombre; }
++    public String getDescripcion() { return descripcion; }
++    public String getUrl_icon() { return url_icon; }
++    public int getCantidad() { return cantidad; }
++
++    public void setId(int id) {
++        this.id = id;
++    }
++    public void setNombre(String nombre) {
++        this.nombre = nombre;
++    }
++
++    public void setDescripcion(String descripcion) {
++        this.descripcion = descripcion;
++    }
++
++    public void setUrl_icon(String url_icon) {
++        this.url_icon = url_icon;
++    }
++
++    public void setCantidad(int cantidad) {
++        this.cantidad = cantidad;
++    }
++
++}
+Index: app/src/main/java/com/example/loginregister/CartActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister;\r\n\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.activity.EdgeToEdge;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.core.graphics.Insets;\r\nimport androidx.core.view.ViewCompat;\r\nimport androidx.core.view.WindowInsetsCompat;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.example.loginregister.Swagger.API;\r\nimport com.example.loginregister.Swagger.AuthService;\r\nimport com.example.loginregister.Swagger.GenericResponse;\r\nimport com.example.loginregister.Swagger.ShopItem;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Map;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\n\r\npublic class CartActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_cart2);\r\n\r\n        RecyclerView recyclerView = findViewById(R.id.cartView);\r\n        recyclerView.setLayoutManager(new LinearLayoutManager(this));\r\n\r\n\r\n        TextView totalTxt = findViewById(R.id.totalTxt);\r\n\r\n        Map<ShopItem, Integer> cartItems = com.example.loginregister.CartManager.getCartItems();\r\n        CartAdapter adapter = new CartAdapter(new ArrayList<>(cartItems.entrySet()), totalTxt);\r\n\r\n        recyclerView.setAdapter(adapter);\r\n\r\n\r\n        double total = 0;\r\n        for (Map.Entry<ShopItem, Integer> entry : cartItems.entrySet()) {\r\n            ShopItem item = entry.getKey();\r\n            int cantidad = entry.getValue();\r\n            total += item.getPrice() * cantidad;\r\n        }\r\n\r\n\r\n        totalTxt.setText(String.format(\"%.2f $\", total));\r\n    }\r\n\r\n\r\n    public void onClickBack(View view) {\r\n        finish();\r\n        overridePendingTransition(R.anim.slide_in_left);\r\n    }\r\n\r\n    private void overridePendingTransition(int slideInLeft) {\r\n    }\r\n\r\n    public void clickBuyBtn(View view){\r\n\r\n        String token = getIntent().getStringExtra(\"token\");\r\n\r\n\r\n        Map<ShopItem, Integer> cartItems = com.example.loginregister.CartManager.getCartItems();\r\n        String itemsString = generateItemsString(cartItems);\r\n\r\n        AuthService authService = API.getAuthService();\r\n        Call<GenericResponse> call = authService.comprarItems(\"Bearer \" + token, itemsString);\r\n\r\n        call.enqueue(new Callback<GenericResponse>() {\r\n            @Override\r\n            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {\r\n                if (response.isSuccessful() && response.body() != null) {\r\n                    if (response.body().isStatus()) {\r\n                        Toast.makeText(CartActivity.this, \"Compra exitosa!\", Toast.LENGTH_SHORT).show();\r\n                        com.example.loginregister.CartManager.clearCart();\r\n                        finish(); // salir del carrito o actualizarlo\r\n                    } else {\r\n                        Toast.makeText(CartActivity.this, \"Error: \" + response.body().getMessage(), Toast.LENGTH_SHORT).show();\r\n                    }\r\n                } else {\r\n                    Toast.makeText(CartActivity.this, \"Error en la compra, intenta de nuevo.\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<GenericResponse> call, Throwable t) {\r\n                Toast.makeText(CartActivity.this, \"Error de red: \" + t.getMessage(), Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    public String generateItemsString(Map<ShopItem, Integer> cartItems) {\r\n        StringBuilder sb = new StringBuilder();\r\n        for (Map.Entry<ShopItem, Integer> entry : cartItems.entrySet()) {\r\n            sb.append(entry.getKey().getId())\r\n                    .append(\":\")\r\n                    .append(entry.getValue())\r\n                    .append(\",\");\r\n        }\r\n        if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);\r\n        return sb.toString();\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/CartActivity.java b/app/src/main/java/com/example/loginregister/CartActivity.java
+--- a/app/src/main/java/com/example/loginregister/CartActivity.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/CartActivity.java	(date 1748447325393)
+@@ -70,6 +70,7 @@
+ 
+ 
+         Map<ShopItem, Integer> cartItems = com.example.loginregister.CartManager.getCartItems();
++        System.out.println(cartItems);
+         String itemsString = generateItemsString(cartItems);
+ 
+         AuthService authService = API.getAuthService();
+@@ -103,9 +104,9 @@
+         StringBuilder sb = new StringBuilder();
+         for (Map.Entry<ShopItem, Integer> entry : cartItems.entrySet()) {
+             sb.append(entry.getKey().getId())
+-                    .append(":")
++                    .append(':')
+                     .append(entry.getValue())
+-                    .append(",");
++                    .append(',');
+         }
+         if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
+         return sb.toString();
+Index: app/src/main/java/com/example/loginregister/PerfilActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister;\r\n\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.example.loginregister.Swagger.API;\r\nimport com.example.loginregister.Swagger.AuthService;\r\nimport com.example.loginregister.Swagger.GenericResponse;\r\n\r\nimport retrofit2.Call;\r\nimport retrofit2.Callback;\r\nimport retrofit2.Response;\r\n\r\npublic class PerfilActivity extends AppCompatActivity {\r\n\r\n    public String user;\r\n    public String correo;\r\n    public String token;\r\n    EditText txtNewPassword, txtActualPassword, txtPasswordDelete;\r\n    Button enviarBtn;\r\n    Button enviarBtn2;\r\n\r\n    TextView correoTxtView;\r\n\r\n    TextView userTxtView;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_perfil);\r\n\r\n        this.user = getIntent().getStringExtra(\"user\");\r\n        this.correo = getIntent().getStringExtra(\"correo\");\r\n        this.token = getIntent().getStringExtra(\"token\");\r\n        correoTxtView = findViewById(R.id.correoTxtView);\r\n        userTxtView = findViewById(R.id.userTxtView);\r\n\r\n        correoTxtView.setText(\"Correo: \" + this.correo);\r\n        userTxtView.setText(\"Usuario: \" + this.user);\r\n\r\n        txtNewPassword = findViewById(R.id.txtNewPassword);\r\n        txtActualPassword = findViewById(R.id.txtActualPassword);\r\n        txtPasswordDelete = findViewById(R.id.txtPasswordDelete);\r\n\r\n        enviarBtn = findViewById(R.id.enviarBtn);\r\n        enviarBtn2 = findViewById(R.id.enviarBtn2);\r\n\r\n        // Están ocultos por XML, pero puedes reforzarlo aquí\r\n        txtNewPassword.setVisibility(View.GONE);\r\n        enviarBtn.setVisibility(View.GONE);\r\n\r\n    }\r\n\r\n    public void changePassClick(View view){\r\n        txtNewPassword.setVisibility(View.VISIBLE);\r\n        txtActualPassword.setVisibility(View.VISIBLE);\r\n        enviarBtn.setVisibility(View.VISIBLE);\r\n        txtPasswordDelete.setVisibility(View.GONE);\r\n        enviarBtn2.setVisibility(View.GONE);\r\n    }\r\n\r\n    public void deleteAccountClick(View view){\r\n        txtNewPassword.setVisibility(View.GONE);\r\n        txtActualPassword.setVisibility(View.GONE);\r\n        enviarBtn.setVisibility(View.GONE);\r\n        txtPasswordDelete.setVisibility(View.VISIBLE);\r\n        enviarBtn2.setVisibility(View.VISIBLE);\r\n    }\r\n\r\n    public void enviarChangeClick(View view){\r\n        String nuevaPassword = txtNewPassword.getText().toString().trim();\r\n        String actualPassword = txtActualPassword.getText().toString().trim();\r\n\r\n        if (this.token == null || this.token.isEmpty()) {\r\n            Toast.makeText(this, \"Sesión no válida. Vuelve a iniciar sesión.\", Toast.LENGTH_SHORT).show();\r\n            return;\r\n        }\r\n\r\n        if (actualPassword.isEmpty()) {\r\n            Toast.makeText(this, \"Introduce tu contraseña actual\", Toast.LENGTH_SHORT).show();\r\n            return;\r\n        }\r\n\r\n        if (nuevaPassword.isEmpty()) {\r\n            Toast.makeText(this, \"Introduce una nueva contraseña\", Toast.LENGTH_SHORT).show();\r\n            return;\r\n        }\r\n\r\n        if (nuevaPassword.equals(actualPassword)) {\r\n            Toast.makeText(this, \"La nueva contraseña no puede ser igual a la anterior\", Toast.LENGTH_SHORT).show();\r\n            return;\r\n        }\r\n\r\n        AuthService authService = API.getAuthService();\r\n        Call<GenericResponse> call = authService.actualizarContrasena(\"Bearer \" + this.token, actualPassword, nuevaPassword);\r\n\r\n        call.enqueue(new Callback<GenericResponse>() {\r\n            @Override\r\n            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {\r\n                if (response.isSuccessful() && response.body() != null) {\r\n                    Toast.makeText(PerfilActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();\r\n                    txtNewPassword.setText(\"\");\r\n                    txtActualPassword.setText(\"\");\r\n                } else {\r\n                    Toast.makeText(PerfilActivity.this, \"No se pudo cambiar la contraseña. Verifica tus datos.\", Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<GenericResponse> call, Throwable t) {\r\n                Toast.makeText(PerfilActivity.this, \"Error de red: \" + t.getMessage(), Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n\r\n    public void enviarDeleteClick(View view){\r\n        String actualPassword = txtPasswordDelete.getText().toString();\r\n\r\n        if (this.token == null || this.token.isEmpty() || actualPassword.isEmpty()) {\r\n            Toast.makeText(this, \"Introduce tu contraseña actual\", Toast.LENGTH_SHORT).show();\r\n            return;\r\n        }\r\n\r\n        AuthService authService = API.getAuthService();\r\n        Call<GenericResponse> call = authService.eliminarUsuario(\"Bearer \" + this.token, actualPassword);\r\n\r\n        call.enqueue(new Callback<GenericResponse>() {\r\n            @Override\r\n            public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {\r\n                if (response.isSuccessful() && response.body() != null && response.body().isStatus()) {\r\n                    Toast.makeText(PerfilActivity.this, \"Cuenta eliminada correctamente\", Toast.LENGTH_LONG).show();\r\n                    // Limpiar sesión\r\n                    SharedPreferences.Editor editor = getSharedPreferences(\"Sesion\", MODE_PRIVATE).edit();\r\n                    editor.clear();\r\n                    editor.apply();\r\n                    // Volver al inicio\r\n                    Intent intent = new Intent(PerfilActivity.this, StartActivity.class);\r\n                    startActivity(intent);\r\n                    finish();\r\n                } else {\r\n                    String mensaje = response.body() != null ? response.body().getMessage() : \"Error al eliminar cuenta\";\r\n                    Toast.makeText(PerfilActivity.this, mensaje, Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n\r\n            @Override\r\n            public void onFailure(Call<GenericResponse> call, Throwable t) {\r\n                Toast.makeText(PerfilActivity.this, \"Error: \" + t.getMessage(), Toast.LENGTH_SHORT).show();\r\n            }\r\n        });\r\n    }\r\n    public void onClickBack(View view) {\r\n        Intent intent = new Intent(PerfilActivity.this, LobbyActivity.class);\r\n        intent.putExtra(\"origen\", \"lobby\");\r\n        startActivity(intent);\r\n\r\n    }\r\n\r\n    private void overridePendingTransition(int slideInLeft) {\r\n    }\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/PerfilActivity.java b/app/src/main/java/com/example/loginregister/PerfilActivity.java
+--- a/app/src/main/java/com/example/loginregister/PerfilActivity.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/PerfilActivity.java	(date 1748447325397)
+@@ -24,6 +24,8 @@
+     public String user;
+     public String correo;
+     public String token;
++    public String money;
++    public String record;
+     EditText txtNewPassword, txtActualPassword, txtPasswordDelete;
+     Button enviarBtn;
+     Button enviarBtn2;
+@@ -40,6 +42,8 @@
+         this.user = getIntent().getStringExtra("user");
+         this.correo = getIntent().getStringExtra("correo");
+         this.token = getIntent().getStringExtra("token");
++        this.money = getIntent().getStringExtra("money");
++        this.record = getIntent().getStringExtra("record");
+         correoTxtView = findViewById(R.id.correoTxtView);
+         userTxtView = findViewById(R.id.userTxtView);
+ 
+@@ -162,6 +166,16 @@
+         intent.putExtra("origen", "lobby");
+         startActivity(intent);
+ 
++    }
++
++    public void onClickInventario(View view){
++        Intent intent = new Intent(PerfilActivity.this, InventarioActivity.class);
++        intent.putExtra("user", this.user);
++        intent.putExtra("correo", this.correo);
++        intent.putExtra("token", this.token);
++        intent.putExtra("money",this.money);
++        intent.putExtra("record", this.record);
++        startActivity(intent);
+     }
+ 
+     private void overridePendingTransition(int slideInLeft) {
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    package=\"com.example.loginregister\">\r\n\r\n    <uses-permission android:name=\"android.permission.INTERNET\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:networkSecurityConfig=\"@xml/network_security_config\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.LoginRegister\"\r\n        android:usesCleartextTraffic=\"true\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".DetailActivity\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".CartActivity\"\r\n            android:exported=\"false\" /> <!-- Declaración de SplashScreenActivity -->\r\n        <activity\r\n            android:name=\".SplashScreenActivity\"\r\n            android:exported=\"true\" /> <!-- Declaración de LoginActivity -->\r\n        <activity\r\n            android:name=\".LoginActivity\"\r\n            android:exported=\"true\" /> <!-- Declaración de RegisterActivity -->\r\n        <activity\r\n            android:name=\".RegisterActivity\"\r\n            android:exported=\"true\" /> <!-- Declaración de LobbyActivity -->\r\n        <activity\r\n            android:name=\".LobbyActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".StartActivity\"\r\n            android:exported=\"true\" />\r\n        <activity\r\n            android:name=\".PerfilActivity\"\r\n            android:exported=\"true\" /> <!-- Declaración de MainActivity con intent-filter -->\r\n        <activity\r\n            android:name=\".HomeActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity> <!-- Declaración de ShopActivity -->\r\n        <activity\r\n            android:name=\".ShopActivity\"\r\n            android:exported=\"true\"\r\n            tools:ignore=\"Instantiatable\" />\r\n\r\n        <meta-data\r\n            android:name=\"preloaded_fonts\"\r\n            android:resource=\"@array/preloaded_fonts\" />\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/AndroidManifest.xml	(date 1748447325391)
+@@ -18,6 +18,9 @@
+         android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+         <activity
++            android:name=".InventarioActivity"
++            android:exported="true" />
++        <activity
+             android:name=".DetailActivity"
+             android:exported="false" />
+         <activity
+@@ -40,7 +43,8 @@
+             android:exported="true" />
+         <activity
+             android:name=".PerfilActivity"
+-            android:exported="true" /> <!-- Declaración de MainActivity con intent-filter -->
++            android:exported="true" />
++        <!-- Declaración de MainActivity con intent-filter -->
+         <activity
+             android:name=".HomeActivity"
+             android:exported="true">
+Index: app/src/main/res/layout/activity_row_inventory.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_row_inventory.xml b/app/src/main/res/layout/activity_row_inventory.xml
+new file mode 100644
+--- /dev/null	(date 1748447325404)
++++ b/app/src/main/res/layout/activity_row_inventory.xml	(date 1748447325404)
+@@ -0,0 +1,53 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="120dp"
++    android:padding="6dp"
++    android:layout_marginTop="12dp">
++
++    <ImageView
++        android:id="@+id/icon"
++        android:layout_width="100dp"
++        android:layout_height="100dp"
++        android:layout_alignParentStart="true"
++        android:layout_centerVertical="true"
++        android:contentDescription="TODO"
++        android:src="@mipmap/ic_launcher" />
++
++    <TextView
++        android:id="@+id/firstLine"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_toEndOf="@id/icon"
++        android:layout_alignParentTop="true"
++        android:layout_marginStart="12dp"
++        android:text="Example application"
++        android:textSize="20sp"
++        android:textStyle="bold"
++        android:fontFamily="@font/alfa_slab_one" />
++
++    <TextView
++        android:id="@+id/secondLine"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_below="@id/firstLine"
++        android:layout_toEndOf="@id/icon"
++        android:layout_marginStart="12dp"
++        android:layout_marginTop="4dp"
++        android:text="Description"
++        android:textSize="16sp"
++        android:fontFamily="serif"
++        android:singleLine="true" />
++
++    <TextView
++        android:id="@+id/CantidadTxt"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_below="@id/secondLine"
++        android:layout_toEndOf="@id/icon"
++        android:layout_marginStart="12dp"
++        android:layout_marginTop="4dp"
++        android:text="Cantidad"
++        android:textSize="16sp" />
++</RelativeLayout>
++
+Index: app/src/main/res/layout/activity_inventario.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_inventario.xml b/app/src/main/res/layout/activity_inventario.xml
+new file mode 100644
+--- /dev/null	(date 1748447325402)
++++ b/app/src/main/res/layout/activity_inventario.xml	(date 1748447325402)
+@@ -0,0 +1,66 @@
++<?xml version="1.0" encoding="utf-8"?>
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    android:background="#ADD8E6">
++
++    <LinearLayout
++        android:id="@+id/backBTN"
++        android:layout_width="56dp"
++        android:layout_height="24dp"
++        android:layout_marginStart="16dp"
++        android:layout_marginTop="16dp"
++        android:onClick="onClickBack"
++        android:orientation="horizontal"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent">
++
++        <ImageView
++            android:id="@+id/imageView3"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_gravity="center_vertical"
++            app:srcCompat="@drawable/back" />
++
++        <TextView
++            android:id="@+id/textView4"
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:layout_marginStart="8dp"
++            android:layout_weight="1"
++            android:text="back"
++            android:textColor="@color/darkBrown" />
++
++    </LinearLayout>
++    <androidx.recyclerview.widget.RecyclerView
++        android:id="@+id/recyclerViewInventario"
++        android:layout_width="0dp"
++        android:layout_height="0dp"
++        android:paddingTop="100dp"
++        android:paddingStart="10dp"
++        android:paddingEnd="10dp"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"/>
++
++    <TextView
++        android:id="@+id/textView2"
++        android:layout_width="207dp"
++        android:layout_height="51dp"
++        android:fontFamily="casual"
++        android:text="INVENTARIO"
++        android:textAlignment="center"
++        android:textSize="34sp"
++        android:textStyle="bold"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.497"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="@+id/recyclerViewInventario"
++        app:layout_constraintVertical_bias="0.038" />
++
++</androidx.constraintlayout.widget.ConstraintLayout>
+Index: app/src/main/java/com/example/loginregister/InventarioActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/InventarioActivity.java b/app/src/main/java/com/example/loginregister/InventarioActivity.java
+new file mode 100644
+--- /dev/null	(date 1748447325394)
++++ b/app/src/main/java/com/example/loginregister/InventarioActivity.java	(date 1748447325394)
+@@ -0,0 +1,70 @@
++package com.example.loginregister;
++
++
++import android.content.Intent;
++import android.content.SharedPreferences;
++import android.os.Bundle;
++import android.util.Log;
++import android.view.View;
++import android.widget.Button;
++import android.widget.EditText;
++import android.widget.TextView;
++import android.widget.Toast;
++
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.example.loginregister.Swagger.API;
++import com.example.loginregister.Swagger.AuthService;
++import com.example.loginregister.Swagger.GenericResponse;
++import com.example.loginregister.Swagger.InventoryResponse;
++
++import java.util.List;
++
++import retrofit2.Call;
++import retrofit2.Callback;
++import retrofit2.Response;
++
++public class InventarioActivity extends AppCompatActivity {
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_inventario);
++
++        RecyclerView recyclerView = findViewById(R.id.recyclerViewInventario);
++        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
++        String username = getIntent().getStringExtra("user");
++        AuthService authService = API.getAuthService();
++
++        authService.getInventario(username).enqueue(new Callback<List<InventoryResponse>>() {
++            @Override
++            public void onResponse(Call<List<InventoryResponse>> call, Response<List<InventoryResponse>> response) {
++                if (response.isSuccessful() && response.body() != null) {
++                    List<InventoryResponse> inventario = response.body();
++                    for (InventoryResponse item : inventario) {
++                        Log.d("Inventario", "Item: " + item.getNombre() + ", Cantidad: " + item.getCantidad());
++                    }
++                    // Crear el adaptador con la lista recibida y asignarlo al RecyclerView
++                    InventarioAdapter adapter = new InventarioAdapter(InventarioActivity.this, inventario);
++                    recyclerView.setAdapter(adapter);
++                } else {
++                    Toast.makeText(InventarioActivity.this, "No se pudo obtener el inventario", Toast.LENGTH_SHORT).show();
++                }
++            }
++
++            @Override
++            public void onFailure(Call<List<InventoryResponse>> call, Throwable t) {
++                Toast.makeText(InventarioActivity.this, "Error de conexión al obtener inventario", Toast.LENGTH_SHORT).show();
++                Log.e("InventarioError", "Error: ", t);
++            }
++        });
++
++    }
++
++    public void onClickBack(View view){
++        Intent intent = new Intent(InventarioActivity.this, PerfilActivity.class);
++        intent.putExtra("origen", "Inventario");
++        startActivity(intent);
++    }
++}
+Index: app/src/main/java/com/example/loginregister/InventarioAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/InventarioAdapter.java b/app/src/main/java/com/example/loginregister/InventarioAdapter.java
+new file mode 100644
+--- /dev/null	(date 1748447325395)
++++ b/app/src/main/java/com/example/loginregister/InventarioAdapter.java	(date 1748447325395)
+@@ -0,0 +1,64 @@
++package com.example.loginregister;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.ImageView;
++import android.widget.TextView;
++
++import androidx.annotation.NonNull;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.bumptech.glide.Glide;
++import com.example.loginregister.Swagger.InventoryResponse;
++
++import java.util.List;
++
++public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.ViewHolder>{
++    private List<InventoryResponse> inventarioList;
++    private Context context;
++
++    public InventarioAdapter(Context context, List<InventoryResponse> inventarioList) {
++        this.context = context;
++        this.inventarioList = inventarioList;
++    }
++
++    @NonNull
++    @Override
++    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(context).inflate(R.layout.activity_row_inventory, parent, false);
++        return new ViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
++        InventoryResponse item = inventarioList.get(position);
++        holder.firstLine.setText(item.getNombre());
++        holder.secondLine.setText(item.getDescripcion());
++        holder.CantidadText.setText("Cantidad: " + item.getCantidad());
++
++        Glide.with(context)
++                .load(item.getUrl_icon())
++                .placeholder(R.mipmap.ic_launcher) // imagen por defecto mientras carga
++                .into(holder.icon);
++    }
++
++    @Override
++    public int getItemCount() {
++        return inventarioList.size();
++    }
++
++    public static class ViewHolder extends RecyclerView.ViewHolder {
++        ImageView icon;
++        TextView firstLine, secondLine, CantidadText;
++
++        public ViewHolder(@NonNull View itemView) {
++            super(itemView);
++            icon = itemView.findViewById(R.id.icon);
++            firstLine = itemView.findViewById(R.id.firstLine);
++            secondLine = itemView.findViewById(R.id.secondLine);
++            CantidadText = itemView.findViewById(R.id.CantidadTxt);
++        }
++    }
++}
+Index: app/src/main/java/com/example/loginregister/Swagger/UserStatsResponse.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.loginregister.Swagger;\r\n\r\npublic class UserStatsResponse {\r\n    private int dinero;\r\n    private int record;\r\n\r\n    public int getDinero() {\r\n        return dinero;\r\n    }\r\n\r\n    public void setDinero(int dinero) {\r\n        this.dinero = dinero;\r\n    }\r\n\r\n    public int getRecord() {\r\n        return record;\r\n    }\r\n\r\n    public void setRecord(int record) {\r\n        this.record = record;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/loginregister/Swagger/UserStatsResponse.java b/app/src/main/java/com/example/loginregister/Swagger/UserStatsResponse.java
+--- a/app/src/main/java/com/example/loginregister/Swagger/UserStatsResponse.java	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/java/com/example/loginregister/Swagger/UserStatsResponse.java	(date 1748447325401)
+@@ -1,22 +1,22 @@
+ package com.example.loginregister.Swagger;
+ 
+ public class UserStatsResponse {
+-    private int dinero;
+-    private int record;
++    private int money;
++    private int score;
+ 
+-    public int getDinero() {
+-        return dinero;
++    public int getMoney() {
++        return money;
+     }
+ 
+-    public void setDinero(int dinero) {
+-        this.dinero = dinero;
++    public void setMoney(int money) {
++        this.money = money;
+     }
+ 
+-    public int getRecord() {
+-        return record;
++    public int getScore() {
++        return score;
+     }
+ 
+-    public void setRecord(int record) {
+-        this.record = record;
++    public void setScore(int score) {
++        this.score = score;
+     }
+ }
+Index: app/src/main/res/layout/activity_perfil.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:background=\"@drawable/background_splash_screen\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/backBTN\"\r\n        android:layout_width=\"56dp\"\r\n        android:layout_height=\"24dp\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:onClick=\"onClickBack\"\r\n        android:orientation=\"horizontal\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <ImageView\r\n            android:id=\"@+id/imageView3\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_gravity=\"center_vertical\"\r\n            app:srcCompat=\"@drawable/back\" />\r\n\r\n        <TextView\r\n            android:id=\"@+id/textView4\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"8dp\"\r\n            android:layout_weight=\"1\"\r\n            android:text=\"back\"\r\n            android:textColor=\"@color/darkBrown\" />\r\n\r\n    </LinearLayout>\r\n\r\n    <com.airbnb.lottie.LottieAnimationView\r\n        android:layout_width=\"420dp\"\r\n        android:layout_height=\"600dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.555\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\"\r\n        app:lottie_autoPlay=\"true\"\r\n        app:lottie_loop=\"true\"\r\n        app:lottie_rawRes=\"@raw/bouncing_balls_perfil\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/txtActualPassword\"\r\n        android:layout_width=\"302dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginEnd=\"48dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:fontFamily=\"casual\"\r\n        android:hint=\"Contraseña actual\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:minHeight=\"48dp\"\r\n        android:padding=\"16dp\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"24sp\"\r\n        android:textStyle=\"bold\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/enviarBtn\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.461\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/deleteAccountBtn\"\r\n        app:layout_constraintVertical_bias=\"0.111\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/txtNewPassword\"\r\n        android:layout_width=\"302dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginEnd=\"48dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:fontFamily=\"casual\"\r\n        android:hint=\"Nueva contraseña\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:minHeight=\"48dp\"\r\n        android:padding=\"16dp\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"24sp\"\r\n        android:textStyle=\"bold\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/enviarBtn\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.461\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/deleteAccountBtn\"\r\n        app:layout_constraintVertical_bias=\"0.888\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/txtPasswordDelete\"\r\n        android:layout_width=\"302dp\"\r\n        android:layout_height=\"99dp\"\r\n        android:layout_marginStart=\"48dp\"\r\n        android:layout_marginEnd=\"48dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:fontFamily=\"casual\"\r\n        android:hint=\"Contraseña\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:minHeight=\"48dp\"\r\n        android:padding=\"16dp\"\r\n        android:textColor=\"#000000\"\r\n        android:textSize=\"24sp\"\r\n        android:textStyle=\"bold\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/enviarBtn\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.461\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/deleteAccountBtn\"\r\n        app:layout_constraintVertical_bias=\"0.14\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/enviarBtn\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"67dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:onClick=\"enviarChangeClick\"\r\n        android:text=\"Enviar\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.934\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/enviarBtn2\"\r\n        android:layout_width=\"177dp\"\r\n        android:layout_height=\"67dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:onClick=\"enviarDeleteClick\"\r\n        android:text=\"Enviar\"\r\n        android:textColor=\"#FFFFFF\"\r\n        android:visibility=\"gone\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.804\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/deleteAccountBtn\"\r\n        android:layout_width=\"240dp\"\r\n        android:layout_height=\"83dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:onClick=\"deleteAccountClick\"\r\n        android:text=\"Eliminar cuenta\"\r\n        android:textColor=\"#FFFFFF\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.647\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.783\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/correoTxtView\"\r\n        android:layout_width=\"241dp\"\r\n        android:layout_height=\"75dp\"\r\n        android:text=\"Correo\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.605\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.175\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/userTxtView\"\r\n        android:layout_width=\"230dp\"\r\n        android:layout_height=\"66dp\"\r\n        android:text=\"User\"\r\n        android:textSize=\"20dp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/correoTxtView\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.569\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"1.0\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/changePassBtn\"\r\n        android:layout_width=\"238dp\"\r\n        android:layout_height=\"81dp\"\r\n        android:layout_marginStart=\"60dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:backgroundTint=\"#000000\"\r\n        android:onClick=\"changePassClick\"\r\n        android:text=\"Cambiar contraseña\"\r\n        android:textColor=\"#FFFFFF\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.509\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.373\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_perfil.xml b/app/src/main/res/layout/activity_perfil.xml
+--- a/app/src/main/res/layout/activity_perfil.xml	(revision eabdc90fface008053408defd52de5af4615173f)
++++ b/app/src/main/res/layout/activity_perfil.xml	(date 1748447325403)
+@@ -49,6 +49,23 @@
+         app:lottie_loop="true"
+         app:lottie_rawRes="@raw/bouncing_balls_perfil" />
+ 
++    <Button
++        android:id="@+id/inventarioBtn"
++        android:layout_width="138dp"
++        android:layout_height="64dp"
++        android:layout_marginStart="60dp"
++        android:layout_marginEnd="60dp"
++        android:backgroundTint="#000000"
++        android:onClick="onClickInventario"
++        android:text="Inventario"
++        android:textColor="#FFFFFF"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="0.541" />
++
+     <EditText
+         android:id="@+id/txtActualPassword"
+         android:layout_width="302dp"

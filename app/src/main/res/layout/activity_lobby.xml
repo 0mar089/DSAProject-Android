@@ -16,10 +16,10 @@
         android:onClick="onClickInsignias"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.477"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403"
+        app:layout_constraintVertical_bias="0.401"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/floating_balls" />
@@ -96,24 +96,24 @@
         android:layout_width="72dp"
         android:layout_height="64dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="4dp"
         android:contentDescription="TODO"
         android:onClick="rankingClick"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView9"
         app:srcCompat="@drawable/podium" />
 
     <ImageView
         android:id="@+id/FAQimage"
-        android:layout_width="68dp"
-        android:layout_height="52dp"
+        android:layout_width="52dp"
+        android:layout_height="55dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/faq"
         android:contentDescription="TODO"
         android:onClick="faqClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/chatimage" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/playBtn"
@@ -137,27 +137,27 @@
         android:id="@+id/imageView2"
         android:layout_width="69dp"
         android:layout_height="54dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="12dp"
         android:contentDescription="Botón de ayuda"
         android:onClick="helpClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.979"
         app:srcCompat="@android:drawable/ic_menu_help" />
 
     <ImageView
         android:id="@+id/insigniasView"
-        android:layout_width="67dp"
-        android:layout_height="50dp"
+        android:layout_width="57dp"
+        android:layout_height="53dp"
+        android:background="@drawable/_425457"
         android:contentDescription="Botón de ayuda"
         android:onClick="onClickInsignias"
-        app:srcCompat="@android:drawable/ic_menu_help"
-        tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="665dp"
-        tools:srcCompat="@drawable/_425457" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toStartOf="@+id/imageView9"
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/imageView9"
