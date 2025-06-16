@@ -162,10 +162,8 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
     public void onClickBack(View view) {
-        Intent intent = new Intent(PerfilActivity.this, LobbyActivity.class);
-        intent.putExtra("origen", "lobby");
-        startActivity(intent);
-
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
     }
 
     public void onClickInventario(View view){

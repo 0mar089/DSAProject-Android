@@ -1,39 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/lightBlue"
+    tools:context=".QuestionActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/backBTN"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onClickBack"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/back" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="back"
+            android:textColor="@color/darkBrown" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="6dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="Preguntas"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/etTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Título" />
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:background="#99FFFFFF"
+            android:hint="Título"
+            android:inputType="textCapSentences"
+            android:paddingHorizontal="16dp" />
 
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mensaje"
+            android:layout_height="150dp"
+            android:layout_marginBottom="16dp"
+            android:background="#99FFFFFF"
+            android:gravity="top|start"
+            android:hint="Escribe tu mensaje"
+            android:inputType="textMultiLine"
+            android:maxLines="6"
             android:minLines="4"
-            android:gravity="top"
-            android:inputType="textMultiLine" />
+            android:padding="16dp" />
 
         <EditText
             android:id="@+id/etSender"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Remitente (email o nombre)" />
+            android:layout_height="50dp"
+            android:layout_marginBottom="24dp"
+            android:background="#99FFFFFF"
+            android:hint="Remitente (email o nombre)"
+            android:inputType="textPersonName"
+            android:paddingHorizontal="16dp" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Enviar" />
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#0D47A1"
+            android:text="Enviar"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
+
+
     </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

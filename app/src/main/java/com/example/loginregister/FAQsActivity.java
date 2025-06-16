@@ -2,6 +2,7 @@ package com.example.loginregister;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,5 +47,12 @@ public class FAQsActivity extends AppCompatActivity {
                 Log.e("API_ERROR", "Error al obtener FAQs");
             }
         });
+    }
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 }

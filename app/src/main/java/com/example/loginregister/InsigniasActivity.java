@@ -1,6 +1,5 @@
 package com.example.loginregister;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,7 +24,7 @@ public class InsigniasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insignias);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewInsignias);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
         String username = getIntent().getStringExtra("user");
         AuthService authService = API.getAuthService();
@@ -55,9 +54,11 @@ public class InsigniasActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack(View view){
-        Intent intent = new Intent(InsigniasActivity.this, PerfilActivity.class);
-        intent.putExtra("origen", "Insignias");
-        startActivity(intent);
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 }
