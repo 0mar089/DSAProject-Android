@@ -151,8 +151,7 @@
         android:contentDescription="Botón de ayuda"
         android:onClick="helpClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/insigniasView"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:layout_constraintEnd_toStartOf="@+id/insigniasView" />
 
     <ImageView
         android:id="@+id/insigniasView"
