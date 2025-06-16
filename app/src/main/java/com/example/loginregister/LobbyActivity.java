@@ -84,7 +84,7 @@ public class LobbyActivity extends AppCompatActivity {
                     LobbyActivity.this.money = String.valueOf(dinero);
                     LobbyActivity.this.record = String.valueOf(record);
                 } else if (response.code() == 404 || response.code() == 401) {
-                    SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+                    SharedPreferences prefs = getSharedPreferences("Session", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.clear();
                     editor.apply();
@@ -174,8 +174,8 @@ public class LobbyActivity extends AppCompatActivity {
                     i.putExtra("inventory", inventarioJson);
                     startActivityForResult(i, 0);
                 } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
-                    Log.e("UnityLaunchError", "Error al lanzar la app Unity", e);
+                    Toast.makeText(getApplicationContext(), "Install the unity app first", Toast.LENGTH_SHORT).show();
+                    Log.e("UnityLaunchError", "Error launching Unity", e);
                 }
             }
         });

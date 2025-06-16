@@ -33,7 +33,7 @@ public class QuestionActivity extends AppCompatActivity {
         etSender = findViewById(R.id.etSender);
         btnSubmit = findViewById(R.id.btnSubmit);
 
-        prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+        prefs = getSharedPreferences("Session", MODE_PRIVATE);
         String token = prefs.getString("token", "");
 
         btnSubmit.setOnClickListener(v -> {
@@ -42,7 +42,7 @@ public class QuestionActivity extends AppCompatActivity {
             String sender = etSender.getText().toString().trim();
 
             if (title.isEmpty() || message.isEmpty() || sender.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Complete all the fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -60,16 +60,16 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(QuestionActivity.this, "Consulta enviada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivity.this, "question sent", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(QuestionActivity.this, "Error en el servidor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(QuestionActivity.this, "Error in the server", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(QuestionActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(QuestionActivity.this, "Error in the network: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         

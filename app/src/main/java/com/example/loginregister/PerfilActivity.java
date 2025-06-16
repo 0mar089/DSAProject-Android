@@ -40,15 +40,15 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         this.user = getIntent().getStringExtra("user");
-        this.correo = getIntent().getStringExtra("correo");
+        this.correo = getIntent().getStringExtra("email");
         this.token = getIntent().getStringExtra("token");
         this.money = getIntent().getStringExtra("money");
         this.record = getIntent().getStringExtra("record");
         correoTxtView = findViewById(R.id.correoTxtView);
         userTxtView = findViewById(R.id.userTxtView);
 
-        correoTxtView.setText("Correo: " + this.correo);
-        userTxtView.setText("Usuario: " + this.user);
+        correoTxtView.setText("Email: " + this.correo);
+        userTxtView.setText("User: " + this.user);
 
         txtNewPassword = findViewById(R.id.txtNewPassword);
         txtActualPassword = findViewById(R.id.txtActualPassword);
@@ -84,22 +84,22 @@ public class PerfilActivity extends AppCompatActivity {
         String actualPassword = txtActualPassword.getText().toString().trim();
 
         if (this.token == null || this.token.isEmpty()) {
-            Toast.makeText(this, "Sesión no válida. Vuelve a iniciar sesión.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Login not valid. Please try again.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (actualPassword.isEmpty()) {
-            Toast.makeText(this, "Introduce tu contraseña actual", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Introduce your current password", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (nuevaPassword.isEmpty()) {
-            Toast.makeText(this, "Introduce una nueva contraseña", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Introduce a new password", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (nuevaPassword.equals(actualPassword)) {
-            Toast.makeText(this, "La nueva contraseña no puede ser igual a la anterior", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "The new password cannot be the same as the old one.", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -114,13 +114,13 @@ public class PerfilActivity extends AppCompatActivity {
                     txtNewPassword.setText("");
                     txtActualPassword.setText("");
                 } else {
-                    Toast.makeText(PerfilActivity.this, "No se pudo cambiar la contraseña. Verifica tus datos.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PerfilActivity.this, "Password couldn't be changed.. Verify your data.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
-                Toast.makeText(PerfilActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PerfilActivity.this, "Connection error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -129,7 +129,7 @@ public class PerfilActivity extends AppCompatActivity {
         String actualPassword = txtPasswordDelete.getText().toString();
 
         if (this.token == null || this.token.isEmpty() || actualPassword.isEmpty()) {
-            Toast.makeText(this, "Introduce tu contraseña actual", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Introduce your current password", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -140,9 +140,9 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 if (response.isSuccessful() && response.body() != null && response.body().isStatus()) {
-                    Toast.makeText(PerfilActivity.this, "Cuenta eliminada correctamente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PerfilActivity.this, "Account deleted succesfully", Toast.LENGTH_LONG).show();
                     // Limpiar sesión
-                    SharedPreferences.Editor editor = getSharedPreferences("Sesion", MODE_PRIVATE).edit();
+                    SharedPreferences.Editor editor = getSharedPreferences("Session", MODE_PRIVATE).edit();
                     editor.clear();
                     editor.apply();
                     // Volver al inicio
@@ -150,7 +150,7 @@ public class PerfilActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    String mensaje = response.body() != null ? response.body().getMessage() : "Error al eliminar cuenta";
+                    String mensaje = response.body() != null ? response.body().getMessage() : "Error eliminating account";
                     Toast.makeText(PerfilActivity.this, mensaje, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -169,7 +169,7 @@ public class PerfilActivity extends AppCompatActivity {
     public void onClickInventario(View view){
         Intent intent = new Intent(PerfilActivity.this, InventarioActivity.class);
         intent.putExtra("user", this.user);
-        intent.putExtra("correo", this.correo);
+        intent.putExtra("email", this.correo);
         intent.putExtra("token", this.token);
         intent.putExtra("money",this.money);
         intent.putExtra("record", this.record);

@@ -129,7 +129,7 @@ public class ShopActivity extends AppCompatActivity {
                 if (progressBarItems != null) progressBarItems.setVisibility(View.GONE); // Ocultar siempre, haya éxito o no
 
                 if (!response.isSuccessful() || response.body() == null) {
-                    Log.d("API", "No se pudieron obtener los productos. Código: " + response.code());
+                    Log.d("API", "Products couldn't be obtained. Código: " + response.code());
                     // Opcionalmente, mostrar un mensaje al usuario
                     hideProgressBars(); // Asegurarse de ocultar si no se hizo antes
                     return;
@@ -146,7 +146,7 @@ public class ShopActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<ShopItem>> call, Throwable t) {
-                Log.e("API", "Error al obtener productos: " + t.getMessage(), t);
+                Log.e("API", "Error obtaining products: " + t.getMessage(), t);
                 if (progressBarItems != null) progressBarItems.setVisibility(View.GONE);
                 hideProgressBars(); // Asegurarse de ocultar en caso de fallo
                 // Opcionalmente, mostrar un mensaje de error al usuario
@@ -174,7 +174,7 @@ public class ShopActivity extends AppCompatActivity {
                         intent.putExtra("itemPosition", position); // Esta línea es opcional
                         startActivity(intent);
                     } else {
-                        Log.w("ShopActivity", "No se pudo obtener el ítem en la posición: " + position);
+                        Log.w("ShopActivity", "couldn't be obtained item in position: " + position);
                     }
                 } else {
                     Log.w("ShopActivity", "Posición no válida o adaptador nulo. Posición: " + position);
@@ -189,7 +189,7 @@ public class ShopActivity extends AppCompatActivity {
 
     public void cartClcik (View view){
         Intent intent = new Intent(ShopActivity.this, CartActivity.class);
-        intent.putExtra("origen", "lobby"); // Asumo que esto es correcto para tu lógica
+        intent.putExtra("origin", "lobby"); // Asumo que esto es correcto para tu lógica
         String token = getIntent().getStringExtra("token");
         intent.putExtra("token", token);
         startActivity(intent);
