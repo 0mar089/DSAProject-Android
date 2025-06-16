@@ -58,7 +58,7 @@ public class RankingActivity extends AppCompatActivity {
     public void onClickBack(View view) {
         finish();
         overridePendingTransition(R.anim.slide_in_left);
-    }   
+    }
 
     private void overridePendingTransition(int slideInLeft) {
     }

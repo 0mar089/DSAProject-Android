@@ -76,8 +76,10 @@ public class LobbyActivity extends AppCompatActivity {
 
                     TextView dineroText = findViewById(R.id.moneyTxt);
                     TextView recordText = findViewById(R.id.recordTxt);
-                    dineroText.setText("Dinero: " + dinero);
-                    recordText.setText("Récord: " + record);
+                    dineroText.setText("Money: " + dinero);
+                    recordText.setText("Record: " + record);
+                    // Activa marquee
+                    dineroText.setSelected(true);
 
                     LobbyActivity.this.money = String.valueOf(dinero);
                     LobbyActivity.this.record = String.valueOf(record);
