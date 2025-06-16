@@ -51,14 +51,15 @@
         android:id="@+id/inventarioBtn"
         android:layout_width="276dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#3C3F40"
         android:onClick="onClickInventario"
         android:text="INVENTARIO"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/deleteAccountBtn"
+        app:layout_constraintBottom_toTopOf="@+id/changePassBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -198,6 +199,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="135dp"
         android:text="User"
+        android:textAllCaps="false"
         android:textColor="@color/darkBrown"
         android:textSize="20dp"
         android:textStyle="bold"
@@ -208,15 +210,16 @@
         android:id="@+id/changePassBtn"
         android:layout_width="276dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="#3C3F40"
         android:onClick="changePassClick"
         android:text="CAMBIAR CONTRASEÑA"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         app:iconTint="#2B2D30"
-        app:layout_constraintBottom_toTopOf="@+id/inventarioBtn"
+        app:layout_constraintBottom_toTopOf="@+id/deleteAccountBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView

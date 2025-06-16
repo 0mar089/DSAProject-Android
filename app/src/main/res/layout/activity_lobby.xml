@@ -15,10 +15,10 @@
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.472"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402"
+        app:layout_constraintVertical_bias="0.4"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/floating_balls" />
@@ -63,17 +63,16 @@
         android:id="@+id/UserTxtLobby"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="USER"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="40sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/playBtn"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toEndOf="@+id/imageView7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -125,15 +124,13 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/playBtn"
-        android:layout_width="147dp"
-        android:layout_height="138dp"
-        android:layout_marginStart="32dp"
+        android:layout_width="219dp"
+        android:layout_height="235dp"
         android:layout_marginBottom="100dp"
         android:contentDescription="@string/play_button_description"
         android:onClick="jugarClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.683"
@@ -175,6 +172,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/insigniasView"
         app:srcCompat="@drawable/videos" />
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="450dp"
+        android:layout_height="290dp"
+        android:layout_marginBottom="-100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/marco"
+        tools:layout_editor_absoluteX="-20dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
