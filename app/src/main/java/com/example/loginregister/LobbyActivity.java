@@ -82,31 +82,31 @@ public class LobbyActivity extends AppCompatActivity {
                     LobbyActivity.this.money = String.valueOf(dinero);
                     LobbyActivity.this.record = String.valueOf(record);
                 } else if (response.code() == 404 || response.code() == 401) {
-                    SharedPreferences prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+                    SharedPreferences prefs = getSharedPreferences("Session", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.clear();
                     editor.apply();
 
-                    Toast.makeText(LobbyActivity.this, "Sesión expirada. Inicia sesión nuevamente.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LobbyActivity.this, "Expired session. Log in again.", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(LobbyActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(LobbyActivity.this, "Error al obtener datos del usuario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LobbyActivity.this, "Error obtaining user's data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<UserStatsResponse> call, Throwable t) {
-                Toast.makeText(LobbyActivity.this, "Fallo al conectar con servidor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LobbyActivity.this, "Error connecting with the server", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     public void shopClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, SplashScreenActivity.class);
-        intent.putExtra("origen", "lobby");
+        intent.putExtra("origin", "lobby");
         TextView dineroText = findViewById(R.id.moneyTxt);
         intent.putExtra("money", dineroText.getText().toString());
         intent.putExtra("token", this.token);
@@ -120,7 +120,7 @@ public class LobbyActivity extends AppCompatActivity {
     public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
         intent.putExtra("user", this.user);
-        intent.putExtra("correo", this.correo);
+        intent.putExtra("Email", this.correo);
         intent.putExtra("token", this.token);
         intent.putExtra("money", this.money);
         intent.putExtra("record", this.record);
@@ -135,7 +135,7 @@ public class LobbyActivity extends AppCompatActivity {
     // Para enlazar boton "?"
     public void helpClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, QuestionActivity.class);
-        intent.putExtra("correo", this.correo);  // para autocompletar remitente
+        intent.putExtra("Email:", this.correo);  // para autocompletar remitente
         startActivity(intent);
     }
 
@@ -155,7 +155,7 @@ public class LobbyActivity extends AppCompatActivity {
             @Override
             public void onInventarioJsonReady(String inventarioJson) {
                 if (inventarioJson == null) {
-                    Toast.makeText(getApplicationContext(), "No se pudo obtener el inventario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Couldn't obtain inventory", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 try {
@@ -167,7 +167,7 @@ public class LobbyActivity extends AppCompatActivity {
                     i.putExtra("user", user);
                     i.putExtra("money", money);
                     i.putExtra("record", record);
-                    i.putExtra("inventario", inventarioJson);
+                    i.putExtra("inventory", inventarioJson);
                     startActivityForResult(i, 0);
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Instala la app de Unity primero", Toast.LENGTH_SHORT).show();
