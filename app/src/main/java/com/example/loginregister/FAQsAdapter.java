@@ -31,9 +31,9 @@ public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         FAQs faq = faqsList.get(position);
 
-        Log.d("ADAPTER_DEBUG", "Pregunta: " + faq.getQuestion() + " - Respuesta: " + faq.getAnswer());
-        holder.questionTextView.setText(faq.getQuestion() != null ? faq.getQuestion() : "Pregunta no disponible");
-        holder.answerTextView.setText(faq.getAnswer() != null ? faq.getAnswer() : "Respuesta no disponible");
+        Log.d("ADAPTER_DEBUG", "Question: " + faq.getQuestion() + " - Answer: " + faq.getAnswer());
+        holder.questionTextView.setText(faq.getQuestion() != null ? faq.getQuestion() : "Question not available");
+        holder.answerTextView.setText(faq.getAnswer() != null ? faq.getAnswer() : "Response not available");
     }
 
 

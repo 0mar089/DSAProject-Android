@@ -39,14 +39,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+        prefs = getSharedPreferences("Session", MODE_PRIVATE);
 
         // si no hay sesion activa entra al if
-        if (prefs.getBoolean("sesionIniciada", false)) {
+        if (prefs.getBoolean("LoggedIn", false)) {
             Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
             intent.putExtra("user", prefs.getString("user", ""));
-            intent.putExtra("correo", prefs.getString("correo", ""));
-            intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
+            intent.putExtra("Email", prefs.getString("Email", ""));
+            intent.putExtra("origin", SplashScreenActivity.Constants.ORIGEN_LOGIN);
             startActivity(intent);
             finish();
             return;
@@ -80,26 +80,26 @@ public class LoginActivity extends AppCompatActivity {
                     if (loginResponse != null && loginResponse.isStatus()) {
                         // Guardar sesión en SharedPreferences
                         SharedPreferences.Editor editor = prefs.edit();
-                        editor.putBoolean("sesionIniciada", true);
+                        editor.putBoolean("LoggedIn", true);
                         editor.putString("user", loginResponse.getUser());
-                        editor.putString("correo", loginResponse.getCorreo());
+                        editor.putString("email", loginResponse.getCorreo());
                         editor.putString("token", loginResponse.getToken());
                         editor.apply();
 
                         // Redirigir a la pantalla principal
-                        Toast.makeText(LoginActivity.this, "Bienvenido, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Welcome, " + loginResponse.getUser(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
                         intent.putExtra("user", loginResponse.getUser());
-                        intent.putExtra("correo", loginResponse.getCorreo());
+                        intent.putExtra("email", loginResponse.getCorreo());
                         intent.putExtra("token", loginResponse.getToken());
-                        intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_LOGIN);
+                        intent.putExtra("origin", SplashScreenActivity.Constants.ORIGEN_LOGIN);
                         startActivity(intent);
                         finish(); // Evita que el usuario regrese con el botón "Atrás"
                     } else {
                         Toast.makeText(LoginActivity.this, "Error: " + loginResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(LoginActivity.this, "Login fallido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Failed to log in", Toast.LENGTH_LONG).show();
                 }
             }
 

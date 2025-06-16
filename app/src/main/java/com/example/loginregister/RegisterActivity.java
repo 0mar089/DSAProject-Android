@@ -44,18 +44,18 @@ public class RegisterActivity extends Activity {
 
             // Validación de los datos ingresados
             if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Please complete all the fields.", Toast.LENGTH_SHORT).show();
 
                 return;
             }
 
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(RegisterActivity.this, "Las contraseñas no coinciden.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "The passwords doin't match.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (!termsCheckbox.isChecked()) {
-                Toast.makeText(RegisterActivity.this, "Debes aceptar los términos y condiciones.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "You must accept terms and conditions.", Toast.LENGTH_SHORT).show();
                 return;
             }
             clickRegister(v);
@@ -64,7 +64,7 @@ public class RegisterActivity extends Activity {
     }
 
     public void clickRegister(View view) {
-        Toast.makeText(this, "CLICK DETECTADO", Toast.LENGTH_SHORT).show();
+
         API.getAuthService().register(
                 usernameInput.getText().toString(),
                 txtEmail.getText().toString(),
@@ -75,18 +75,18 @@ public class RegisterActivity extends Activity {
                 if (response.isSuccessful() && response.body() != null) {
                     RegisterResponse registerResponse = response.body();
                     if (registerResponse.isStatus()) {
-                        Toast.makeText(RegisterActivity.this, "Registro exitoso: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(RegisterActivity.this, "Registration succesful: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, SplashScreenActivity.class);
                         intent.putExtra("user", registerResponse.getUsername());
-                        intent.putExtra("correo", registerResponse.getCorreo());
-                        intent.putExtra("origen", SplashScreenActivity.Constants.ORIGEN_REGISTER);
+                        intent.putExtra("email", registerResponse.getCorreo());
+                        intent.putExtra("origin", SplashScreenActivity.Constants.ORIGEN_REGISTER);
                         startActivity(intent);
                         finish();
                     } else {
                         Toast.makeText(RegisterActivity.this, "Error: " + registerResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Error en el registro.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "Error registration.", Toast.LENGTH_LONG).show();
                 }
             }
 

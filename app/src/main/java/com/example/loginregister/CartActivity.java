@@ -77,20 +77,20 @@ public class CartActivity extends AppCompatActivity {
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isStatus()) {
-                        Toast.makeText(CartActivity.this, "Compra exitosa!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CartActivity.this, "Succesful purchase!", Toast.LENGTH_SHORT).show();
                         com.example.loginregister.CartManager.clearCart();
                         finish(); // salir del carrito o actualizarlo
                     } else {
                         Toast.makeText(CartActivity.this, "Error: " + response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(CartActivity.this, "Error en la compra, intenta de nuevo.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Purchase error, please try again.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
-                Toast.makeText(CartActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

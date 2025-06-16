@@ -59,7 +59,7 @@ public class DetailActivity extends AppCompatActivity {
             com.example.loginregister.CartManager.addItem(item, cantidad); // Agregar al carrito
 
             // Mostrar mensaje flotante de confirmación
-            Toast.makeText(this, "¡Item añadido al carrito!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "¡Item added to the cart!", Toast.LENGTH_SHORT).show();
         }
     }
     public void minusQuantityClick(View view){

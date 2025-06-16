@@ -32,19 +32,19 @@ public class FAQsActivity extends AppCompatActivity {
                     List<FAQs> faqs = response.body();
 
                     for (FAQs faq : faqs) {
-                        Log.d("API_DEBUG", "Pregunta: " + faq.getQuestion() + " - Respuesta: " + faq.getAnswer());
+                        Log.d("API_DEBUG", "Question: " + faq.getQuestion() + " - Answer: " + faq.getAnswer());
                     }
 
                     FAQsAdapter adapter = new FAQsAdapter(FAQsActivity.this, faqs);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Log.e("API_ERROR", "Error al obtener FAQs: " + response.errorBody());
+                    Log.e("API_ERROR", "Error obtaining FAQs: " + response.errorBody());
                 }
             }
 
             @Override
             public void onFailure(Call<List<FAQs>> call, Throwable t) {
-                Log.e("API_ERROR", "Error al obtener FAQs");
+                Log.e("API_ERROR", "Error obtaining FAQs");
             }
         });
     }

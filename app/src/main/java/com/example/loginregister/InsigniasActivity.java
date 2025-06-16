@@ -35,20 +35,20 @@ public class InsigniasActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<InsigniaResponse> insignias = response.body();
                     for (InsigniaResponse insignia : insignias) {
-                        Log.d("Insignias", "Insignia: " + insignia.getName() + ", Avatar: " + insignia.getAvatar());
+                        Log.d("Badges", "Badge: " + insignia.getName() + ", Avatar: " + insignia.getAvatar());
                     }
                     // Crear el adaptador con la lista recibida y asignarlo al RecyclerView
                     InsigniasAdapter adapter = new InsigniasAdapter(InsigniasActivity.this, insignias);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(InsigniasActivity.this, "No se pudo obtener las insignias", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsigniasActivity.this, "Badges couldn`t be obtained", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<InsigniaResponse>> call, Throwable t) {
-                Toast.makeText(InsigniasActivity.this, "Error de conexión al obtener las insignias", Toast.LENGTH_SHORT).show();
-                Log.e("InsigniasError", "Error: ", t);
+                Toast.makeText(InsigniasActivity.this, "Connection error trying to obtain badges", Toast.LENGTH_SHORT).show();
+                Log.e("BadgeError", "Error: ", t);
             }
         });
 

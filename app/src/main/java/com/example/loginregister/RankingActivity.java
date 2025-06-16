@@ -38,18 +38,18 @@ public class RankingActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<UsersScoreResponse> ranking = response.body();
                     for (UsersScoreResponse userScore : ranking) {
-                        Log.d("Ranking", "Usuario: " + userScore.getUsername() + ", Score: " + userScore.getScore());
+                        Log.d("Ranking", "User: " + userScore.getUsername() + ", Score: " + userScore.getScore());
                     }
                     RankingAdapter adapter = new RankingAdapter(RankingActivity.this, ranking);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(RankingActivity.this, "No se pudo obtener el ranking", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RankingActivity.this, "Ranking couldn't be obtained", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<UsersScoreResponse>> call, Throwable t) {
-                Toast.makeText(RankingActivity.this, "Error de conexión al obtener ranking", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RankingActivity.this, "connection error obtaining ranking", Toast.LENGTH_SHORT).show();
                 Log.e("RankingError", "Error: ", t);
             }
         });

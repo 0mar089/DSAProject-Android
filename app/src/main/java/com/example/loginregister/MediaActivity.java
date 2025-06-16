@@ -35,14 +35,14 @@ public class MediaActivity extends AppCompatActivity {
                     List<MediaResponse> videos = response.body();
                     recyclerView.setAdapter(new MediaAdapter(MediaActivity.this, videos));
                 } else {
-                    Toast.makeText(MediaActivity.this, "No se pudieron obtener los videos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MediaActivity.this, "Videos couldn't be obtained", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<MediaResponse>> call, Throwable t) {
-                Toast.makeText(MediaActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
-                Log.e("MediaError", "Error al cargar videos", t);
+                Toast.makeText(MediaActivity.this, "Connection error", Toast.LENGTH_SHORT).show();
+                Log.e("MediaError", "Error loading video", t);
             }
         });
     }

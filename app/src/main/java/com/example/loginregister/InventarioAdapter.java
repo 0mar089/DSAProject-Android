@@ -36,7 +36,7 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
         InventoryResponse item = inventarioList.get(position);
         holder.firstLine.setText(item.getNombre());
         holder.secondLine.setText(item.getDescripcion());
-        holder.CantidadText.setText("Cantidad: " + item.getCantidad());
+        holder.CantidadText.setText("Quantity: " + item.getCantidad());
 
         Glide.with(context)
                 .load(item.getUrl_icon())

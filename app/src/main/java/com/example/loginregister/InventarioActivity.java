@@ -37,20 +37,20 @@ public class InventarioActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<InventoryResponse> inventario = response.body();
                     for (InventoryResponse item : inventario) {
-                        Log.d("Inventario", "Item: " + item.getNombre() + ", Cantidad: " + item.getCantidad());
+                        Log.d("Inventory", "Item: " + item.getNombre() + ", Quantity: " + item.getCantidad());
                     }
                     // Crear el adaptador con la lista recibida y asignarlo al RecyclerView
                     InventarioAdapter adapter = new InventarioAdapter(InventarioActivity.this, inventario);
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(InventarioActivity.this, "No se pudo obtener el inventario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InventarioActivity.this, "Couldn't obtain inventory", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<InventoryResponse>> call, Throwable t) {
-                Toast.makeText(InventarioActivity.this, "Error de conexión al obtener inventario", Toast.LENGTH_SHORT).show();
-                Log.e("InventarioError", "Error: ", t);
+                Toast.makeText(InventarioActivity.this, "Connection error trying to obtain inventory", Toast.LENGTH_SHORT).show();
+                Log.e("InventoryError", "Error: ", t);
             }
         });
 

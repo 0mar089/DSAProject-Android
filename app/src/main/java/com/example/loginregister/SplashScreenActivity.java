@@ -28,7 +28,7 @@ public class SplashScreenActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
         );
 
-        String origen = getIntent().getStringExtra("origen");
+        String origen = getIntent().getStringExtra("origin");
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent;
@@ -46,7 +46,7 @@ public class SplashScreenActivity extends Activity {
                     case Constants.ORIGEN_REGISTER:
                         intent = new Intent(this, LobbyActivity.class);
                         user = getIntent().getStringExtra("user");
-                        gmail = getIntent().getStringExtra("correo");
+                        gmail = getIntent().getStringExtra("email");
                         token = getIntent().getStringExtra("token");
                         break;
                     case Constants.ORIGEN_LOBBY:
@@ -65,7 +65,7 @@ public class SplashScreenActivity extends Activity {
 
 
             intent.putExtra("user", user);
-            intent.putExtra("correo", gmail);
+            intent.putExtra("email", gmail);
             intent.putExtra("token", token);
             intent.putExtra("money", money);
 
