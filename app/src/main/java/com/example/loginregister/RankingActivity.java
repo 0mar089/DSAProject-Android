@@ -1,6 +1,5 @@
 package com.example.loginregister;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +27,7 @@ public class RankingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewRanking);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         AuthService authService = API.getAuthService();

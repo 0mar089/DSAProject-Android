@@ -1,7 +1,6 @@
 package com.example.loginregister;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +26,7 @@ public class InventarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventario);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewRanking);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
         String username = getIntent().getStringExtra("user");
         AuthService authService = API.getAuthService();

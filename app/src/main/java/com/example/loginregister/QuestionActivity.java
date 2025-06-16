@@ -2,6 +2,7 @@ package com.example.loginregister;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -75,5 +76,14 @@ public class QuestionActivity extends AppCompatActivity {
                 Toast.makeText(QuestionActivity.this, "Error de red: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        
+        
+    }
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 }
