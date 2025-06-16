@@ -24,7 +24,7 @@ public class InsigniasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insignias);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewBadges);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
         String username = getIntent().getStringExtra("user");
         AuthService authService = API.getAuthService();

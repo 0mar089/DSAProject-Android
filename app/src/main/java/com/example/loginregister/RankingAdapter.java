@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +14,7 @@ import com.example.loginregister.Clases.UsersScoreResponse;
 
 import java.util.List;
 
-public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHolder>{
+public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHolder> {
     private Context context;
     private List<UsersScoreResponse> rankingList;
 
@@ -24,12 +25,14 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtUsuario, txtScore, txtPosicion;
+        RelativeLayout circleLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtUsuario = itemView.findViewById(R.id.usernameTxtRanking);
             txtScore = itemView.findViewById(R.id.RecordTxt);
             txtPosicion = itemView.findViewById(R.id.positionTxt);
+            circleLayout = itemView.findViewById(R.id.positionCircle);
         }
     }
 
@@ -43,33 +46,31 @@ public class RankingAdapter extends RecyclerView.Adapter<RankingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull RankingAdapter.ViewHolder holder, int position) {
         UsersScoreResponse user = rankingList.get(position);
+        int displayPosition = position + 1;
+
         holder.txtUsuario.setText(user.getUsername());
         holder.txtScore.setText("Score: " + user.getScore());
-
-        int displayPosition = position + 1;
         holder.txtPosicion.setText(String.valueOf(displayPosition));
 
+        // Cambia el fondo del círculo según la posición
         switch (displayPosition) {
             case 1:
-                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#FFD700")); // Oro
+                holder.circleLayout.setBackgroundResource(R.drawable.circle_gold);
                 break;
             case 2:
-                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#C0C0C0")); // Plata
+                holder.circleLayout.setBackgroundResource(R.drawable.circle_silver);
                 break;
             case 3:
-                holder.txtPosicion.setTextColor(android.graphics.Color.parseColor("#CD7F32")); // Bronce
+                holder.circleLayout.setBackgroundResource(R.drawable.circle_bronze);
                 break;
             default:
-                holder.txtPosicion.setTextColor(android.graphics.Color.BLACK);
+                holder.circleLayout.setBackgroundResource(R.drawable.circle_gray);
                 break;
         }
     }
-
 
     @Override
     public int getItemCount() {
         return rankingList.size();
     }
-
-
 }
