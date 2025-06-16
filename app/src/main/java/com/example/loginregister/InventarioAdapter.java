@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loginregister.Swagger.InventoryResponse;
+import com.example.loginregister.Clases.InventoryResponse;
 
 import java.util.List;
 

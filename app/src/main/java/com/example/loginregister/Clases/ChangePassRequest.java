@@ -1,4 +1,4 @@
-package com.example.loginregister.Swagger;
+package com.example.loginregister.Clases;
 
 public class ChangePassRequest {
     private String correo;

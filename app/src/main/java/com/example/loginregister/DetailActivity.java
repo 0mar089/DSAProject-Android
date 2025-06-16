@@ -9,8 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.example.loginregister.R;
-import com.example.loginregister.Swagger.ShopItem;
+import com.example.loginregister.Clases.ShopItem;
 
 public class DetailActivity extends AppCompatActivity {
 

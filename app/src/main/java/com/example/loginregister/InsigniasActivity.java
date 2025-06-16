@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.InsigniaResponse;
+import com.example.loginregister.Clases.API;
+import com.example.loginregister.Clases.AuthService;
+import com.example.loginregister.Clases.InsigniaResponse;
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class InsigniasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insignias);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewBadges);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
         String username = getIntent().getStringExtra("user");
         AuthService authService = API.getAuthService();

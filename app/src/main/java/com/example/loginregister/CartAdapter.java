@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loginregister.Swagger.ShopItem;
+import com.example.loginregister.Clases.ShopItem;
 import java.util.List;
 import java.util.Map;
 

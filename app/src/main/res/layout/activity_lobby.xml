@@ -15,10 +15,10 @@
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.477"
+        app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.401"
+        app:layout_constraintVertical_bias="0.402"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/floating_balls" />
@@ -39,17 +39,25 @@
 
     <TextView
         android:id="@+id/moneyTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="end"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:text="money"
-        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
 
     <TextView
         android:id="@+id/UserTxtLobby"
@@ -62,57 +70,58 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/playBtn"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toEndOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.116" />
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="56dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="30dp"
+        android:layout_width="86dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:contentDescription="@string/todo"
         android:onClick="shopClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_2" />
+        app:srcCompat="@drawable/carrito" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="59dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="72dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:contentDescription="TODO"
         android:onClick="perfilClick"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_5" />
+        app:srcCompat="@drawable/user" />
 
     <ImageView
         android:id="@+id/podiumImage"
-        android:layout_width="72dp"
-        android:layout_height="64dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
         android:contentDescription="TODO"
         android:onClick="rankingClick"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView9"
-        app:srcCompat="@drawable/podium" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:srcCompat="@drawable/podio" />
 
     <ImageView
         android:id="@+id/FAQimage"
-        android:layout_width="52dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/faq"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/faqs"
         android:contentDescription="TODO"
         android:onClick="faqClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/imageView2" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/playBtn"
@@ -134,42 +143,38 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="69dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="12dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/preguntas_verde"
         android:contentDescription="Botón de ayuda"
         android:onClick="helpClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintHorizontal_bias="0.352"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:layout_constraintEnd_toStartOf="@+id/insigniasView" />
 
     <ImageView
         android:id="@+id/insigniasView"
-        android:layout_width="57dp"
-        android:layout_height="53dp"
-        android:background="@drawable/_425457"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/badgespng"
         android:contentDescription="Botón de ayuda"
         android:onClick="onClickInsignias"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toStartOf="@+id/imageView9"
-        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="67dp"
-        android:layout_height="54dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="15dp"
         android:onClick="mediaClick"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.718"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979"
-        app:srcCompat="@drawable/media" />
+        app:layout_constraintStart_toEndOf="@+id/insigniasView"
+        app:srcCompat="@drawable/videos" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

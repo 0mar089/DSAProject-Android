@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.loginregister.Swagger.InsigniaResponse;
+import com.example.loginregister.Clases.InsigniaResponse;
 
 import java.util.List;
 

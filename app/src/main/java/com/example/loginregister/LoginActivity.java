@@ -6,12 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.LoginResponse;
+import com.example.loginregister.Clases.API;
+import com.example.loginregister.Clases.LoginResponse;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;

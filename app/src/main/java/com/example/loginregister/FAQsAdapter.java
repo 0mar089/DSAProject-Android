@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.loginregister.Swagger.FAQs;
+import com.example.loginregister.Clases.FAQs;
 import java.util.List;
 
 public class FAQsAdapter extends RecyclerView.Adapter<FAQsAdapter.ViewHolder> {

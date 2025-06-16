@@ -10,7 +10,7 @@ import android.webkit.WebView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.loginregister.Swagger.MediaResponse;
+import com.example.loginregister.Clases.MediaResponse;
 
 import java.util.List;
 
