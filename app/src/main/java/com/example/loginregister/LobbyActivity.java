@@ -46,16 +46,16 @@ public class LobbyActivity extends AppCompatActivity {
 
         // Obtener datos del usuario desde Intent
         this.user = getIntent().getStringExtra("user");
-        this.correo = getIntent().getStringExtra("correo");
+        this.correo = getIntent().getStringExtra("email");
         this.token = getIntent().getStringExtra("token");
 
         // Si los datos no vienen en el Intent, recuperarlos desde SharedPreferences
-        prefs = getSharedPreferences("Sesion", MODE_PRIVATE);
+        prefs = getSharedPreferences("Session", MODE_PRIVATE);
         if (user == null || user.isEmpty()) {
-            this.user = prefs.getString("user", "Invitado");
+            this.user = prefs.getString("user", "Guest");
         }
         if (correo == null || correo.isEmpty()) {
-            this.correo = prefs.getString("correo", "Sin correo");
+            this.correo = prefs.getString("Email", "Without Email");
         }
         if (this.token == null || this.token.isEmpty()) {
             this.token = prefs.getString("token", null);
