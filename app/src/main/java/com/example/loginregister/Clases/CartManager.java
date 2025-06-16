@@ -2,7 +2,7 @@ package com.example.loginregister;
 
 import android.util.Log;
 
-import com.example.loginregister.Swagger.ShopItem;
+import com.example.loginregister.Clases.ShopItem;
 
 import java.util.HashMap;
 import java.util.Map;

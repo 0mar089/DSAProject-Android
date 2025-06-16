@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.UsersScoreResponse;
+import com.example.loginregister.Clases.API;
+import com.example.loginregister.Clases.AuthService;
+import com.example.loginregister.Clases.UsersScoreResponse;
 
 import java.util.List;
 

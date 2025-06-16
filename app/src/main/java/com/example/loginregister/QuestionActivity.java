@@ -9,13 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.AuthService;
-import com.example.loginregister.Swagger.QuestionRequest;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import com.example.loginregister.Clases.API;
+import com.example.loginregister.Clases.AuthService;
+import com.example.loginregister.Clases.QuestionRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;

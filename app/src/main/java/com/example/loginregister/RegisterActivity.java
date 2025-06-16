@@ -9,9 +9,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.loginregister.Swagger.API;
-import com.example.loginregister.Swagger.RegisterRequest;
-import com.example.loginregister.Swagger.RegisterResponse;
+import com.example.loginregister.Clases.API;
+import com.example.loginregister.Clases.RegisterResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;

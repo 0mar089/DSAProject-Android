@@ -1,4 +1,4 @@
-package com.example.loginregister.Swagger;
+package com.example.loginregister.Clases;
 
 import java.util.List;
 
