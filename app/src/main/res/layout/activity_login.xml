@@ -10,6 +10,7 @@
     android:padding="24dp"
     tools:context=".LoginActivity">
 
+    <!-- Título -->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottieAnimationView"
         android:layout_width="1101dp"
@@ -18,13 +19,14 @@
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.325"
+        app:layout_constraintVertical_bias="0.331"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/floating_balls" />
-    <!-- Título -->
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
