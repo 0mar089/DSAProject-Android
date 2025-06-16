@@ -26,7 +26,7 @@ public class InventarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventario);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewInventory);
         recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Layout vertical por defecto
         String username = getIntent().getStringExtra("user");
         AuthService authService = API.getAuthService();

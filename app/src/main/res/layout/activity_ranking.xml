@@ -39,6 +39,7 @@
         android:layout_width="410dp"
         android:layout_height="646dp"
         android:layout_marginTop="75dp"
+        android:paddingTop="20sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
