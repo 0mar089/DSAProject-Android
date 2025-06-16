@@ -13,7 +13,6 @@
         android:layout_height="2028dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="100dp"
-        android:onClick="onClickInsignias"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.477"
