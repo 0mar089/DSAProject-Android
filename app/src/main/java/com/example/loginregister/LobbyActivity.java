@@ -112,6 +112,10 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("token", this.token);
         startActivity(intent);
     }
+    public void faqClick(View view){
+        Intent intent = new Intent(LobbyActivity.this, FAQsActivity.class);
+        startActivity(intent);
+    }
 
     public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
@@ -121,7 +125,29 @@ public class LobbyActivity extends AppCompatActivity {
         intent.putExtra("money", this.money);
         intent.putExtra("record", this.record);
         startActivity(intent);
-        finish();
+    }
+
+    public void rankingClick(View view) {
+        Intent intent = new Intent(LobbyActivity.this, RankingActivity.class);
+        startActivity(intent);
+    }
+
+    // Para enlazar boton "?"
+    public void helpClick(View view) {
+        Intent intent = new Intent(LobbyActivity.this, QuestionActivity.class);
+        intent.putExtra("correo", this.correo);  // para autocompletar remitente
+        startActivity(intent);
+    }
+
+    public void onClickInsignias(View view){
+        Intent intent = new Intent(LobbyActivity.this, InsigniasActivity.class);
+        intent.putExtra("user", this.user);
+        startActivity(intent);
+    }
+
+    public void mediaClick(View view){
+        Intent intent = new Intent(LobbyActivity.this, MediaActivity.class);
+        startActivity(intent);
     }
 
     public void jugarClick(View view) {
@@ -151,39 +177,6 @@ public class LobbyActivity extends AppCompatActivity {
         });
     }
 
-    public void chatClick(View view) {
-        // Aquí podrías abrir un ChatActivity o implementar más adelante
-    }
-
-    public void rankingClick(View view) {
-        Intent intent = new Intent(LobbyActivity.this, RankingActivity.class);
-        startActivity(intent);
-    }
-
-    // Para enlazar boton "?"
-    public void helpClick(View view) {
-        Intent intent = new Intent(LobbyActivity.this, QuestionActivity.class);
-        intent.putExtra("correo", this.correo);  // para autocompletar remitente
-        startActivity(intent);
-    }
-    public void faqClick(View view){
-        Intent intent = new Intent(LobbyActivity.this, FAQsActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void onClickInsignias(View view){
-        Intent intent = new Intent(LobbyActivity.this, InsigniasActivity.class);
-        intent.putExtra("user", this.user);
-        startActivity(intent);
-        finish();
-    }
-
-    public void mediaClick(View view){
-        Intent intent = new Intent(LobbyActivity.this, MediaActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     private void obtenerInventarioJson(String username, final OnInventarioJsonReadyListener listener) {
         AuthService authService = API.getAuthService();

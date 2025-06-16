@@ -55,9 +55,11 @@ public class InsigniasActivity extends AppCompatActivity {
 
     }
 
-    public void onClickBack(View view){
-        Intent intent = new Intent(InsigniasActivity.this, PerfilActivity.class);
-        intent.putExtra("origen", "Insignias");
-        startActivity(intent);
+    public void onClickBack(View view) {
+        finish();
+        overridePendingTransition(R.anim.slide_in_left);
+    }
+
+    private void overridePendingTransition(int slideInLeft) {
     }
 }
