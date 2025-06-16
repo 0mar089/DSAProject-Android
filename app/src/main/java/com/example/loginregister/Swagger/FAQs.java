@@ -9,9 +9,13 @@ public class FAQs {
     @SerializedName("answer")
     private String answer;
 
-    public FAQs(String question, String answer) {
+    @SerializedName("sender")
+    private String sender;
+
+    public FAQs(String question, String answer, String sender) {
         this.question = question;
         this.answer = answer;
+        this.sender = sender;
     }
 
     public String getQuestion() {
@@ -21,4 +25,9 @@ public class FAQs {
     public String getAnswer() {
         return answer;
     }
+
+    public String getSender() {
+        return sender;
+    }
+
 }
