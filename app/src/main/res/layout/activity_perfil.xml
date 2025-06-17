@@ -169,15 +169,14 @@
         android:id="@+id/deleteAccountBtn"
         android:layout_width="276dp"
         android:layout_height="70dp"
-        android:layout_marginBottom="50dp"
         android:backgroundTint="#3C3F40"
         android:onClick="deleteAccountClick"
         android:text="ELIMINAR CUENTA"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="611dp" />
 
     <TextView
         android:id="@+id/correoTxtView"
