@@ -55,7 +55,7 @@ public class LobbyActivity extends AppCompatActivity {
             this.user = prefs.getString("user", "Guest");
         }
         if (correo == null || correo.isEmpty()) {
-            this.correo = prefs.getString("Email", "Without Email");
+            this.correo = prefs.getString("email", "Without Email");
         }
         if (this.token == null || this.token.isEmpty()) {
             this.token = prefs.getString("token", null);
@@ -123,7 +123,7 @@ public class LobbyActivity extends AppCompatActivity {
     public void perfilClick(View view) {
         Intent intent = new Intent(LobbyActivity.this, PerfilActivity.class);
         intent.putExtra("user", this.user);
-        intent.putExtra("Email", this.correo);
+        intent.putExtra("email", this.correo);
         intent.putExtra("token", this.token);
         intent.putExtra("money", this.money);
         intent.putExtra("record", this.record);

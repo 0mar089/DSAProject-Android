@@ -1,7 +1,8 @@
-package com.example.loginregister;
+package com.example.loginregister;  // Añade esta línea al inicio
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,18 +20,30 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MediaActivity extends AppCompatActivity {
+    private ProgressBar progressBar;  // Completado
+    private RecyclerView recyclerView;  // Completado
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_media);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewMedia);
+        // Inicializar vistas
+        progressBar = findViewById(R.id.progressBar);
+        recyclerView = findViewById(R.id.recyclerViewMedia);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        loadVideos();
+    }
+
+    private void loadVideos() {
         AuthService authService = API.getAuthService();
         authService.getAllVideos().enqueue(new Callback<List<MediaResponse>>() {
             @Override
             public void onResponse(Call<List<MediaResponse>> call, Response<List<MediaResponse>> response) {
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
                 if (response.isSuccessful() && response.body() != null) {
                     List<MediaResponse> videos = response.body();
                     recyclerView.setAdapter(new MediaAdapter(MediaActivity.this, videos));
@@ -41,8 +54,8 @@ public class MediaActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<MediaResponse>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Toast.makeText(MediaActivity.this, "Connection error", Toast.LENGTH_SHORT).show();
-                Log.e("MediaError", "Error loading video", t);
             }
         });
     }

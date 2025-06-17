@@ -34,6 +34,12 @@ public class StartActivity extends AppCompatActivity {
             Intent intent = new Intent(StartActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
+        btnExit.setOnClickListener(v -> {
+            finishAffinity(); // Cierra todas las actividades
+            System.exit(0);   // Finaliza el proceso (no siempre recomendado)
+        });
+
     }
+
 
 }

@@ -179,5 +179,24 @@ public class PerfilActivity extends AppCompatActivity {
     private void overridePendingTransition(int slideInLeft) {
     }
 
+    public void onClickCerrarSesion(View view) {
+        // Obtener el objeto SharedPreferences y editarlo
+        SharedPreferences preferences = getSharedPreferences("Session", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        // Eliminar todas las preferencias
+        editor.clear();
+        editor.apply(); // Aplicar cambios
+
+        // Redirigir al inicio (StartHomeActivity)
+        Intent intent = new Intent(this, HomeActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Evita que vuelva atrás
+        startActivity(intent);
+
+        // Cerrar la actividad actual
+        finish();
+    }
+
+
 
 }

@@ -1,51 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="120dp"
-    android:padding="6dp"
-    android:layout_marginTop="12dp">
+    android:layout_marginTop="12dp"
+    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp">
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="TODO"
-        android:src="@mipmap/ic_launcher" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
-    <TextView
-        android:id="@+id/usernameTxtRanking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="12dp"
-        android:layout_toEndOf="@id/icon"
-        android:text="Example application"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <!-- Imagen con bordes redondeados -->
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="App icon"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_image_bg"
+            android:src="@mipmap/ic_launcher" />
 
-    <TextView
-        android:id="@+id/RecordTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/usernameTxtRanking"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:layout_toEndOf="@id/icon"
-        android:singleLine="true"
-        android:text="Description"
-        android:textSize="16sp" />
+        <!-- Contenedor de texto -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"
+            android:layout_toEndOf="@id/icon"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/CantidadTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/RecordTxt"
-        android:layout_toEndOf="@id/icon"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
-        android:text="Cantidad"
-        android:textSize="16sp" />
-</RelativeLayout>
+            <TextView
+                android:id="@+id/usernameTxtRanking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Example application"
+                android:textColor="#212121"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="1" />
 
+            <TextView
+                android:id="@+id/RecordTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Description"
+                android:textColor="#757575"
+                android:textSize="15sp"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <TextView
+                android:id="@+id/CantidadTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Cantidad"
+                android:textColor="#6200EE"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
