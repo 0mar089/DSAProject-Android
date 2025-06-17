@@ -196,8 +196,11 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void lobbyClcik (View view){
-        finish();
-        // overridePendingTransition(R.anim.slide_in_left); // Descomenta si tienes estas animaciones
+        Intent intent = new Intent(ShopActivity.this, LobbyActivity.class);
+        intent.putExtra("origin", "lobby"); // Asumo que esto es correcto para tu lógica
+        String token = getIntent().getStringExtra("token");
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 
 }
