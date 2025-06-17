@@ -1,6 +1,7 @@
 package com.example.loginregister;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -21,25 +22,45 @@ import retrofit2.Response;
 
 public class RankingActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+    private AuthService authService;
+    private Handler handler = new Handler();
+    private Runnable updateRanking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFAQs);
+        recyclerView = findViewById(R.id.recyclerViewFAQs);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        AuthService authService = API.getAuthService();
+        authService = API.getAuthService();
 
+        fetchRanking(); // Obtiene el ranking inicial
+
+        // Configura la actualización automática cada 30 segundos
+        updateRanking = new Runnable() {
+            @Override
+            public void run() {
+                fetchRanking();
+                handler.postDelayed(this, 30000);
+            }
+        };
+
+        handler.postDelayed(updateRanking, 30000);
+    }
+
+    private void fetchRanking() {
         authService.getRanking().enqueue(new Callback<List<UsersScoreResponse>>() {
             @Override
             public void onResponse(Call<List<UsersScoreResponse>> call, Response<List<UsersScoreResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<UsersScoreResponse> ranking = response.body();
-                    for (UsersScoreResponse userScore : ranking) {
-                        Log.d("Ranking", "User: " + userScore.getUsername() + ", Score: " + userScore.getScore());
-                    }
+
+                    // Ordenar por puntuación en orden descendente
+                    ranking.sort((u1, u2) -> Integer.compare(u2.getScore(), u1.getScore()));
+
                     RankingAdapter adapter = new RankingAdapter(RankingActivity.this, ranking);
                     recyclerView.setAdapter(adapter);
                 } else {
@@ -49,11 +70,18 @@ public class RankingActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<UsersScoreResponse>> call, Throwable t) {
-                Toast.makeText(RankingActivity.this, "connection error obtaining ranking", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RankingActivity.this, "Connection error obtaining ranking", Toast.LENGTH_SHORT).show();
                 Log.e("RankingError", "Error: ", t);
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(updateRanking); // Detiene la actualización automática al cerrar la actividad
+    }
+
     public void onClickBack(View view) {
         finish();
         overridePendingTransition(R.anim.slide_in_left);
@@ -61,5 +89,4 @@ public class RankingActivity extends AppCompatActivity {
 
     private void overridePendingTransition(int slideInLeft) {
     }
-
 }
