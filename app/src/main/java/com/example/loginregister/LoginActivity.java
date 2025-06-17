@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         if (prefs.getBoolean("LoggedIn", false)) {
             Intent intent = new Intent(LoginActivity.this, SplashScreenActivity.class);
             intent.putExtra("user", prefs.getString("user", ""));
-            intent.putExtra("Email", prefs.getString("Email", ""));
+            intent.putExtra("email", prefs.getString("Email", ""));
             intent.putExtra("origin", SplashScreenActivity.Constants.ORIGEN_LOGIN);
             startActivity(intent);
             finish();
