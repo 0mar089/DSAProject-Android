@@ -29,7 +29,7 @@
         android:background="@drawable/btn_home"
         android:fontFamily="inherit"
         android:onClick="startClick"
-        android:text="Start"
+        android:text="START"
         android:textColor="@drawable/txt_btn_home"
         android:textAllCaps="false"
         android:textFontWeight="800"

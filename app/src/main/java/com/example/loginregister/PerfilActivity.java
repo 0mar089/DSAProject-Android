@@ -179,5 +179,9 @@ public class PerfilActivity extends AppCompatActivity {
     private void overridePendingTransition(int slideInLeft) {
     }
 
+    public void onClickCerrarSesion(View view) {
+
+    }
+
 
 }
